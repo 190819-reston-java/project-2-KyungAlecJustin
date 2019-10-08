@@ -21,8 +21,8 @@ actors VARCHAR (60),
 released_date INTEGER
 );
 
-DROP TABLE cineplay.blog;
-CREATE TABLE cineplay.blog (
+DROP TABLE cineplay.forum;
+CREATE TABLE cineplay.forum (
 blog_id SERIAL PRIMARY KEY NOT NULL,
 writer_id INTEGER REFERENCES cineplay.users(user_id) NOT NULL,
 message varchar(1000),
