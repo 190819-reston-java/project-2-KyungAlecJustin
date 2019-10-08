@@ -1,5 +1,5 @@
 package com.revature.repositories;
 
-public class tempDeleteLater {
+public class UserRepository {
 
 }
