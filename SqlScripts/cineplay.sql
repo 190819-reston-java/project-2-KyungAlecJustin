@@ -17,13 +17,13 @@ CREATE TABLE cineplay.movies (
 movie_id SERIAL PRIMARY KEY NOT NULL,
 title VARCHAR(100),
 director VARCHAR(60),
-actors VARCHAR (60),
-released_date INTEGER
+actor VARCHAR(60),
+released_date VARCHAR(50)
 );
 
 DROP TABLE cineplay.forum;
 CREATE TABLE cineplay.forum (
-blog_id SERIAL PRIMARY KEY NOT NULL,
+forum_id SERIAL PRIMARY KEY NOT NULL,
 writer_id INTEGER REFERENCES cineplay.users(user_id) NOT NULL,
 message varchar(1000),
 post_time TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT(CURRENT_TIMESTAMP)
