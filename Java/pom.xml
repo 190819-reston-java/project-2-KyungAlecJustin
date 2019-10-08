@@ -51,6 +51,18 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.9.10</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>4.3.11.Final</version>
+		</dependency>
+		
+		<!-- Spring -->
+		<groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.1.10.RELEASE</version>
 
 
 
