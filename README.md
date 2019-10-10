@@ -2,7 +2,7 @@
 
 # Group info
 - Group name: Cineplay
-- Members: Kyung Min Lee, Alec Thavychith, Lamar Comer, Justin Yang
+- Members: Kyung Min Lee, Alec Thavychith, Justin Yang
 
 # User story:
 - Users can login
