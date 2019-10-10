@@ -1,9 +1,7 @@
 --CREATE DATABASE projecttwo;
 
---CREATE SCHEMA cineplay;
-
-DROP TABLE cineplay.users;
-CREATE TABLE cineplay.users (
+DROP TABLE users;
+CREATE TABLE users (
 user_id SERIAL PRIMARY KEY NOT NULL,
 username VARCHAR(30) UNIQUE NOT NULL,
 usrpwd VARCHAR(20) NOT NULL,
@@ -11,30 +9,34 @@ email VARCHAR(30) NOT NULL,
 first_name VARCHAR(30) NOT NULL,
 last_name VARCHAR(30) NOT NULL
 );
+SELECT * FROM users;
 
-DROP TABLE cineplay.movies;
-CREATE TABLE cineplay.movies (
+DROP TABLE movies;
+CREATE TABLE movies (
 movie_id SERIAL PRIMARY KEY NOT NULL,
 title VARCHAR(100),
 director VARCHAR(60),
 actor VARCHAR(60),
 released_date VARCHAR(50)
 );
+SELECT * FROM movies;
 
-DROP TABLE cineplay.forum;
-CREATE TABLE cineplay.forum (
+DROP TABLE forum;
+CREATE TABLE forum (
 forum_id SERIAL PRIMARY KEY NOT NULL,
-writer_id INTEGER REFERENCES cineplay.users(user_id) NOT NULL,
+writer_id INTEGER REFERENCES users(user_id) NOT NULL,
 message varchar(1000),
 post_time TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT(CURRENT_TIMESTAMP)
 );
+SELECT * FROM forum;
 
-DROP TABLE cineplay.watchlist;
-CREATE TABLE cineplay.watchlist (
+DROP TABLE watchlist;
+CREATE TABLE watchlist (
 watchlist_id SERIAL PRIMARY KEY NOT NULL,
-owner_id INTEGER REFERENCES cineplay.users(user_id) NOT NULL,
-movie INTEGER REFERENCES cineplay.movies(movie_id) NOT NULL
-)
+owner_id INTEGER REFERENCES users(user_id) NOT NULL,
+movie INTEGER REFERENCES movies(movie_id) NOT NULL
+);
+SELECT * FROM watchlist;
 
 --CREATE TABLE project_2.forum(
 --id serial,

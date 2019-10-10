@@ -1,14 +1,95 @@
 package com.revature.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.springframework.stereotype.Component;
+
+@Entity
+@Table(name = "watchlist")
+@Component
 public class Watchlist implements Serializable {
 
 	private static final long serialVersionUID = 5508595899459911621L;
 
-	private Long watchlistId;
-	private Long ownerId;
-//	private Long movie;
+	@Id
+	@Column(name = "watchlist_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int watchlistId;
+	
+	@Column(name = "owner_id")
+	private int ownerId;
+	
+	@Column(name = "movie")
+	private int movie;
+
+	public Watchlist() {
+		super();
+	}
+
+	public Watchlist(int watchlistId, int ownerId, int movie) {
+		super();
+		this.watchlistId = watchlistId;
+		this.ownerId = ownerId;
+		this.movie = movie;
+	}
+
+	public int getWatchlistId() {
+		return watchlistId;
+	}
+
+	public void setWatchlistId(int watchlistId) {
+		this.watchlistId = watchlistId;
+	}
+
+	public int getOwnerId() {
+		return ownerId;
+	}
+
+	public void setOwnerId(int ownerId) {
+		this.ownerId = ownerId;
+	}
+
+	public int getMovie() {
+		return movie;
+	}
+
+	public void setMovie(int movie) {
+		this.movie = movie;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(movie, ownerId, watchlistId);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof Watchlist)) {
+			return false;
+		}
+		Watchlist other = (Watchlist) obj;
+		return movie == other.movie && ownerId == other.ownerId && watchlistId == other.watchlistId;
+	}
+
+	@Override
+	public String toString() {
+		return "Watchlist [watchlistId=" + watchlistId + ", ownerId=" + ownerId + ", movie=" + movie + "]";
+	}
+	
+	
+	
+	
 	
 	
 }
