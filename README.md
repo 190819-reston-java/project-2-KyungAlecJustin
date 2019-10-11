@@ -10,7 +10,7 @@
 - Main page holds a trailer
 - User can search for certain or specific playlists from other users
 - User can create their own playlist 
-- Users can communicate with each other in a community blog
+- Users can communicate with each other in a community forum
 - User can logout
 
 # Project 2 Specifications
