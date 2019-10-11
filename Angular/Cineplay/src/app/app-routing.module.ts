@@ -1,8 +1,24 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { MainComponent } from './main/main.component';
+import { WatchlistComponent } from './watchlist/watchlist.component';
+import { ChatroomComponent } from './chatroom/chatroom.component';
 
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: "main",
+    component: MainComponent
+  },
+  {
+    path: "watchlist",
+    component: WatchlistComponent
+  },
+  {
+    path: "chat",
+    component: ChatroomComponent
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -1,1 +1,10 @@
-<p>banner works!</p>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Vidaloka&display=swap" rel="stylesheet">
+</head>
+
+<div id="screen-size" [ngStyle]="{'background-image': 'url(' + loginBanner + ')'}">
+    <h1>CINEPLAY</h1>
+    <p>{{filmInfo}}</p>
+</div>
+
+<app-login-signup></app-login-signup>
