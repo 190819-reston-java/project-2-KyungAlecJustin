@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -38,6 +39,14 @@ public class User implements Serializable {
 	
 	@Column(name = "last_name")
 	private String lastName;
+	
+	//AT Mapping CODE-------------------------------------------------------------------------------
+	
+	@OneToMany(mappedBy = "user")
+	private List<Forum> forums;
+	
+	//AT Mapping CODE-------------------------------------------------------------------------------
+
 
 	public User() {
 		super();
