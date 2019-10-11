@@ -24,6 +24,9 @@ public class Watchlist implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int watchlistId;
 	
+	@Column(name = "watchlist_name")
+	private String watchlistName;
+	
 	@Column(name = "owner_id")
 	private int ownerId;
 	
@@ -34,9 +37,10 @@ public class Watchlist implements Serializable {
 		super();
 	}
 
-	public Watchlist(int watchlistId, int ownerId, int movie) {
+	public Watchlist(int watchlistId, String watchlistName, int ownerId, int movie) {
 		super();
 		this.watchlistId = watchlistId;
+		this.watchlistName = watchlistName;
 		this.ownerId = ownerId;
 		this.movie = movie;
 	}
@@ -47,6 +51,14 @@ public class Watchlist implements Serializable {
 
 	public void setWatchlistId(int watchlistId) {
 		this.watchlistId = watchlistId;
+	}
+
+	public String getWatchlistName() {
+		return watchlistName;
+	}
+
+	public void setWatchlistName(String watchlistName) {
+		this.watchlistName = watchlistName;
 	}
 
 	public int getOwnerId() {
@@ -67,7 +79,7 @@ public class Watchlist implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(movie, ownerId, watchlistId);
+		return Objects.hash(movie, ownerId, watchlistId, watchlistName);
 	}
 
 	@Override
@@ -79,17 +91,15 @@ public class Watchlist implements Serializable {
 			return false;
 		}
 		Watchlist other = (Watchlist) obj;
-		return movie == other.movie && ownerId == other.ownerId && watchlistId == other.watchlistId;
+		return movie == other.movie && ownerId == other.ownerId && watchlistId == other.watchlistId
+				&& Objects.equals(watchlistName, other.watchlistName);
 	}
 
 	@Override
 	public String toString() {
-		return "Watchlist [watchlistId=" + watchlistId + ", ownerId=" + ownerId + ", movie=" + movie + "]";
+		return "Watchlist [watchlistId=" + watchlistId + ", watchlistName=" + watchlistName + ", ownerId=" + ownerId
+				+ ", movie=" + movie + "]";
 	}
-	
-	
-	
-	
-	
+
 	
 }
