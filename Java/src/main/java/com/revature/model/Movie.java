@@ -42,11 +42,7 @@ public class Movie implements Serializable {
 	private String releasedDate;
 	
 	//AT Mapping CODE-------------------------------------------------------------------------------
-	@ManyToMany
-	@JoinTable(
-			name = "watchlist_movie", 
-			joinColumns = {@JoinColumn(name="movie_id")},
-			inverseJoinColumns = {@JoinColumn(name = "watchlist_id")})
+	@ManyToMany(mappedBy = "watchlist")
 	private List<Watchlist> watchlists = new ArrayList<Watchlist>();
 	
 	//AT Mapping CODE-------------------------------------------------------------------------------
