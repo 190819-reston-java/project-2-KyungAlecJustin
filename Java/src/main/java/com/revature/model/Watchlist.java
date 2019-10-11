@@ -1,6 +1,8 @@
 package com.revature.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -8,6 +10,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -30,8 +36,21 @@ public class Watchlist implements Serializable {
 	@Column(name = "owner_id")
 	private int ownerId;
 	
-	@Column(name = "movie")
-	private int movie;
+//	@Column(name = "movie")
+//	private int movie;
+	
+	//AT Mapping CODE-------------------------------------------------------------------------------
+	@OneToMany(mappedBy = "watchlist")
+	private List<Movie> movies; //Lists movies in Watchlist
+	
+	@ManyToMany
+	@JoinTable(
+			name = "watchlist_movie", 
+			joinColumns = {@JoinColumn(name="watchlist_id")},
+			inverseJoinColumns = {@JoinColumn(name = "movie_id")})
+	private List<Movie> moviesWatchlist = new ArrayList<Movie>();
+	
+	//AT Mapping CODE-------------------------------------------------------------------------------
 
 	public Watchlist() {
 		super();
