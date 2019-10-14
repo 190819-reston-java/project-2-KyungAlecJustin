@@ -44,12 +44,14 @@ public class UserDAO implements IUserDAO {
 	
 
 	@Override
+	@Transactional
 	public User getUserLogin(String username, String password) {
 		return null;
 	
 	}
 
 	@Override
+	@Transactional
 	public User createUser(User user) {
 		
 		Session s = sf.getCurrentSession();
