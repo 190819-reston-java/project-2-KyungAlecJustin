@@ -8,7 +8,7 @@ public interface IForumDAO {
 	
 	public List<Forum> findAll();
 	
-	public Forum findOne(int forumId);
+	public Forum findOne(int writerId);
 	
 
 }

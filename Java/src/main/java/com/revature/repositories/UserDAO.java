@@ -1,5 +1,6 @@
 package com.revature.repositories;
 
+
 import java.util.List;
 
 import org.hibernate.Session;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.model.User;
+
 
 @Repository
 public class UserDAO implements IUserDAO {
@@ -37,6 +39,26 @@ public class UserDAO implements IUserDAO {
 		User u = (User) s.get(User.class, userId);
 		
 		return u;
+	}
+	
+	
+
+	@Override
+	@Transactional
+	public User getUserLogin(String username, String password) {
+		return null;
+	
+	}
+
+	@Override
+	@Transactional
+	public User createUser(User user) {
+		
+		Session s = sf.getCurrentSession();
+		
+		User newUser = (User) s.save(User.class);
+		
+		return newUser;
 	}
 
 }
