@@ -32,6 +32,7 @@ public class UserController {
 	@PostMapping("/login")
 	@ResponseBody
 	public ResponseEntity<User> loginVerify(){
+		System.out.println("login initialized");
 		return null;
 		
 	}
