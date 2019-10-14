@@ -10,5 +10,9 @@ public interface IUserDAO {
 	
 	public User findOne(int userId);
 	
+	User getUserLogin(String username, String password);
+	
+	User createUser(User user);
+
 	
 }

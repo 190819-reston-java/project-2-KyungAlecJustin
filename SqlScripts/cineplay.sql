@@ -11,6 +11,9 @@ last_name VARCHAR(30) NOT NULL
 );
 SELECT * FROM users;
 
+INSERT INTO users VALUES
+	(DEFAULT, 'admin', 'password', 'admin@cineplay.com', 'Alec', 'Yang');
+
 DROP TABLE movies;
 CREATE TABLE movies (
 movie_id SERIAL PRIMARY KEY NOT NULL,
@@ -25,7 +28,7 @@ DROP TABLE forum;
 CREATE TABLE forum (
 forum_id SERIAL PRIMARY KEY NOT NULL,
 writer_id INTEGER REFERENCES users(user_id) NOT NULL,
-message varchar(1000),
+message VARCHAR(1000),
 post_time TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT(CURRENT_TIMESTAMP)
 );
 SELECT * FROM forum;
@@ -33,8 +36,9 @@ SELECT * FROM forum;
 DROP TABLE watchlist;
 CREATE TABLE watchlist (
 watchlist_id SERIAL PRIMARY KEY NOT NULL,
+watchlist_name VARCHAR(200),
 owner_id INTEGER REFERENCES users(user_id) NOT NULL,
-movie INTEGER REFERENCES movies(movie_id) NOT NULL
+--movie INTEGER REFERENCES movies(movie_id) NOT NULL
 );
 SELECT * FROM watchlist;
 

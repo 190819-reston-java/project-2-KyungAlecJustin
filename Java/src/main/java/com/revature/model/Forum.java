@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -32,6 +34,15 @@ public class Forum implements Serializable {
 	
 	@Column(name = "post_time")
 	private String postTime;
+	
+	//AT Mapping CODE-------------------------------------------------------------------------------
+
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+	
+	//AT Mapping CODE-------------------------------------------------------------------------------
+
 
 	public Forum() {
 		super();
