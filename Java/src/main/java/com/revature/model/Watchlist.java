@@ -36,8 +36,8 @@ public class Watchlist implements Serializable {
 	@Column(name = "owner_id")
 	private int ownerId;
 	
-//	@Column(name = "movie")
-//	private int movie;
+	@Column(name = "movie")
+	private int movie;
 	
 	//AT Mapping CODE-------------------------------------------------------------------------------
 	@OneToMany(mappedBy = "watchlist")
@@ -87,14 +87,14 @@ public class Watchlist implements Serializable {
 	public void setOwnerId(int ownerId) {
 		this.ownerId = ownerId;
 	}
-
-	public int getMovie() {
-		return movie;
-	}
-
-	public void setMovie(int movie) {
-		this.movie = movie;
-	}
+//
+//	public int getMovie() {
+//		return movie;
+//	}
+//
+//	public void setMovie(int movie) {
+//		this.movie = movie;
+//	}
 
 	@Override
 	public int hashCode() {
