@@ -1,8 +1,8 @@
-# project-2-KyungAlecJustin
+# project-2-KyungAlecJustinLamar
 
 # Group info
 - Group name: Cineplay
-- Memebers: Kyung Min Lee, Alec Thavychith, Lamar Comer, Justing Yang
+- Members: Kyung Min Lee, Alec Thavychith, Justin Yang
 
 # User story:
 - Users can login

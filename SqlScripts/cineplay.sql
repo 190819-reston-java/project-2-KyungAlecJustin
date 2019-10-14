@@ -38,7 +38,7 @@ CREATE TABLE watchlist (
 watchlist_id SERIAL PRIMARY KEY NOT NULL,
 watchlist_name VARCHAR(200),
 owner_id INTEGER REFERENCES users(user_id) NOT NULL,
---movie INTEGER REFERENCES movies(movie_id) NOT NULL
+movie INTEGER REFERENCES movies(movie_id) NOT NULL
 );
 SELECT * FROM watchlist;
 

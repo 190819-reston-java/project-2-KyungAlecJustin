@@ -61,7 +61,7 @@ public class Watchlist implements Serializable {
 		this.watchlistId = watchlistId;
 		this.watchlistName = watchlistName;
 		this.ownerId = ownerId;
-//		this.movie = movie;
+		this.movie = movie;
 	}
 
 	public int getWatchlistId() {
@@ -88,65 +88,36 @@ public class Watchlist implements Serializable {
 		this.ownerId = ownerId;
 	}
 
-//	public int getMovie() {
-//		return movie;
-//	}
-//
-//	public void setMovie(int movie) {
-//		this.movie = movie;
-//	}
-	
-	
+	public int getMovie() {
+		return movie;
+	}
 
-	
-
-	@Override
-	public String toString() {
-		return "Watchlist [watchlistId=" + watchlistId + ", watchlistName=" + watchlistName + ", ownerId=" + ownerId
-				+ "]";
+	public void setMovie(int movie) {
+		this.movie = movie;
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((movies == null) ? 0 : movies.hashCode());
-		result = prime * result + ((moviesWatchlist == null) ? 0 : moviesWatchlist.hashCode());
-		result = prime * result + ownerId;
-		result = prime * result + watchlistId;
-		result = prime * result + ((watchlistName == null) ? 0 : watchlistName.hashCode());
-		return result;
+		return Objects.hash(movie, ownerId, watchlistId, watchlistName);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (!(obj instanceof Watchlist)) {
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
+		}
 		Watchlist other = (Watchlist) obj;
-		if (movies == null) {
-			if (other.movies != null)
-				return false;
-		} else if (!movies.equals(other.movies))
-			return false;
-		if (moviesWatchlist == null) {
-			if (other.moviesWatchlist != null)
-				return false;
-		} else if (!moviesWatchlist.equals(other.moviesWatchlist))
-			return false;
-		if (ownerId != other.ownerId)
-			return false;
-		if (watchlistId != other.watchlistId)
-			return false;
-		if (watchlistName == null) {
-			if (other.watchlistName != null)
-				return false;
-		} else if (!watchlistName.equals(other.watchlistName))
-			return false;
-		return true;
+		return movie == other.movie && ownerId == other.ownerId && watchlistId == other.watchlistId
+				&& Objects.equals(watchlistName, other.watchlistName);
+	}
+
+	@Override
+	public String toString() {
+		return "Watchlist [watchlistId=" + watchlistId + ", watchlistName=" + watchlistName + ", ownerId=" + ownerId
+				+ ", movie=" + movie + "]";
 	}
 
 	
