@@ -12,6 +12,8 @@ public interface IUserDAO {
 	
 	public User create(User u);
 	
+	public User getLogin(String username, String userpwd);
+	
 
 	
 	

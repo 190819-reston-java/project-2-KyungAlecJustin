@@ -9,12 +9,17 @@ import com.revature.model.User;
 
 @Service
 public class UserService {
+
 	
 	private List<User> users = new ArrayList<User>();
 
-	
+
 	public List<User> findAll() {
 		return users;
+	}
+	
+	public User getLogin() {
+		return null;
 	}
 	
 	

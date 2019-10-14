@@ -47,6 +47,12 @@ public class UserDAO implements IUserDAO {
 		s.save(u);
 		return u;
 	}
+
+	@Override
+	public User getLogin(String username, String userpwd) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 
