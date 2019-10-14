@@ -1,5 +1,12 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-dark">
-    <a routerLink="main" routerLinkActive="active" class="nav-item nav-link">Home</a>
-    <a routerLink="watchlist" routerLinkActive="active" class="nav-item nav-link">Your Watchlists</a>
-    <a routerLink="chat" routerLinkActive="active" class="nav-item nav-link">Chat</a>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Hepta+Slab&display=swap" rel="stylesheet">
+</head>
+<nav id="navbar" #navbar>
+	<a routerLink="../main" routerLinkActive="active" class="nav-item nav-link">Home</a>
+	<a routerLink="../watchlist" routerLinkActive="active" class="nav-item nav-link">Your Watchlists</a>
+	<a routerLink="../chat" routerLinkActive="active" class="nav-item nav-link">Chat</a>
+	<form id="searchbar">
+		<input type="text" placeholder="Search">
+		<button>Search</button>
+	</form>
 </nav>
