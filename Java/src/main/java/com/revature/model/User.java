@@ -1,6 +1,7 @@
 package com.revature.model;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;

@@ -18,7 +18,7 @@ public class ForumDAO implements IForumDAO {
 	private SessionFactory sf;
 
 	@Override
-	@Transactional(propagation = Propagation.REQUIRED)
+	//@Transactional(propagation = Propagation.REQUIRED)
 	public List<Forum> findAll() {
 		Session s = sf.getCurrentSession();
 		
@@ -30,10 +30,10 @@ public class ForumDAO implements IForumDAO {
 
 	@Override
 	@Transactional
-	public Forum findOne(int forumId) {
+	public Forum findOne(int writerId) {
 		Session s = sf.getCurrentSession();
 		
-		Forum f = (Forum) s.get(Forum.class, forumId);
+		Forum f = (Forum) s.get(Forum.class, writerId);
 		
 		return f;
 	}
