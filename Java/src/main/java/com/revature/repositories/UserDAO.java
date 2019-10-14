@@ -38,5 +38,16 @@ public class UserDAO implements IUserDAO {
 		
 		return u;
 	}
+	
+
+	@Override
+	@Transactional
+	public User create(User u) {
+		Session s = sf.getCurrentSession();
+		s.save(u);
+		return u;
+	}
+	
+	
 
 }

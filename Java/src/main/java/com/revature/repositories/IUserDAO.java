@@ -10,5 +10,9 @@ public interface IUserDAO {
 	
 	public User findOne(int userId);
 	
+	public User create(User u);
+	
+
+	
 	
 }
