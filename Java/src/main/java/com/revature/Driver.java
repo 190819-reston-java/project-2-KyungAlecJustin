@@ -1,5 +1,7 @@
 package com.revature;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -18,19 +20,15 @@ public class Driver {
 	private static Session session;
 
 	public static void main(String[] args) {
-		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");	
-		
-//		// boilerplate for Hibernate
-//		configuration = new Configuration().configure();
-//		ssrb = new StandardServiceRegistryBuilder()
-//				.applySettings(configuration.getProperties());
-//		sf = configuration.buildSessionFactory(ssrb.build());
-		// boilerplate for hibernate
-		
+		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+
 		IUserDAO userDAO = (IUserDAO) ac.getBean("userDAO");
 		
-		addUser();
+		List<User> users = userDAO.findAll();
 		
+		for(User u : users) {
+			System.out.println(u);
+		}
 	}
 
 	private static void addUser() {
