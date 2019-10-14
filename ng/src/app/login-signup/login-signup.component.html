@@ -1,0 +1,32 @@
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Hepta+Slab&display=swap" rel="stylesheet">
+</head>
+
+<div id="login-signup">
+  <div id="login-signup-tabs">
+    <h4 (click)="showLogin(loginForm, signUpForm)">Login</h4>
+	<form #loginForm hidden>
+		<p>Enter your username:</p>
+		<input type="text" #username>
+		<p>Enter your password:</p>
+		<input type="password" #password>
+		<br>
+		<input type="submit" #loginSubmit (click)="submitLoginInfo($event, username.value, password.value)">
+	</form>
+    <h4 (click)="showSignUp(signUpForm, loginForm)">Sign Up</h4>
+	<form #signUpForm hidden>
+		<p>Enter a username:</p>
+		<input type="text">
+		<p>Enter a password:</p>
+		<input type="text">
+		<p>Enter your email:</p>
+		<input type="text">
+		<p>Enter your first name:</p>
+		<input type="text">
+		<p>Enter your last name:</p>
+		<input type="text">
+		<br>
+		<input type="submit">
+	</form>
+  </div>
+</div>
