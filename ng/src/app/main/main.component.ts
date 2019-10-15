@@ -18,6 +18,11 @@ export class MainComponent implements OnInit {
   TMDBmovieId: Number = Math.random()*450000;
 
   featureFilm: Object;
+  //Can use the following for feature film
+  trendingURI: String = 'https://api.themoviedb.org/3/trending/movie/day?api_key=69464c49beeffbf72f4680011dafb90d';
+  featuredURI: String = 'https://api.themoviedb.org/3/movie/popular?api_key=69464c49beeffbf72f4680011dafb90d&language=en-US&page=1'
+
+  randomNumber: Number = Math.random()*50;
 
   constructor(private http : HttpClient) { }
 
@@ -31,9 +36,9 @@ export class MainComponent implements OnInit {
     TMDB.subscribe((result=>{
       this.TMDBbyMovieId = result;
     }))
+
     //TMDB feature film calls
-    let featureFilmAPICall = this.http.get(`https://api.themoviedb.org/3/movie/popular?api_key=69464c49beeffbf72f4680011dafb90d&language=en-US&page=1
-    `)
+    let featureFilmAPICall = this.http.get(`${this.trendingURI}`)
     featureFilmAPICall.subscribe((result=>{
       this.featureFilm = result;
     }))
