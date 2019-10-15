@@ -1,0 +1,31 @@
+#chatroom {
+    margin-top: 5%;
+    font-family: 'Hepta Slab', serif;
+}
+
+#display-message {
+    border: solid rgb(255, 0, 85) 3px;
+    width: 850px;
+    height: 500px;
+    margin: auto;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#send-message {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    margin: auto;
+}
+
+#send-message input {
+    width: 50%;
+    height: 30px;
+}
+
+button {
+    color: white;
+    background-color: rgb(255, 0, 85);
+    border-color: rgb(255, 0, 85);
+}
