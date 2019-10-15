@@ -13,6 +13,7 @@ import { LoginSignupComponent } from './login-signup/login-signup.component';
 import { MainComponent } from './main/main.component';
 import { WatchlistComponent } from './watchlist/watchlist.component';
 import { ChatroomComponent } from './chatroom/chatroom.component';
+import { CarouselComponent } from './carousel/carousel.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ChatroomComponent } from './chatroom/chatroom.component';
     LoginSignupComponent,
     MainComponent,
     WatchlistComponent,
-    ChatroomComponent
+    ChatroomComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,
