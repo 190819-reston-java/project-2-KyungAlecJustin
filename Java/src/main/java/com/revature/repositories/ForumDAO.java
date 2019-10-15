@@ -11,14 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.model.Forum;
 
-@Repository
+//@Repository
 public class ForumDAO implements IForumDAO {
 	
-	@Autowired
+	//@Autowired
 	private SessionFactory sf;
 
 	@Override
-	@Transactional(propagation = Propagation.REQUIRED)
+	//@Transactional(propagation = Propagation.REQUIRED)
 	public List<Forum> findAll() {
 		Session s = sf.getCurrentSession();
 		
@@ -29,7 +29,7 @@ public class ForumDAO implements IForumDAO {
 	}
 
 	@Override
-	@Transactional
+	//@Transactional
 	public Forum findOne(int forumId) {
 		Session s = sf.getCurrentSession();
 		

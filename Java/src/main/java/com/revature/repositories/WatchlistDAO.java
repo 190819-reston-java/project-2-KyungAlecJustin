@@ -11,14 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.model.Watchlist;
 
-@Repository
+//@Repository
 public class WatchlistDAO implements IWatchlistDAO {
 	
-	@Autowired
+	//@Autowired
 	private SessionFactory sf;
 
 	@Override
-	@Transactional(propagation = Propagation.REQUIRED)
+	//@Transactional(propagation = Propagation.REQUIRED)
 	public List<Watchlist> findAll() {
 		Session s = sf.getCurrentSession();
 		
@@ -30,7 +30,7 @@ public class WatchlistDAO implements IWatchlistDAO {
 	}
 
 	@Override
-	@Transactional
+	//@Transactional
 	public Watchlist findOne(int watchlistId) {
 		Session s = sf.getCurrentSession();
 		

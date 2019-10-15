@@ -11,14 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.model.Movie;
 
-@Repository
+//@Repository
 public class MovieDAO implements IMovieDAO {
 	
-	@Autowired
+	//@Autowired
 	private SessionFactory sf;
 
 	@Override
-	@Transactional(propagation = Propagation.REQUIRED)
+//	@Transactional(propagation = Propagation.REQUIRED)
 	public List<Movie> findAll() {
 		Session s = sf.getCurrentSession();
 		
@@ -29,7 +29,7 @@ public class MovieDAO implements IMovieDAO {
 	}
 
 	@Override
-	@Transactional
+	//@Transactional
 	public Movie findOne(int movieId) {
 		Session s = sf.getCurrentSession();
 		
