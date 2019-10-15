@@ -1,4 +1,26 @@
 <head>
-    <link href="https://fonts.googleapis.com/css?family=Hepta+Slab&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Hepta+Slab&display=swap" rel="stylesheet">
 </head>
 <app-navbar></app-navbar>
+
+<div id="movie-cards">
+    <h1>Trending Movies for </h1>
+    <div class="movie">
+        <img src="https://image.tmdb.org/t/p/w500{{featureFilm.results[0].poster_path}}" class="card-img-top" alt="..." width="100%">
+        <div>
+            <p class="card-text">{{featureFilm.results[0].overview}}</p>
+        </div>
+    </div>
+    <div class="movie">
+        <img src="https://image.tmdb.org/t/p/w500{{featureFilm.results[1].poster_path}}" class="card-img-top" alt="..." width="100%">
+        <div>
+            <p class="card-text">{{featureFilm.results[1].overview}}</p>
+        </div>
+    </div>
+    <div class="movie">
+        <img src="https://image.tmdb.org/t/p/w500{{featureFilm.results[2].poster_path}}" class="card-img-top" alt="..." width="100%">
+         <div>
+             <p class="card-text">{{featureFilm.results[2].overview}}</p>
+         </div>
+    </div>
+</div>

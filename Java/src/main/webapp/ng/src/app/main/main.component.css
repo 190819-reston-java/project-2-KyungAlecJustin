@@ -1,0 +1,7 @@
+#movie-cards {
+    display: flex;
+}
+
+.movie {
+    width: 33.33%;
+}
