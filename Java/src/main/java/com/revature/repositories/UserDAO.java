@@ -15,15 +15,25 @@ import com.revature.model.User;
 public class UserDAO implements IUserDAO {
 
 	@Autowired
-	private SessionFactory sf;
+	SessionFactory sf;
 	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<User> findAll() {
+		System.out.println("reaching findAll in USER DAO");
 		//Session s = sf.getCurrentSession();
+		Session os = sf.openSession();
+		os.beginTransaction();
+		
+		System.out.println(os);
 		
 		@SuppressWarnings("unchecked")
-		List<User> users = s.createCriteria(User.class).list();
+		List<User> users = os.createCriteria(User.class).list();	
+		
+		System.out.println(users);
+		
+		os.getTransaction().commit();
+		os.close();
 		
 		return users;
 		
@@ -33,6 +43,7 @@ public class UserDAO implements IUserDAO {
 	@Transactional
 	public User findOne(int userId) {
 		Session s = sf.getCurrentSession();
+		System.out.println(s);
 		
 		User u = (User) s.get(User.class, userId);
 		
@@ -43,8 +54,17 @@ public class UserDAO implements IUserDAO {
 	@Override
 	@Transactional
 	public User create(User u) {
-		Session s = sf.getCurrentSession();
-		s.save(u);
+		//Session s = sf.getCurrentSession();
+		System.out.println("reaching create in UserDAO");
+		Session os = sf.openSession();
+		System.out.println(os);
+
+		os.beginTransaction();
+		
+		System.out.println(u);
+		os.save(u);
+		os.getTransaction().commit();
+		os.close();
 		return u;
 	}
 
