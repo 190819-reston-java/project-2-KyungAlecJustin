@@ -1,25 +1,62 @@
 package com.revature.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.model.User;
+import com.revature.repositories.UserDAO;
 import com.revature.services.UserService;
 
-@RestController
+@Controller
 public class UserController {
 	
 	@Autowired
 	private UserService userService;
 	
-	@PostMapping("/login")
-	public ResponseEntity<User> loginVerify(){
-		userService.getLogin();
-		System.out.println("Login reached in Spring");
-		return null;
+	@RequestMapping(value = "/users", method=RequestMethod.GET)
+	public List<User> findAll(){
+		System.out.println("reaching users");
+		return userService.findAll();
+	}
+//	
+	@PutMapping("/create")
+	public ResponseEntity<User> upsert(@RequestBody User u){
+		System.out.println("create reached");
+	;	User response = userService.createUser(u);
+		
+		return ResponseEntity.ok(response);
+	}
+//	
+//	@PostMapping("/login")
+//	public ResponseEntity<User> loginVerify(){
+//		userDao.getLogin(null, null);
+//		System.out.println("Login reached in Spring");
+//		return null;
+//	}
+	
+	
+	@RequestMapping(value="/hello", method=RequestMethod.GET)
+	public ResponseEntity<String> sayHello(){
+		System.out.println("reaching hello");
+		return new ResponseEntity<String>("Hello!", HttpStatus.OK);
 	}
 	
+	@RequestMapping(value="/home", method=RequestMethod.GET)
+	public String home() {
+		
+		return "home";
+	}
 
 }

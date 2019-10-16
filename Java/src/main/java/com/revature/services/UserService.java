@@ -6,16 +6,22 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.revature.model.User;
+import com.revature.repositories.UserDAO;
 
 @Service
 public class UserService {
 	
-	
-	private List<User> users = new ArrayList<User>();
+	UserDAO userDao = new UserDAO();
 
 
 	public List<User> findAll() {
+		List<User> users = userDao.findAll();
 		return users;
+	}
+	
+	public User createUser(User u) {
+		userDao.create(u);
+		return u;
 	}
 	
 	public User getLogin() {

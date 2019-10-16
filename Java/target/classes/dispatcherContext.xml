@@ -9,7 +9,7 @@
 	
 	<mvc:default-servlet-handler/>	
 	<mvc:annotation-driven/>
-	<context:component-scan base-package="com.revature" />
+	<context:component-scan base-package="com.revature.controllers" />
 	<!-- This tells the framework where to look for you static resources and how to map them -->
 	<mvc:resources location="/static/" mapping="/static/**"></mvc:resources>
 	

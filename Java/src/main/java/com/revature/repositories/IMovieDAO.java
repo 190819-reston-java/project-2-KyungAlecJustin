@@ -6,8 +6,8 @@ import com.revature.model.Movie;
 
 public interface IMovieDAO {
 	
-	public List<Movie> findAll();
-	
-	public Movie findOne(int movieId);
+	public List<Movie> listAll();
+			
+	public Movie addMovie(Movie m);
 
 }
