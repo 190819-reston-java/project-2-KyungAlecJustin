@@ -4,6 +4,7 @@ import { MainComponent } from './main/main.component';
 import { WatchlistComponent } from './watchlist/watchlist.component';
 import { ChatroomComponent } from './chatroom/chatroom.component';
 import { BannerComponent } from './banner/banner.component';
+import { ExploreComponent } from './explore/explore.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: "watchlist",
     component: WatchlistComponent
+  },
+  {
+    path: "explore",
+    component: ExploreComponent
   },
   {
     path: "chat",
