@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -19,7 +20,8 @@ import com.revature.model.User;
 import com.revature.repositories.UserDAO;
 import com.revature.services.UserService;
 
-@Controller
+@RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 	
 	@Autowired
@@ -27,7 +29,8 @@ public class UserController {
 	
 	@RequestMapping(value = "/users", method=RequestMethod.GET)
 	public List<User> findAll(){
-		System.out.println("reaching users");
+		System.out.println("reaching /users in UserController");
+		
 		return userService.findAll();
 	}
 
@@ -46,11 +49,5 @@ public class UserController {
 		return null;
 	}
 	
-	
-	@RequestMapping(value="/home", method=RequestMethod.GET)
-	public String home() {
-		
-		return "home";
-	}
 
 }

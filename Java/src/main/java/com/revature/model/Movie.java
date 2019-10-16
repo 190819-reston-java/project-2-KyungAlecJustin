@@ -7,6 +7,7 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name = "movies")
-//@Component
+@Component
 public class Movie implements Serializable {
 
 	private static final long serialVersionUID = 1482141467399248051L;
@@ -32,14 +33,20 @@ public class Movie implements Serializable {
 	@Column(name = "title")
 	private String title;
 	
+	@Column(name="director")
+	private String director;
+	
 	@Column(name = "plot")
 	private String plot;
+	
+	@Column(name = "poster")
+	private String poster;
 	
 	@Column(name = "released_date")
 	private String releasedDate;
 	
 	//AT Mapping CODE-------------------------------------------------------------------------------
-//	//@ManyToMany(mappedBy = "watchlist")
+//	@ManyToMany(mappedBy = "movies", fetch = FetchType.LAZY)
 //	private List<Watchlist> watchlists = new ArrayList<Watchlist>();
 
 	public Movie() {

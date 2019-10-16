@@ -12,14 +12,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.model.Movie;
 
-//@Repository
+@Repository
 public class MovieDAO implements IMovieDAO {
 	
-	//@Autowired
+	@Autowired
 	private SessionFactory sf;
 
 	@Override
-	//@Transactional(propagation = Propagation.REQUIRED)
+	@Transactional(propagation = Propagation.REQUIRED)
 	public List<Movie> listAll() {
 		Session s = sf.getCurrentSession();
 		
@@ -30,10 +30,19 @@ public class MovieDAO implements IMovieDAO {
 	}
 
 	@Override
-	//@Transactional
+	@Transactional
 	public Movie addMovie(Movie m) {
-		Session s = sf.getCurrentSession();
-		s.save(m);
+		//Session s = sf.getCurrentSession();
+		System.out.println("reached addMovie() in MovieDAO");
+		Session os = sf.openSession();
+		System.out.println(os);
+
+		os.beginTransaction();
+		
+		System.out.println(m);
+		os.save(m);
+		os.getTransaction().commit();
+		os.close();
 		return m;
 	}
 

@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,7 +45,8 @@ public class Watchlist implements Serializable {
 //	@OneToMany(mappedBy = "watchlist")
 //	private List<Movie> movies; //Lists movies in Watchlist
 //	
-//	@ManyToMany
+	//HAVING TROUBLE WITH MANY TO MANY MAPPING
+//	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST} )
 //	@JoinTable(
 //			name = "watchlist_movie", 
 //			joinColumns = {@JoinColumn(name="watchlist_id")},
