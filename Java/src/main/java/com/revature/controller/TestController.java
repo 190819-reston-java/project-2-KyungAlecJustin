@@ -16,5 +16,11 @@ public class TestController {
 		System.out.println("reaching hello in Test Controller");
 		return new ResponseEntity<String>("Hello!", HttpStatus.OK);
 	}
+	
+	@RequestMapping(value="/home", method=RequestMethod.GET)
+	public String home() {
+		
+		return "home";
+	}
 
 }

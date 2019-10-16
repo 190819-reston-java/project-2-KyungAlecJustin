@@ -20,7 +20,7 @@ import com.revature.model.User;
 import com.revature.repositories.UserDAO;
 import com.revature.services.UserService;
 
-@Controller
+@RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 	
@@ -28,7 +28,6 @@ public class UserController {
 	private UserService userService;
 	
 	@RequestMapping(value = "/users", method=RequestMethod.GET)
-	@ResponseBody
 	public List<User> findAll(){
 		System.out.println("reaching /users in UserController");
 		
@@ -50,11 +49,5 @@ public class UserController {
 		return null;
 	}
 	
-	
-	@RequestMapping(value="/home", method=RequestMethod.GET)
-	public String home() {
-		
-		return "home";
-	}
 
 }
