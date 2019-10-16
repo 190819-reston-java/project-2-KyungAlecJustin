@@ -9,7 +9,8 @@ export class LoginAuthenticationService {
 
   constructor(private http: HttpClient) {}
 
-  getLogin() : Observable {
-    return this.http.get("http://localhost:8080/login")
+  loginUri = "http://localhost:8080/login";
+  getLogin() : Object {
+    return this.loginUri;
   }
 }
