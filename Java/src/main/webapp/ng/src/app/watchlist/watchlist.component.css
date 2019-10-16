@@ -1,0 +1,123 @@
+#create-view {
+    margin-top: 17%;
+    color: white;
+    font-family: 'Hepta Slab', serif;
+}
+
+#create-view-tabs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+#create-view-tabs h4 {
+    border-bottom: white 2px solid;
+    margin-left: auto;
+    margin-right: auto;
+    width: 45%;
+    text-decoration: none;
+    color: white;
+    font-size: 2.5em;
+}
+
+#create-view h4:hover {
+    color: rgb(255, 0, 85);
+}
+
+#create-view-tabs p {
+    margin-bottom: 1%;
+}
+
+#create-view form {
+    width: 50%;
+    padding: 2.5%;
+}
+
+#create-view input[type=text] {
+    width: 50%;
+    margin-bottom: 2%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#create-view input[type=password] {
+    width: 50%;
+    margin-bottom: 2%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#create-view input[type=submit] {
+    padding: 0.5% 7.5%;
+    color: white;
+    background-color: rgb(255, 0, 85);
+    border-color: rgb(255, 0, 85);
+    border-radius: 10px;
+}
+
+#search-movies {
+    position: absolute;
+    left: 25%;
+    top: 25%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    font-family: 'Hepta Slab', serif;
+    background-color: rgba(0, 0, 0, 0.95);
+    padding: 10% 10%;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 50%;
+    border: 3px solid rgb(255, 0, 85);
+}
+
+#search-movies form {
+    width: 100%;
+    height: 50px;
+}
+
+#search-movies input[type=text] {
+    width: 75%;
+}
+
+#search-movies input[type=submit] {
+  width: 20%;
+  color: white;
+  background-color: rgb(255, 0, 85);
+  border-color: rgb(255, 0, 85);
+}
+
+#search-movies table {
+    text-align: center;
+    margin: auto;
+    border-collapse: collapse;
+    color: white;
+    font-size: 0.5em;
+    width: 100%;
+}
+
+#search-movies th {
+    padding: 5px 20px;
+    border: 2px solid rgb(255, 0, 85);
+}
+
+#search-movies td {
+  padding: 5px 20px;
+  border: 2px solid rgb(255, 0, 85);
+}
+
+#search-movies button {
+    background-color: rgb(255, 0, 85);
+    border-color: rgb(255, 0, 85);
+    border-radius: 10px;
+    color: white;
+    font-size: 0.5em;
+}

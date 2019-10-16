@@ -14,6 +14,7 @@ import { MainComponent } from './main/main.component';
 import { WatchlistComponent } from './watchlist/watchlist.component';
 import { ChatroomComponent } from './chatroom/chatroom.component';
 import { CarouselComponent } from './carousel/carousel.component';
+import { ExploreComponent } from './explore/explore.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { CarouselComponent } from './carousel/carousel.component';
     MainComponent,
     WatchlistComponent,
     ChatroomComponent,
-    CarouselComponent
+    CarouselComponent,
+    ExploreComponent
   ],
   imports: [
     BrowserModule,
