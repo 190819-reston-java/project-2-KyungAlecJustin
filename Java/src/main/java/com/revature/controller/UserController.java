@@ -30,28 +30,22 @@ public class UserController {
 		System.out.println("reaching users");
 		return userService.findAll();
 	}
-//	
+
 	@PutMapping("/create")
 	public ResponseEntity<User> upsert(@RequestBody User u){
 		System.out.println("create reached");
-	;	User response = userService.createUser(u);
+		User response = userService.createUser(u);
 		
 		return ResponseEntity.ok(response);
 	}
-//	
-//	@PostMapping("/login")
-//	public ResponseEntity<User> loginVerify(){
-//		userDao.getLogin(null, null);
-//		System.out.println("Login reached in Spring");
-//		return null;
-//	}
 	
-	
-	@RequestMapping(value="/hello", method=RequestMethod.GET)
-	public ResponseEntity<String> sayHello(){
-		System.out.println("reaching hello");
-		return new ResponseEntity<String>("Hello!", HttpStatus.OK);
+	@PostMapping("/login")
+	public ResponseEntity<User> loginVerify(){
+		userService.getLogin();
+		System.out.println("Login reached in Spring");
+		return null;
 	}
+	
 	
 	@RequestMapping(value="/home", method=RequestMethod.GET)
 	public String home() {
