@@ -21,6 +21,12 @@
 			<version>5.1.10.RELEASE</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.8.10</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>log4j</groupId>
