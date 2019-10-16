@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name = "movies")
-@Component
+//@Component
 public class Movie implements Serializable {
 
 	private static final long serialVersionUID = 1482141467399248051L;
@@ -32,33 +32,34 @@ public class Movie implements Serializable {
 	@Column(name = "title")
 	private String title;
 	
-	@Column(name = "director")
-	private String director;
-	
-	@Column(name = "actor")
-	private String actor;
+	@Column(name = "plot")
+	private String plot;
 	
 	@Column(name = "released_date")
 	private String releasedDate;
 	
 	//AT Mapping CODE-------------------------------------------------------------------------------
-	@ManyToMany(mappedBy = "watchlist")
-	private List<Watchlist> watchlists = new ArrayList<Watchlist>();
-	
-	//AT Mapping CODE-------------------------------------------------------------------------------
+//	//@ManyToMany(mappedBy = "watchlist")
+//	private List<Watchlist> watchlists = new ArrayList<Watchlist>();
 
-	
-	
 	public Movie() {
 		super();
 	}
-
-	public Movie(int movieId, String title, String director, String actor, String releasedDate) {
+	
+	//Constructor without watchlist
+	public Movie(int movieId, String title, String plot, String releasedDate) {
 		super();
 		this.movieId = movieId;
 		this.title = title;
-		this.director = director;
-		this.actor = actor;
+		this.plot = plot;
+		this.releasedDate = releasedDate;
+	}
+	
+	public Movie(int movieId, String title, String plot, String releasedDate, List<Watchlist> watchlists) {
+		super();
+		this.movieId = movieId;
+		this.title = title;
+		this.plot = plot;
 		this.releasedDate = releasedDate;
 	}
 
@@ -78,20 +79,12 @@ public class Movie implements Serializable {
 		this.title = title;
 	}
 
-	public String getDirector() {
-		return director;
+	public String getPlot() {
+		return plot;
 	}
 
-	public void setDirector(String director) {
-		this.director = director;
-	}
-
-	public String getActor() {
-		return actor;
-	}
-
-	public void setActor(String actor) {
-		this.actor = actor;
+	public void setPlot(String plot) {
+		this.plot = plot;
 	}
 
 	public String getReleasedDate() {
@@ -104,28 +97,53 @@ public class Movie implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(actor, director, movieId, releasedDate, title);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + movieId;
+		result = prime * result + ((plot == null) ? 0 : plot.hashCode());
+		result = prime * result + ((releasedDate == null) ? 0 : releasedDate.hashCode());
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (!(obj instanceof Movie)) {
+		if (obj == null)
 			return false;
-		}
+		if (getClass() != obj.getClass())
+			return false;
 		Movie other = (Movie) obj;
-		return Objects.equals(actor, other.actor) && Objects.equals(director, other.director)
-				&& movieId == other.movieId && Objects.equals(releasedDate, other.releasedDate)
-				&& Objects.equals(title, other.title);
+		if (movieId != other.movieId)
+			return false;
+		if (plot == null) {
+			if (other.plot != null)
+				return false;
+		} else if (!plot.equals(other.plot))
+			return false;
+		if (releasedDate == null) {
+			if (other.releasedDate != null)
+				return false;
+		} else if (!releasedDate.equals(other.releasedDate))
+			return false;
+		if (title == null) {
+			if (other.title != null)
+				return false;
+		} else if (!title.equals(other.title))
+			return false;
+		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Movie [movieId=" + movieId + ", title=" + title + ", director=" + director + ", actor=" + actor
-				+ ", releasedDate=" + releasedDate + "]";
+		return "Movie [movieId=" + movieId + ", title=" + title + ", plot=" + plot + ", releasedDate=" + releasedDate
+				+ ", watchlists=" + "]";
 	}
+	
+	//AT Mapping CODE-------------------------------------------------------------------------------
+
+
 
 	
 	

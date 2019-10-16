@@ -2,6 +2,7 @@ package com.revature.repositories;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,8 @@ public class MovieDAO implements IMovieDAO {
 	private SessionFactory sf;
 
 	@Override
-//	@Transactional(propagation = Propagation.REQUIRED)
-	public List<Movie> findAll() {
+	//@Transactional(propagation = Propagation.REQUIRED)
+	public List<Movie> listAll() {
 		Session s = sf.getCurrentSession();
 		
 		@SuppressWarnings("unchecked")
@@ -30,12 +31,12 @@ public class MovieDAO implements IMovieDAO {
 
 	@Override
 	//@Transactional
-	public Movie findOne(int movieId) {
+	public Movie addMovie(Movie m) {
 		Session s = sf.getCurrentSession();
-		
-		Movie m = (Movie) s.get(Movie.class, movieId);
-		
+		s.save(m);
 		return m;
 	}
+
+
 
 }

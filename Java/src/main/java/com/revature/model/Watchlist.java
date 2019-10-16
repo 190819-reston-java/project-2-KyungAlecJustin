@@ -1,4 +1,4 @@
-package com.revature.model;
+ package com.revature.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name = "watchlist")
-@Component
+//@Component
 public class Watchlist implements Serializable {
 
 	private static final long serialVersionUID = 5508595899459911621L;
@@ -40,15 +40,15 @@ public class Watchlist implements Serializable {
 	private int movie;
 	
 	//AT Mapping CODE-------------------------------------------------------------------------------
-	@OneToMany(mappedBy = "watchlist")
-	private List<Movie> movies; //Lists movies in Watchlist
-	
-	@ManyToMany
-	@JoinTable(
-			name = "watchlist_movie", 
-			joinColumns = {@JoinColumn(name="watchlist_id")},
-			inverseJoinColumns = {@JoinColumn(name = "movie_id")})
-	private List<Movie> moviesWatchlist = new ArrayList<Movie>();
+//	@OneToMany(mappedBy = "watchlist")
+//	private List<Movie> movies; //Lists movies in Watchlist
+//	
+//	@ManyToMany
+//	@JoinTable(
+//			name = "watchlist_movie", 
+//			joinColumns = {@JoinColumn(name="watchlist_id")},
+//			inverseJoinColumns = {@JoinColumn(name = "movie_id")})
+//	private List<Movie> moviesWatchlist = new ArrayList<Movie>();
 	
 	//AT Mapping CODE-------------------------------------------------------------------------------
 
