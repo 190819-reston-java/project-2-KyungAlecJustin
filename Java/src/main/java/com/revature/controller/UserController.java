@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpServerErrorException;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.model.User;
 import com.revature.repositories.UserDAO;
 import com.revature.services.UserService;
@@ -47,68 +48,20 @@ public class UserController {
 		return ResponseEntity.ok(response);
 	}
 	
-	//temporary leaving it like this 
-//	@PostMapping("/login")
-//	public ResponseEntity<User> loginVerify(HttpServletRequest req, HttpServletResponse resp) throws IOException{
-//		System.out.println("Login reached in Spring:UserController");
-//		HttpSession session = req.getSession();
-//		
-//		String username = req.getParameter("username");
-//		String userpwd = req.getParameter("password");
-//		
-//		if (userService.getLogin(username, userpwd)) {
-//			//to where?
-//			resp.sendRedirect("/main");
-//		} else {
-//			//to where?
-//			resp.sendRedirect("/index");
-//		}
-//		
-//		
-//		return null;
-//	}
-	
-//	@PostMapping("/login")
-//	public void loginVerify(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-//		System.out.println("Login reached in Spring:UserController");
-//		HttpSession session = req.getSession();
-//		
-//		String username = req.getParameter("username");
-//		String userpwd = req.getParameter("password");
-//		
-//		System.out.println("user input is :" +username + userpwd);
-//		
-//		if (userService.getLogin(username, userpwd)) {
-//			System.out.println("login succ");
-//			//to where?
-//			resp.sendRedirect("/main");
-//		} else {
-//			System.out.println("login fail");
-//			//to where?
-//			resp.sendRedirect("/index");
-//		}
-//	}
-	
 	@PostMapping("/login")
-
-	public void loginVerify(@RequestBody String userCreds) throws ServletException, IOException{
-		System.out.println("Login reached in Spring:UserController");
-//		System.out.println(userCreds ["username"]);
-//		HttpSession session = req.getSession();
-//		
-//		userCreds.
-//		
-//		System.out.println("user input is :" +username + userpwd);
-//		
-//		if (userService.getLogin(username, userpwd)) {
-//			System.out.println("login succ");
-//			//to where?
-//			resp.sendRedirect("/main");
-//		} else {
-//			System.out.println("login fail");
-//			//to where?
-//			resp.sendRedirect("/index");
-//		}
+	public String loginVerify(@RequestBody User userCreds) throws ServletException, IOException{
+		ObjectMapper om = new ObjectMapper();
+		String response;
+		if (userService.getLogin(userCreds.getUsername(), userCreds.getUsrpwd())) {
+			response = om.writeValueAsString(new ResponseEntity<String>(HttpStatus.ACCEPTED));
+			System.out.println(response);
+			return response;
+		} else {
+			response = om.writeValueAsString(new ResponseEntity<String>(HttpStatus.UNAUTHORIZED));
+			System.out.println(response);
+			return response;
+		}
+		
 
 	}
 	

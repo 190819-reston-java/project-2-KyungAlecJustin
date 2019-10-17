@@ -64,7 +64,7 @@ export class WatchlistComponent implements OnInit {
 		this.newFilm.plot = this.apiFilm.Plot;
 		this.newFilm.poster = this.apiFilm.Poster;
 		console.log(this.newFilm);
-		this.http.post(this.uri, this.newFilm).subscribe(
+		this.http.put(this.movieUri, this.newFilm).subscribe(
 			(request => {
 				console.log(request);
 			})
