@@ -15,15 +15,23 @@ import com.revature.model.User;
 public class UserDAO implements IUserDAO {
 
 	@Autowired
-	private SessionFactory sf;
+	SessionFactory sf;
 	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<User> findAll() {
-		Session s = sf.getCurrentSession();
+		//Session s = sf.getCurrentSession();
+		Session os = sf.openSession(); 
+		os.beginTransaction();
+		
 		
 		@SuppressWarnings("unchecked")
-		List<User> users = s.createCriteria(User.class).list();
+		List<User> users = os.createCriteria(User.class).list();
+		
+		System.out.println(users);
+		
+		os.getTransaction().commit();
+		os.close();
 		
 		return users;
 		
@@ -33,10 +41,53 @@ public class UserDAO implements IUserDAO {
 	@Transactional
 	public User findOne(int userId) {
 		Session s = sf.getCurrentSession();
+		System.out.println(s);
 		
 		User u = (User) s.get(User.class, userId);
 		
 		return u;
 	}
+	
+
+	@Override
+	@Transactional
+	public User create(User u) {
+		//Session s = sf.getCurrentSession();
+		System.out.println("reaching create in UserDAO");
+		Session os = sf.openSession();
+
+		os.beginTransaction();
+		
+		os.save(u);
+		os.getTransaction().commit();
+		os.close();
+		return u;
+	}
+
+	@Override
+	@Transactional
+	public boolean getLogin(String username, String userpwd) {
+		System.out.println("reaching getLogin in UserDAO");
+		//Session s = sf.getCurrentSession();
+		Session os = sf.openSession(); 
+		os.beginTransaction();
+		System.out.println(os);
+		
+		@SuppressWarnings("unchecked")
+		List<User> users = os.createCriteria(User.class).list();
+//		User u = (User) os.createCriteria(User.class);
+		
+		for(User u : users) {
+			if (u.getUsername() == username) {
+				if (u.getUsrpwd() == userpwd) {
+					return true;
+				}
+			}
+		}
+		return false;
+		
+	}
+	
+	
 
 }

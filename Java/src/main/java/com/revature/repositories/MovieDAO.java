@@ -19,23 +19,38 @@ public class MovieDAO implements IMovieDAO {
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public List<Movie> findAll() {
-		Session s = sf.getCurrentSession();
+	public List<Movie> listAll() {
+		//Will use for sessions:
+		//Session s = sf.getCurrentSession();
 		
+		Session os = sf.openSession();
+		os.beginTransaction();
+				
 		@SuppressWarnings("unchecked")
-		List<Movie> movies = s.createCriteria(Movie.class).list();
+		List<Movie> movies = os.createCriteria(Movie.class).list();	
+				
+		os.getTransaction().commit();
+		os.close();
 		
 		return movies;
 	}
 
 	@Override
 	@Transactional
-	public Movie findOne(int movieId) {
-		Session s = sf.getCurrentSession();
+	public Movie addMovie(Movie newMovie) {
+		//Session s = sf.getCurrentSession();
+		Session os = sf.openSession();
+
+		os.beginTransaction();
 		
-		Movie m = (Movie) s.get(Movie.class, movieId);
+		System.out.println(newMovie);
+		os.save(newMovie);
+		os.getTransaction().commit();
+		os.close();
 		
-		return m;
+		return newMovie;
 	}
+
+
 
 }

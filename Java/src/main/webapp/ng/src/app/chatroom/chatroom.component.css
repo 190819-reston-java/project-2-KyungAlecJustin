@@ -1,0 +1,55 @@
+h1 {
+    text-align: center;
+    font-family: 'Hepta Slab', serif;
+    font-size: 4em;
+    color: white;
+    margin-top: 2.5%;
+}
+
+#chatroom {
+    margin-top: 1%;
+    font-family: 'Hepta Slab', serif;
+}
+
+#display-message {
+    border: solid rgb(255, 0, 85) 3px;
+    width: 850px;
+    height: 500px;
+    margin: auto;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: white;
+}
+
+#display-message p {
+    text-align: left;
+    margin: 2%;
+    color: white;
+    font-size: 0.75em;
+}
+
+form {
+    display: flex;
+    width: 50%;
+    margin: auto;
+    font-family: 'Hepta Slab', serif;
+    height: 40px;
+}
+
+input[type=text] {
+    width: 80%;
+}
+
+input[type=submit] {
+    width: 20%;
+    color: white;
+    background-color: rgb(255, 0, 85);
+    border-color: rgb(255, 0, 85);
+}

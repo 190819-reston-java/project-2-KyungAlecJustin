@@ -1,12 +1,14 @@
-package com.revature.model;
+ package com.revature.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +22,7 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name = "watchlist")
-@Component
+//@Component
 public class Watchlist implements Serializable {
 
 	private static final long serialVersionUID = 5508595899459911621L;
@@ -36,19 +38,20 @@ public class Watchlist implements Serializable {
 	@Column(name = "owner_id")
 	private int ownerId;
 	
-//	@Column(name = "movie")
-//	private int movie;
+	@Column(name = "movie")
+	private int movie;
 	
 	//AT Mapping CODE-------------------------------------------------------------------------------
-	@OneToMany(mappedBy = "watchlist")
-	private List<Movie> movies; //Lists movies in Watchlist
-	
-	@ManyToMany
-	@JoinTable(
-			name = "watchlist_movie", 
-			joinColumns = {@JoinColumn(name="watchlist_id")},
-			inverseJoinColumns = {@JoinColumn(name = "movie_id")})
-	private List<Movie> moviesWatchlist = new ArrayList<Movie>();
+//	@OneToMany(mappedBy = "watchlist")
+//	private List<Movie> movies; //Lists movies in Watchlist
+//	
+	//HAVING TROUBLE WITH MANY TO MANY MAPPING
+//	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST} )
+//	@JoinTable(
+//			name = "watchlist_movie", 
+//			joinColumns = {@JoinColumn(name="watchlist_id")},
+//			inverseJoinColumns = {@JoinColumn(name = "movie_id")})
+//	private List<Movie> moviesWatchlist = new ArrayList<Movie>();
 	
 	//AT Mapping CODE-------------------------------------------------------------------------------
 
@@ -87,14 +90,14 @@ public class Watchlist implements Serializable {
 	public void setOwnerId(int ownerId) {
 		this.ownerId = ownerId;
 	}
-
-	public int getMovie() {
-		return movie;
-	}
-
-	public void setMovie(int movie) {
-		this.movie = movie;
-	}
+//
+//	public int getMovie() {
+//		return movie;
+//	}
+//
+//	public void setMovie(int movie) {
+//		this.movie = movie;
+//	}
 
 	@Override
 	public int hashCode() {

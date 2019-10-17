@@ -29,16 +29,7 @@ public class Driver {
 		for(User u : users) {
 			System.out.println(u);
 		}
-	}
-
-	private static void addUser() {
 		
-		
-		// required session headers
-		session = sf.openSession();
-		session.beginTransaction();
-
-		// testing adding new record
 		User newUser = new User();
 		newUser.setUsername("SpringTest");
 		newUser.setUsrpwd("password");
@@ -46,16 +37,10 @@ public class Driver {
 		newUser.setFirstName("Spring");
 		newUser.setLastName("Test");
 		
+		userDAO.create(newUser);
 		
+		((ClassPathXmlApplicationContext) ac).close();
 
-		session.save(newUser);
-		System.out.println(newUser);
-
-		// required session footer
-		session.getTransaction().commit();
-		session.close();
-		
-		
 	}
 	
 

@@ -1,0 +1,30 @@
+<app-navbar></app-navbar>
+
+<header>
+  <link href="https://fonts.googleapis.com/css?family=Hepta+Slab&display=swap" rel="stylesheet">
+</header>
+
+<div id="featured-films">
+  <h1>Trending Movies for {{today}}</h1>
+  <div id="movie-cards">
+    <div class="movie">
+      <img src="https://image.tmdb.org/t/p/w500{{featureFilm.results[0].poster_path}}" class="card-img-top" alt="..."
+        width="100%">
+      <p class="movie-overview">{{featureFilm.results[0].overview}}</p>
+    </div>
+    <div class="movie">
+      <img src="https://image.tmdb.org/t/p/w500{{featureFilm.results[1].poster_path}}" class="card-img-top" alt="..."
+        width="100%">
+      <p class="movie-overview">{{featureFilm.results[1].overview}}</p>
+    </div>
+    <div class="movie">
+      <img src="https://image.tmdb.org/t/p/w500{{featureFilm.results[2].poster_path}}" class="card-img-top" alt="..."
+        width="100%">
+      <p class="movie-overview">{{featureFilm.results[2].overview}}</p>
+    </div>
+  </div>
+</div>
+
+<div id="feed">
+    <h1>See What Watchlists People Are Creating</h1>
+</div>
