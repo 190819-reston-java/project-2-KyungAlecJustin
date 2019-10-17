@@ -93,7 +93,7 @@ public class UserController {
 
 	public void loginVerify(@RequestBody String userCreds) throws ServletException, IOException{
 		System.out.println("Login reached in Spring:UserController");
-		System.out.println(userCreds ["username"]);
+//		System.out.println(userCreds ["username"]);
 //		HttpSession session = req.getSession();
 //		
 //		userCreds.
