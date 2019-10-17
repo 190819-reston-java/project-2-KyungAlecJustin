@@ -11,10 +11,20 @@ export class WatchlistComponent implements OnInit {
 
 	constructor(private movieApi: MovieApiService, private http: HttpClient) {}
 
-	film: Object = {
+	apifilm: Object = {
 		"Title": null,
+		"Director": null,
 		"Released": null,
-		"Plot": null
+		"Plot": null,
+		"Poster": null
+	}
+
+	newFilm: Object = {
+		"title": null,
+		"director": null,
+		"released": null,
+		"plot": null,
+		"poster": null
 	}
 
 	showCreate = function(createForm, viewForm) {
@@ -39,9 +49,19 @@ export class WatchlistComponent implements OnInit {
 		let uri = this.movieApi.getUri() + title;
 		this.http.get(uri).subscribe(
 			(result => {
-				this.film = result;
+				this.apiFilm = result;
 			})
 		);
+	}
+
+	addToWatchList = function(event) {
+		event.preventDefault();
+		this.newFilm.title = this.apiFilm.Title;
+		this.newFilm.director = this.apiFilm.Director;
+		this.newFilm.released = this.apiFilm.Released;
+		this.newFilm.plot = this.apiFilm.Plot;
+		this.newFilm.poster = this.apiFilm.Poster;
+		console.log(this.newFilm);
 	}
 
 	ngOnInit() {}
