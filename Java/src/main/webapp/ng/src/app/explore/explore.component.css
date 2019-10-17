@@ -25,3 +25,66 @@ input[type=submit] {
     background-color: rgb(255, 0, 85);
     border-color: rgb(255, 0, 85);
 }
+
+#watchlists {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    font-family: 'Hepta Slab', serif;
+}
+
+#watchlists-tabs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+#watchlist-tabs h4 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    color: white;
+    margin-top: 2%;
+}
+
+#watchlist-tabs h4:hover {
+    color: rgb(255, 0, 85);
+}
+
+.watchlist-titles h5 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+    color: white;
+    margin-top: 2%;
+    font-size: 0.75em;
+}
+
+.watchlist-titles h5:hover {
+    color: rgb(255, 0, 85);
+}
+
+table {
+    text-align: center;
+    margin: auto;
+    border-collapse: collapse;
+    color: white;
+    font-size: 0.5em;
+    width: 50%;
+}
+
+th {
+    padding: 5px 20px;
+    border: 2px solid rgb(255, 0, 85);
+}
+
+td {
+    padding: 5px 20px;
+    border: 2px solid rgb(255, 0, 85);
+}

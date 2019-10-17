@@ -20,6 +20,21 @@ h1 {
     overflow-x: hidden;
 }
 
+::-webkit-scrollbar {
+    width: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: white;
+}
+
+#display-message p {
+    text-align: left;
+    margin: 2%;
+    color: white;
+    font-size: 0.75em;
+}
+
 form {
     display: flex;
     width: 50%;

@@ -27,6 +27,8 @@ export class WatchlistComponent implements OnInit {
 		"released": null
 	}
 
+	movieUri = "http://localhost:8080/cineplay/addmovie";
+
 	showCreate = function(createForm, viewForm) {
 		createForm.hidden = false;
 		viewForm.hidden = true;
@@ -62,16 +64,11 @@ export class WatchlistComponent implements OnInit {
 		this.newFilm.plot = this.apiFilm.Plot;
 		this.newFilm.poster = this.apiFilm.Poster;
 		console.log(this.newFilm);
-		//Code to add to 
-		this.http.post("http://localhost:8080/addmovie", this.newFilm).subscribe(
-			(result => {
-				this.newFilm = result;
-				console.log(result);
+		this.http.post(this.uri, this.newFilm).subscribe(
+			(request => {
+				console.log(request);
 			})
-		
-			
-
-		)
+		);
 	}
 
 	ngOnInit() {}
