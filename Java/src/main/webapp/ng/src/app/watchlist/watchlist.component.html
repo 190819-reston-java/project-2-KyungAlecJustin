@@ -36,18 +36,20 @@
 		<thead>
 			<tr>
 			  <th>Title</th>
+			  <th>Director</th>
 			  <th>Release Date</th>
 			  <th>Plot</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td>{{film.Title}}</td>
-				<td>{{film.Released}}</td>
-				<td>{{film.Plot}}</td>
+				<td>{{apiFilm.Title}}</td>
+				<td>{{apiFilm.Director}}</td>
+				<td>{{apiFilm.Released}}</td>
+				<td>{{apiFilm.Plot}}</td>
 			</tr>
 		</tbody>
 	</table>
 	<br>
-	<button #movieButton hidden>Add to Watchlist</button>
+	<button #movieButton hidden (click)="addToWatchList($event)">Add to Watchlist</button>
 </div>
