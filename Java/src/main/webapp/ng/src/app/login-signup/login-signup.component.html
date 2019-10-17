@@ -11,7 +11,7 @@
 		<p>Enter your password:</p>
 		<input type="password" #password>
 		<br>
-		<input type="submit" #loginSubmit (click)="submitLoginInfo($event, username.value, password.value)">
+		<input type="submit" (click)="submitLoginInfo($event, username.value, password.value)">
 	</form>
     <h4 (click)="showSignUp(signUpForm, loginForm)">Sign Up</h4>
 	<form #signUpForm hidden>

@@ -11,9 +11,15 @@ import { LoginAuthenticationService } from '../login-authentication.service';
 export class LoginSignupComponent implements OnInit {
 	constructor(private router: Router, private loginAuthentication: LoginAuthenticationService) {}
 
-	// username : string;
-	// password : string;
-	loginUri = "/login";
+	loginUri = "http://localhost:8080/cineplay/login";
+
+	userCreds: Object = {
+		"username": null,
+		"usrpwd": null,
+		"email": null,
+		"firstName": null,
+		"lastName": null
+	}
 
 	showLogin = function(loginForm, signUpForm) {
 		loginForm.hidden = false;
@@ -27,23 +33,17 @@ export class LoginSignupComponent implements OnInit {
 
 	submitLoginInfo = function(event, username, password) {
 		event.preventDefault();
-		let loginInfo = {
-			username: username,
-			password: password
-		};
-		this.loginAuthentication.http.post(this.loginUri, loginInfo).subscribe(
-			response => {
-				if (response.status >= 200 && response.status < 300) {
-					this.router.navigate(["main"]);
+		this.userCreds.username = username;
+		this.userCreds.usrpwd = password;
+		this.loginAuthentication.http.post(this.loginUri, this.userCreds).subscribe(
+			(response => {
+				if (response.statusCode === "ACCEPTED") {
+					this.router.navigate(['main']);
 				} else {
-					console.log("WRONG USERNAME AND PASSWORD")
+					alert("WRONG USERNAME OR PASSWORD");
 				}
-			}
+			})
 		);
-		// this.username = username;
-		// this.password = password;
-		// console.log(username, password);
-		
 	}
 
 	ngOnInit() {
