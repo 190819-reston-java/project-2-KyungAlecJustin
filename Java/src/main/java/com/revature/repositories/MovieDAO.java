@@ -2,7 +2,6 @@ package com.revature.repositories;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.model.Movie;
-import com.revature.model.User;
 
 @Repository
 public class MovieDAO implements IMovieDAO {

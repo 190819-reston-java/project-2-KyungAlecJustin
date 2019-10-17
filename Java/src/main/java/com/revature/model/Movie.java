@@ -43,31 +43,26 @@ public class Movie implements Serializable {
 	private String poster;
 	
 	@Column(name = "released_date")
-	private String releasedDate;
+	private String released;
+	
 	
 	//AT Mapping CODE-------------------------------------------------------------------------------
 //	@ManyToMany(mappedBy = "movies", fetch = FetchType.LAZY)
 //	private List<Watchlist> watchlists = new ArrayList<Watchlist>();
+	
 
 	public Movie() {
 		super();
 	}
-	
-	//Constructor without watchlist
-	public Movie(int movieId, String title, String plot, String releasedDate) {
+
+	public Movie(int movieId, String title, String director, String plot, String poster, String released) {
 		super();
 		this.movieId = movieId;
 		this.title = title;
+		this.director = director;
 		this.plot = plot;
-		this.releasedDate = releasedDate;
-	}
-	
-	public Movie(int movieId, String title, String plot, String releasedDate, List<Watchlist> watchlists) {
-		super();
-		this.movieId = movieId;
-		this.title = title;
-		this.plot = plot;
-		this.releasedDate = releasedDate;
+		this.poster = poster;
+		this.released = released;
 	}
 
 	public int getMovieId() {
@@ -86,6 +81,14 @@ public class Movie implements Serializable {
 		this.title = title;
 	}
 
+	public String getDirector() {
+		return director;
+	}
+
+	public void setDirector(String director) {
+		this.director = director;
+	}
+
 	public String getPlot() {
 		return plot;
 	}
@@ -94,21 +97,31 @@ public class Movie implements Serializable {
 		this.plot = plot;
 	}
 
-	public String getReleasedDate() {
-		return releasedDate;
+	public String getPoster() {
+		return poster;
 	}
 
-	public void setReleasedDate(String releasedDate) {
-		this.releasedDate = releasedDate;
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
+
+	public String getReleased() {
+		return released;
+	}
+
+	public void setReleased(String released) {
+		this.released = released;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((director == null) ? 0 : director.hashCode());
 		result = prime * result + movieId;
 		result = prime * result + ((plot == null) ? 0 : plot.hashCode());
-		result = prime * result + ((releasedDate == null) ? 0 : releasedDate.hashCode());
+		result = prime * result + ((poster == null) ? 0 : poster.hashCode());
+		result = prime * result + ((released == null) ? 0 : released.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
@@ -122,6 +135,11 @@ public class Movie implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Movie other = (Movie) obj;
+		if (director == null) {
+			if (other.director != null)
+				return false;
+		} else if (!director.equals(other.director))
+			return false;
 		if (movieId != other.movieId)
 			return false;
 		if (plot == null) {
@@ -129,10 +147,15 @@ public class Movie implements Serializable {
 				return false;
 		} else if (!plot.equals(other.plot))
 			return false;
-		if (releasedDate == null) {
-			if (other.releasedDate != null)
+		if (poster == null) {
+			if (other.poster != null)
 				return false;
-		} else if (!releasedDate.equals(other.releasedDate))
+		} else if (!poster.equals(other.poster))
+			return false;
+		if (released == null) {
+			if (other.released != null)
+				return false;
+		} else if (!released.equals(other.released))
 			return false;
 		if (title == null) {
 			if (other.title != null)
@@ -144,11 +167,8 @@ public class Movie implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Movie [movieId=" + movieId + ", title=" + title + ", plot=" + plot + ", releasedDate=" + releasedDate
-				+ ", watchlists=" + "]";
+		return "Movie [movieId=" + movieId + ", title=" + title + ", director=" + director + ", plot=" + plot
+				+ ", poster=" + poster + ", released=" + released + "]";
 	}
-
-	// AT Mapping
-	// CODE-------------------------------------------------------------------------------
-
+		
 }

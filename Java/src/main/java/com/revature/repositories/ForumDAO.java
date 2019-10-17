@@ -10,32 +10,53 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.model.Forum;
+import com.revature.model.Movie;
 
-//@Repository
+@Repository
 public class ForumDAO implements IForumDAO {
 	
-	//@Autowired
+	@Autowired
 	private SessionFactory sf;
 
 	@Override
-	//@Transactional(propagation = Propagation.REQUIRED)
-	public List<Forum> findAll() {
-		Session s = sf.getCurrentSession();
+	@Transactional(propagation = Propagation.REQUIRED)
+	public List<Forum> getAllForums() {
+		System.out.println("reaching forums in ForumDAO");
+		//Session s = sf.getCurrentSession();
+
+		Session os = sf.openSession();
+		os.beginTransaction();
+		
+		System.out.println(os);
 		
 		@SuppressWarnings("unchecked")
-		List<Forum> forums = s.createCriteria(Forum.class).list();
+		List<Forum> forums = os.createCriteria(Forum.class).list();	
+		
+		System.out.println(forums);
+		
+		os.getTransaction().commit();
+		os.close();
 		
 		return forums;
 	}
+	
 
 	@Override
-	//@Transactional
-	public Forum findOne(int forumId) {
-		Session s = sf.getCurrentSession();
+	@Transactional
+	public Forum createForum(Forum f) {
+		//Session s = sf.getCurrentSession();
+		Session os = sf.openSession();
+		System.out.println(os);
+
+		os.beginTransaction();
 		
-		Forum f = (Forum) s.get(Forum.class, forumId);
-		
+		System.out.println(f);
+		os.save(f);
+		os.getTransaction().commit();
+		os.close();
 		return f;
 	}
+	
+	
 
 }
