@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.model.Movie;
+import com.revature.model.User;
 
 @Repository
 public class MovieDAO implements IMovieDAO {
@@ -21,10 +22,20 @@ public class MovieDAO implements IMovieDAO {
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<Movie> listAll() {
-		Session s = sf.getCurrentSession();
+		System.out.println("reaching movies in MovieDAO");
+
+		Session os = sf.openSession();
+		os.beginTransaction();
+		
+		System.out.println(os);
 		
 		@SuppressWarnings("unchecked")
-		List<Movie> movies = s.createCriteria(Movie.class).list();
+		List<Movie> movies = os.createCriteria(Movie.class).list();	
+		
+		System.out.println(movies);
+		
+		os.getTransaction().commit();
+		os.close();
 		
 		return movies;
 	}

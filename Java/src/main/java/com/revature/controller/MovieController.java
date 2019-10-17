@@ -22,11 +22,13 @@ public class MovieController {
 	
 	@GetMapping("/movies")
 	public List<Movie> listAllMovies(){
+		System.out.println("reaching movies in MovieController");
 		return movieService.listAllMovies();
 	}
 	
-	@PutMapping("/create")
+	@PutMapping("/addmovie")
 	public ResponseEntity<Movie> upsert(@RequestBody Movie m){
+		System.out.println("reached addmovie in MovieController");
 		Movie response = movieService.addMovie(m);
 		
 		return ResponseEntity.ok(response);
