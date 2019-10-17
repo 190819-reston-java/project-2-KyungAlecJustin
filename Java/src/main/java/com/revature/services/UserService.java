@@ -28,8 +28,9 @@ public class UserService {
 		return u;
 	}
 	
-	public User getLogin() {
-		return null;
+	public boolean getLogin(String username, String userpwd) {
+		return userDao.getLogin(username, userpwd);
+		
 	}
 	
 	
