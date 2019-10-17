@@ -6,8 +6,11 @@ import com.revature.model.Watchlist;
 
 public interface IWatchlistDAO {
 	
-	public List<Watchlist> findAll();
+	public List<Watchlist> findAllWatchlist();
 	
-	public Watchlist findOne(int watchlistId);
+	public Watchlist findWatchlist(String watchlistName);
 
+	public Watchlist create(Watchlist w);
+	
+	public Watchlist getUserWatchlist(int ownerId);
 }
