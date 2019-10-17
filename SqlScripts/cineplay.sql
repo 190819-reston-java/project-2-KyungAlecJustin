@@ -12,7 +12,10 @@ last_name VARCHAR(30) NOT NULL
 SELECT * FROM users;
 
 INSERT INTO users VALUES
-	(DEFAULT, 'cineplay', 'admin', 'admin@cineplay.com', 'Cineplay', 'Admin');
+	(DEFAULT, 'cineplay', 'admin', 'admin@cineplay.com', 'Cineplay', 'Admin'),
+	(DEFAULT, 'kmlee0206', 'admin', 'kmlee0206@cineplay.com', 'Kyungmin', 'Lee'),
+	(DEFAULT, 'justiny', 'admin', 'justiny@cineplay.com', 'Justin', 'Yang'),
+	(DEFAULT, 'alect23', 'jumpman23', 'djaether@cineplay.com', 'Alec', 'Thavychith');
 
 DROP TABLE movies;
 CREATE TABLE movies (
