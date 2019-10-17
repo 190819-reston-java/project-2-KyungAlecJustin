@@ -70,25 +70,46 @@ public class UserController {
 //		return null;
 //	}
 	
+//	@PostMapping("/login")
+//	public void loginVerify(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+//		System.out.println("Login reached in Spring:UserController");
+//		HttpSession session = req.getSession();
+//		
+//		String username = req.getParameter("username");
+//		String userpwd = req.getParameter("password");
+//		
+//		System.out.println("user input is :" +username + userpwd);
+//		
+//		if (userService.getLogin(username, userpwd)) {
+//			System.out.println("login succ");
+//			//to where?
+//			resp.sendRedirect("/main");
+//		} else {
+//			System.out.println("login fail");
+//			//to where?
+//			resp.sendRedirect("/index");
+//		}
+//	}
+	
 	@PostMapping("/login")
-	public void loginVerify(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+	public void loginVerify(@RequestBody String userCreds) throws ServletException, IOException{
 		System.out.println("Login reached in Spring:UserController");
-		HttpSession session = req.getSession();
-		
-		String username = req.getParameter("username");
-		String userpwd = req.getParameter("password");
-		
-		System.out.println("user input is :" +username + userpwd);
-		
-		if (userService.getLogin(username, userpwd)) {
-			System.out.println("login succ");
-			//to where?
-			resp.sendRedirect("/main");
-		} else {
-			System.out.println("login fail");
-			//to where?
-			resp.sendRedirect("/index");
-		}
+		System.out.println(userCreds ["username"]);
+//		HttpSession session = req.getSession();
+//		
+//		userCreds.
+//		
+//		System.out.println("user input is :" +username + userpwd);
+//		
+//		if (userService.getLogin(username, userpwd)) {
+//			System.out.println("login succ");
+//			//to where?
+//			resp.sendRedirect("/main");
+//		} else {
+//			System.out.println("login fail");
+//			//to where?
+//			resp.sendRedirect("/index");
+//		}
 	}
 	
 
