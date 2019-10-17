@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,15 +36,12 @@ public class UserController {
 	private UserService userService;
 	
 	@RequestMapping(value = "/users", method=RequestMethod.GET)
-	public List<User> findAll(){
-		System.out.println("reaching /users in UserController");
-		
+	public List<User> findAll(){		
 		return userService.findAll();
 	}
 
 	@PutMapping("/create")
 	public ResponseEntity<User> upsert(@RequestBody User u){
-		System.out.println("create reached");
 		User response = userService.createUser(u);
 		
 		return ResponseEntity.ok(response);
@@ -92,6 +90,7 @@ public class UserController {
 //	}
 	
 	@PostMapping("/login")
+
 	public void loginVerify(@RequestBody String userCreds) throws ServletException, IOException{
 		System.out.println("Login reached in Spring:UserController");
 		System.out.println(userCreds ["username"]);
@@ -110,6 +109,7 @@ public class UserController {
 //			//to where?
 //			resp.sendRedirect("/index");
 //		}
+
 	}
 	
 

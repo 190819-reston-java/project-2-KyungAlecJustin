@@ -29,7 +29,6 @@ public class ForumController {
 
 	@PutMapping("/createforum")
 	public ResponseEntity<Forum> upsert(@RequestBody Forum f) {
-		System.out.println("create reached");
 		Forum response = forumService.createForum(f);
 
 		return ResponseEntity.ok(response);

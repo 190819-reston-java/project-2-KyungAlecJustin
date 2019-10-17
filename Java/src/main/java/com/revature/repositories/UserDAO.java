@@ -20,12 +20,10 @@ public class UserDAO implements IUserDAO {
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<User> findAll() {
-		System.out.println("reaching findAll in USER DAO");
 		//Session s = sf.getCurrentSession();
 		Session os = sf.openSession(); 
 		os.beginTransaction();
 		
-		System.out.println(os);
 		
 		@SuppressWarnings("unchecked")
 		List<User> users = os.createCriteria(User.class).list();
@@ -57,11 +55,9 @@ public class UserDAO implements IUserDAO {
 		//Session s = sf.getCurrentSession();
 		System.out.println("reaching create in UserDAO");
 		Session os = sf.openSession();
-		System.out.println(os);
 
 		os.beginTransaction();
 		
-		System.out.println(u);
 		os.save(u);
 		os.getTransaction().commit();
 		os.close();

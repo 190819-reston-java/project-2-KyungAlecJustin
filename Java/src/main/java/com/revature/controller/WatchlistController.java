@@ -6,33 +6,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.model.Movie;
-import com.revature.services.MovieService;
+import com.revature.model.Watchlist;
+import com.revature.services.WatchlistService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
-public class MovieController {
+@CrossOrigin(origins = "http://localhost:4200")
+public class WatchlistController {
 	
 	@Autowired
-	private MovieService movieService;
+	private WatchlistService watchlistService;
 	
-	@GetMapping("/movies")
-	public List<Movie> listAllMovies(){
-		return movieService.listAllMovies();
+	@GetMapping("/watchlists")
+	public List<Watchlist> listAllWatchlists(){
+		return watchlistService.getAllWatchlist();
+		
 	}
 	
-	@PutMapping("/addmovie")
-	public ResponseEntity<Movie> upsert(@RequestBody Movie m){
-		Movie response = movieService.addMovie(m);
-		
+	@PutMapping("/createwatchlist")
+	public ResponseEntity<Watchlist> upsert(@RequestBody Watchlist w){
+		Watchlist response = watchlistService.createWatchlist(w);
 		return ResponseEntity.ok(response);
 	}
-	
 	
 
 }

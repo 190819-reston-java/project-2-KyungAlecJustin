@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
 
 @Injectable({
 	providedIn: 'root'
 })
 export class MovieApiService {
 
-	constructor(private http: HttpClient) { }
+	constructor() { }
 
 	baseUri = "http://www.omdbapi.com/?apikey=63f27bd7&t=";
 

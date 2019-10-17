@@ -21,7 +21,6 @@ public class ForumDAO implements IForumDAO {
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<Forum> getAllForums() {
-		System.out.println("reaching forums in ForumDAO");
 		//Session s = sf.getCurrentSession();
 
 		Session os = sf.openSession();

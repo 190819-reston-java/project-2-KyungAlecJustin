@@ -15,7 +15,6 @@ public class MovieService {
 	private IMovieDAO movieDao;
 	
 	public List<Movie> listAllMovies(){
-		System.out.println("reaching movies in MovieService");
 		List<Movie> movies = movieDao.listAll();
 		return movies;
 		

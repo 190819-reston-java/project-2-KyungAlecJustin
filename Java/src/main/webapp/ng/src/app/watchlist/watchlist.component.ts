@@ -11,7 +11,7 @@ export class WatchlistComponent implements OnInit {
 
 	constructor(private movieApi: MovieApiService, private http: HttpClient) {}
 
-	apifilm: Object = {
+	apiFilm: Object = {
 		"Title": null,
 		"Director": null,
 		"Released": null,
@@ -22,10 +22,12 @@ export class WatchlistComponent implements OnInit {
 	newFilm: Object = {
 		"title": null,
 		"director": null,
-		"released": null,
 		"plot": null,
-		"poster": null
+		"poster": null,
+		"released": null
 	}
+
+	movieUri = "http://localhost:8080/cineplay/addmovie";
 
 	showCreate = function(createForm, viewForm) {
 		createForm.hidden = false;
@@ -62,6 +64,11 @@ export class WatchlistComponent implements OnInit {
 		this.newFilm.plot = this.apiFilm.Plot;
 		this.newFilm.poster = this.apiFilm.Poster;
 		console.log(this.newFilm);
+		this.http.post(this.uri, this.newFilm).subscribe(
+			(request => {
+				console.log(request);
+			})
+		);
 	}
 
 	ngOnInit() {}
