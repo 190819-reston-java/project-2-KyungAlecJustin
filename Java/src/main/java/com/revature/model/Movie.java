@@ -29,199 +29,124 @@ public class Movie implements Serializable {
 	@Column(name = "movie_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int movieId;
-	
-	@Column(name="title")
-	private String Title;
-	
-	@Column(name="released_date")
-	private String Released;
+
+	@Column(name = "title")
+	private String title;
 	
 	@Column(name="director")
-	private String Director;
+	private String director;
 	
-	@Column(name="plot")
-	private String Plot;
+	@Column(name = "plot")
+	private String plot;
 	
-	@Column(name="poster")
-	private String Poster;
+	@Column(name = "poster")
+	private String poster;
 	
-//	@Column(name = "title")
-//	private String title;
-//	
-//	@Column(name="director")
-//	private String director;
-//	
-//	@Column(name = "plot")
-//	private String plot;
-//	
-//	@Column(name = "poster")
-//	private String poster;
-//	
-//	@Column(name = "released_date")
-//	private String releasedDate;
+	@Column(name = "released_date")
+	private String releasedDate;
+	
+	//AT Mapping CODE-------------------------------------------------------------------------------
+//	@ManyToMany(mappedBy = "movies", fetch = FetchType.LAZY)
+//	private List<Watchlist> watchlists = new ArrayList<Watchlist>();
 
-	// Getter Methods
+	public Movie() {
+		super();
+	}
+	
+	//Constructor without watchlist
+	public Movie(int movieId, String title, String plot, String releasedDate) {
+		super();
+		this.movieId = movieId;
+		this.title = title;
+		this.plot = plot;
+		this.releasedDate = releasedDate;
+	}
+	
+	public Movie(int movieId, String title, String plot, String releasedDate, List<Watchlist> watchlists) {
+		super();
+		this.movieId = movieId;
+		this.title = title;
+		this.plot = plot;
+		this.releasedDate = releasedDate;
+	}
+
+	public int getMovieId() {
+		return movieId;
+	}
+
+	public void setMovieId(int movieId) {
+		this.movieId = movieId;
+	}
 
 	public String getTitle() {
-		return Title;
+		return title;
 	}
 
-	public String getReleased() {
-		return Released;
-	}
-
-	public String getDirector() {
-		return Director;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getPlot() {
-		return Plot;
+		return plot;
 	}
 
-	public String getPoster() {
-		return Poster;
+	public void setPlot(String plot) {
+		this.plot = plot;
 	}
 
-	
-	// Setter Methods
-
-	public void setTitle(String Title) {
-		this.Title = Title;
+	public String getReleasedDate() {
+		return releasedDate;
 	}
 
-	public void setReleased(String Released) {
-		this.Released = Released;
+	public void setReleasedDate(String releasedDate) {
+		this.releasedDate = releasedDate;
 	}
 
-	public void setDirector(String Director) {
-		this.Director = Director;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + movieId;
+		result = prime * result + ((plot == null) ? 0 : plot.hashCode());
+		result = prime * result + ((releasedDate == null) ? 0 : releasedDate.hashCode());
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		return result;
 	}
 
-	public void setPlot(String Plot) {
-		this.Plot = Plot;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Movie other = (Movie) obj;
+		if (movieId != other.movieId)
+			return false;
+		if (plot == null) {
+			if (other.plot != null)
+				return false;
+		} else if (!plot.equals(other.plot))
+			return false;
+		if (releasedDate == null) {
+			if (other.releasedDate != null)
+				return false;
+		} else if (!releasedDate.equals(other.releasedDate))
+			return false;
+		if (title == null) {
+			if (other.title != null)
+				return false;
+		} else if (!title.equals(other.title))
+			return false;
+		return true;
 	}
 
-	public void setPoster(String Poster) {
-		this.Poster = Poster;
+	@Override
+	public String toString() {
+		return "Movie [movieId=" + movieId + ", title=" + title + ", plot=" + plot + ", releasedDate=" + releasedDate
+				+ ", watchlists=" + "]";
 	}
-
-//	@Column(name = "title")
-//	private String title;
-//	
-//	@Column(name="director")
-//	private String director;
-//	
-//	@Column(name = "plot")
-//	private String plot;
-//	
-//	@Column(name = "poster")
-//	private String poster;
-//	
-//	@Column(name = "released_date")
-//	private String releasedDate;
-//	
-//	//AT Mapping CODE-------------------------------------------------------------------------------
-////	@ManyToMany(mappedBy = "movies", fetch = FetchType.LAZY)
-////	private List<Watchlist> watchlists = new ArrayList<Watchlist>();
-//
-//	public Movie() {
-//		super();
-//	}
-//	
-//	//Constructor without watchlist
-//	public Movie(int movieId, String title, String plot, String releasedDate) {
-//		super();
-//		this.movieId = movieId;
-//		this.title = title;
-//		this.plot = plot;
-//		this.releasedDate = releasedDate;
-//	}
-//	
-//	public Movie(int movieId, String title, String plot, String releasedDate, List<Watchlist> watchlists) {
-//		super();
-//		this.movieId = movieId;
-//		this.title = title;
-//		this.plot = plot;
-//		this.releasedDate = releasedDate;
-//	}
-//
-//	public int getMovieId() {
-//		return movieId;
-//	}
-//
-//	public void setMovieId(int movieId) {
-//		this.movieId = movieId;
-//	}
-//
-//	public String getTitle() {
-//		return title;
-//	}
-//
-//	public void setTitle(String title) {
-//		this.title = title;
-//	}
-//
-//	public String getPlot() {
-//		return plot;
-//	}
-//
-//	public void setPlot(String plot) {
-//		this.plot = plot;
-//	}
-//
-//	public String getReleasedDate() {
-//		return releasedDate;
-//	}
-//
-//	public void setReleasedDate(String releasedDate) {
-//		this.releasedDate = releasedDate;
-//	}
-//
-//	@Override
-//	public int hashCode() {
-//		final int prime = 31;
-//		int result = 1;
-//		result = prime * result + movieId;
-//		result = prime * result + ((plot == null) ? 0 : plot.hashCode());
-//		result = prime * result + ((releasedDate == null) ? 0 : releasedDate.hashCode());
-//		result = prime * result + ((title == null) ? 0 : title.hashCode());
-//		return result;
-//	}
-//
-//	@Override
-//	public boolean equals(Object obj) {
-//		if (this == obj)
-//			return true;
-//		if (obj == null)
-//			return false;
-//		if (getClass() != obj.getClass())
-//			return false;
-//		Movie other = (Movie) obj;
-//		if (movieId != other.movieId)
-//			return false;
-//		if (plot == null) {
-//			if (other.plot != null)
-//				return false;
-//		} else if (!plot.equals(other.plot))
-//			return false;
-//		if (releasedDate == null) {
-//			if (other.releasedDate != null)
-//				return false;
-//		} else if (!releasedDate.equals(other.releasedDate))
-//			return false;
-//		if (title == null) {
-//			if (other.title != null)
-//				return false;
-//		} else if (!title.equals(other.title))
-//			return false;
-//		return true;
-//	}
-//
-//	@Override
-//	public String toString() {
-//		return "Movie [movieId=" + movieId + ", title=" + title + ", plot=" + plot + ", releasedDate=" + releasedDate
-//				+ ", watchlists=" + "]";
-//	}
 
 	// AT Mapping
 	// CODE-------------------------------------------------------------------------------
