@@ -16,7 +16,6 @@ public class ForumService {
 	private IForumDAO forumDao;
 	
 	public List<Forum> getAllForums(){
-		System.out.println("reaching movies in MovieService");
 		List<Forum> forums = forumDao.getAllForums();
 		return forums;
 		

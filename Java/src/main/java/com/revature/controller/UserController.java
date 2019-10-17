@@ -2,6 +2,9 @@ package com.revature.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,22 +31,20 @@ public class UserController {
 	private UserService userService;
 	
 	@RequestMapping(value = "/users", method=RequestMethod.GET)
-	public List<User> findAll(){
-		System.out.println("reaching /users in UserController");
-		
+	public List<User> findAll(){		
 		return userService.findAll();
 	}
 
 	@PutMapping("/create")
 	public ResponseEntity<User> upsert(@RequestBody User u){
-		System.out.println("create reached");
 		User response = userService.createUser(u);
 		
 		return ResponseEntity.ok(response);
 	}
 	
 	@PostMapping("/login")
-	public ResponseEntity<User> loginVerify(){
+	public ResponseEntity<User> loginVerify(@RequestBody String loginform, HttpServletRequest req, HttpServletResponse resp){
+		User signedInUser = userService.getLogin();
 		userService.getLogin();
 		System.out.println("Login reached in Spring");
 		return null;

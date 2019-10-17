@@ -24,7 +24,6 @@ public class UserService {
 	}
 	
 	public User createUser(User u) {
-		System.out.println("reached in UserService");
 		userDao.create(u);
 		return u;
 	}
