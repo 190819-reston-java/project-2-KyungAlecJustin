@@ -22,13 +22,13 @@ public class UserDAO implements IUserDAO {
 	public List<User> findAll() {
 		System.out.println("reaching findAll in USER DAO");
 		//Session s = sf.getCurrentSession();
-		Session os = sf.openSession();
+		Session os = sf.openSession(); 
 		os.beginTransaction();
 		
 		System.out.println(os);
 		
 		@SuppressWarnings("unchecked")
-		List<User> users = os.createCriteria(User.class).list();	
+		List<User> users = os.createCriteria(User.class).list();
 		
 		System.out.println(users);
 		
@@ -69,9 +69,27 @@ public class UserDAO implements IUserDAO {
 	}
 
 	@Override
-	public User getLogin(String username, String userpwd) {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional
+	public boolean getLogin(String username, String userpwd) {
+		System.out.println("reaching getLogin in UserDAO");
+		//Session s = sf.getCurrentSession();
+		Session os = sf.openSession(); 
+		os.beginTransaction();
+		System.out.println(os);
+		
+		@SuppressWarnings("unchecked")
+		List<User> users = os.createCriteria(User.class).list();
+//		User u = (User) os.createCriteria(User.class);
+		
+		for(User u : users) {
+			if (u.getUsername() == username) {
+				if (u.getUsrpwd() == userpwd) {
+					return true;
+				}
+			}
+		}
+		return false;
+		
 	}
 	
 	

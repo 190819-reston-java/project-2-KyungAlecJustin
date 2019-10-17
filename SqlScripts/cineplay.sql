@@ -12,14 +12,15 @@ last_name VARCHAR(30) NOT NULL
 SELECT * FROM users;
 
 INSERT INTO users VALUES
-	(DEFAULT, 'admin', 'password', 'admin@cineplay.com', 'Alec', 'Yang');
+	(DEFAULT, 'cineplay', 'admin', 'admin@cineplay.com', 'Cineplay', 'Admin');
 
 DROP TABLE movies;
 CREATE TABLE movies (
 movie_id SERIAL PRIMARY KEY NOT NULL,
-title VARCHAR(100),
-director VARCHAR(60),
-actor VARCHAR(60),
+title VARCHAR(200),
+director VARCHAR(1000),
+plot VARCHAR(1000),
+poster VARCHAR(1000),
 released_date VARCHAR(50)
 );
 SELECT * FROM movies;
@@ -32,6 +33,9 @@ message VARCHAR(1000),
 post_time TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT(CURRENT_TIMESTAMP)
 );
 SELECT * FROM forum;
+
+INSERT INTO forum VALUES
+	(DEFAULT, 1, 'OUR FIRST MESSAGE', DEFAULT);
 
 DROP TABLE watchlist;
 CREATE TABLE watchlist (
