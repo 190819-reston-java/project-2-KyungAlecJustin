@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginAuthenticationService } from '../login-authentication.service';
+import { HttpClient } from "@angular/common/http";
 
 
 @Component({
@@ -9,11 +10,9 @@ import { LoginAuthenticationService } from '../login-authentication.service';
 	styleUrls: ['./login-signup.component.css']
 })
 export class LoginSignupComponent implements OnInit {
-	constructor(private router: Router, private loginAuthentication: LoginAuthenticationService) {}
+	constructor(private router: Router, private http: HttpClient, private loginAuthentication: LoginAuthenticationService) {}
 
-	// username : string;
-	// password : string;
-	loginUri = "/login";
+	loginUri: String;
 
 	showLogin = function(loginForm, signUpForm) {
 		loginForm.hidden = false;
@@ -31,19 +30,16 @@ export class LoginSignupComponent implements OnInit {
 			username: username,
 			password: password
 		};
-		this.loginAuthentication.http.post(this.loginUri, loginInfo).subscribe(
-			response => {
+		this.loginUri = this.loginAuthentication.getLogin();
+		this.http.post(this.loginUri, loginInfo).subscribe(
+			(response => {
 				if (response.status >= 200 && response.status < 300) {
 					this.router.navigate(["main"]);
 				} else {
-					console.log("WRONG USERNAME AND PASSWORD")
+					console.log("WRONG USERNAME AND PASSWORD");
 				}
-			}
+			})
 		);
-		// this.username = username;
-		// this.password = password;
-		// console.log(username, password);
-		
 	}
 
 	ngOnInit() {

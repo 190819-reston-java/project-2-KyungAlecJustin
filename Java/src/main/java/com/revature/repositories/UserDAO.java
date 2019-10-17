@@ -20,7 +20,7 @@ public class UserDAO implements IUserDAO {
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<User> findAll() {
-		//Session s = sf.getCurrentSession();
+		Session s = sf.getCurrentSession();
 		
 		@SuppressWarnings("unchecked")
 		List<User> users = s.createCriteria(User.class).list();
