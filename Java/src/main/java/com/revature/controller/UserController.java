@@ -41,10 +41,11 @@ public class UserController {
 		return userService.findAll();
 	}
 
-	@PutMapping("/create")
-	public ResponseEntity<User> upsert(@RequestBody User u){
-		User response = userService.createUser(u);
+	@PutMapping("/createuser")
+	public ResponseEntity<User> upsert(@RequestBody User userCreate){
+		User response = userService.createUser(userCreate);
 		
+		System.out.println("STATUSCODEEE: " + ResponseEntity.ok(response));
 		return ResponseEntity.ok(response);
 	}
 	

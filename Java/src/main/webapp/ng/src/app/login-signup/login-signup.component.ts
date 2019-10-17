@@ -12,6 +12,7 @@ export class LoginSignupComponent implements OnInit {
 	constructor(private router: Router, private loginAuthentication: LoginAuthenticationService) {}
 
 	loginUri = "http://localhost:8080/cineplay/login";
+	createUri = "http://localhost:8080/cineplay/createuser"
 
 	userCreds: Object = {
 		"username": null,
@@ -20,6 +21,16 @@ export class LoginSignupComponent implements OnInit {
 		"firstName": null,
 		"lastName": null
 	}
+
+	userCreate: Object = {
+		"username": null,
+		"usrpwd": null,
+		"email": null,
+		"firstName": null,
+		"lastName": null
+	}
+
+
 
 	showLogin = function(loginForm, signUpForm) {
 		loginForm.hidden = false;
@@ -41,6 +52,24 @@ export class LoginSignupComponent implements OnInit {
 					this.router.navigate(['main']);
 				} else {
 					alert("WRONG USERNAME OR PASSWORD");
+				}
+			})
+		);
+	}
+
+	submitCreateUser = function(event, cusername, cpassword, cemail, cfirstname, clastname) {
+		event.preventDefault();
+		this.userCreate.username = cusername;
+		this.userCreate.usrpwd = cpassword;
+		this.userCreate.email = cemail;
+		this.userCreate.firstName = cfirstname;
+		this.userCreate.lastName = clastname;
+		this.loginAuthentication.http.put(this.createUri, this.userCreate).subscribe(
+			(response => {
+				if (response.statuCode === "OK") {
+					alert("USER CREATION SUCCESSFUL")
+				} else {
+					alert("USER CREATION UNSUCCESSFUL");
 				}
 			})
 		);
