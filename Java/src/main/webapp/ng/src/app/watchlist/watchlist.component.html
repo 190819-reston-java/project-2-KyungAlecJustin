@@ -1,58 +1,58 @@
 <app-navbar></app-navbar>
 
 <header>
-  <link href="https://fonts.googleapis.com/css?family=Hepta+Slab&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Hepta+Slab&display=swap" rel="stylesheet">
 </header>
 
 <div id="create-view">
-	<div id="create-view-tabs">
-		<h4 (click)="showCreate(createForm, viewForm)">Create a Watchlist</h4>
-		<form #createForm hidden>
-			<p>Enter the name of your new watchlist:</p>
-			<input type="text" #name>
-			<br>
-			<input type="submit" (click)="submitWatchlist($event, searchMovies)">
-		</form>
-		<h4 (click)="showView(createForm, viewForm)">View Your Watchlists</h4>
-		<form #viewForm hidden>
-			<p>Enter the name of your new watchlist:</p>
-			<input type="text" #name>
-			<p>Enter the title of the movie:</p>
-			<input type="text" #title>
-			<br>
-			<input type="submit" (click)="submitCreation($event, username.value, password.value)">
-		</form>
-	</div>
+    <div id="create-view-tabs">
+        <h4 (click)="showCreate(createForm, viewForm)">Create a Watchlist</h4>
+        <form #createForm hidden>
+            <p>Enter the name of your new watchlist:</p>
+            <input type="text" #createWL>
+            <br>
+            <input type="submit" (click)="submitWatchlist($event, searchMovies, createWL.value)">
+        </form>
+        <h4 (click)="showView(createForm, viewForm)">View Your Watchlists</h4>
+        <form #viewForm hidden>
+            <p>Enter the name of your new watchlist:</p>
+            <input type="text" #name>
+            <p>Enter the title of the movie:</p>
+            <input type="text" #title>
+            <br>
+            <input type="submit" (click)="submitCreation($event, username.value, password.value)">
+        </form>
+    </div>
 </div>
 
 <div id="search-movies" #searchMovies hidden>
-	<form>
-		<p>Add a movie to your watchlist</p>
-		<input type="text" #title placeholder="Search by title">
-		<input type="submit" (click)="submitMovie($event, title.value, movieTable, movieButton, exitButton)">
-	</form>
-	<br><br>
-	<table #movieTable hidden>
-		<thead>
-			<tr>
-			  <th>Title</th>
-			  <th>Director</th>
-			  <th>Release Date</th>
-			  <th>Plot</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>{{apiFilm.Title}}</td>
-				<td>{{apiFilm.Director}}</td>
-				<td>{{apiFilm.Released}}</td>
-				<td>{{apiFilm.Plot}}</td>
-			</tr>
-		</tbody>
-	</table>
-	<br>
-	<div id="buttons">
-		<button #movieButton hidden (click)="addToWatchList($event)">Add to Watchlist</button>
-		<button #exitButton hidden (click)="exit($event)">Exit</button>
-	</div>
+    <form>
+        <p>Add a movie to your watchlist</p>
+        <input type="text" #title placeholder="Search by title">
+        <input type="submit" (click)="submitMovie($event, title.value, movieTable, movieButton, exitButton)">
+    </form>
+    <br><br>
+    <table #movieTable hidden>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Director</th>
+                <th>Release Date</th>
+                <th>Plot</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{apiFilm.Title}}</td>
+                <td>{{apiFilm.Director}}</td>
+                <td>{{apiFilm.Released}}</td>
+                <td>{{apiFilm.Plot}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <div id="buttons">
+        <button #movieButton hidden (click)="addToWatchList($event)">Add to Watchlist</button>
+        <button #exitButton hidden (click)="exit($event)">Exit</button>
+    </div>
 </div>

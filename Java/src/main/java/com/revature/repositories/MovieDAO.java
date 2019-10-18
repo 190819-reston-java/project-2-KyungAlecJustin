@@ -20,7 +20,6 @@ public class MovieDAO implements IMovieDAO {
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<Movie> listAll() {
-		//Will use for sessions:
 		//Session s = sf.getCurrentSession();
 		
 		Session os = sf.openSession();

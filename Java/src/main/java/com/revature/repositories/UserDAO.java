@@ -24,12 +24,9 @@ public class UserDAO implements IUserDAO {
 		Session os = sf.openSession(); 
 		os.beginTransaction();
 		
-		
 		@SuppressWarnings("unchecked")
 		List<User> users = os.createCriteria(User.class).list();
-		
-		System.out.println(users);
-		
+				
 		os.getTransaction().commit();
 		os.close();
 		
