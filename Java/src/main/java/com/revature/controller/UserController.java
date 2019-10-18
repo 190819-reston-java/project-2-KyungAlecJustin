@@ -48,13 +48,13 @@ public class UserController {
 		return userService.findAll();
 	}
 
-	@PutMapping("/create")
-	public ResponseEntity<User> upsert(@RequestBody User u){
-		User response = userService.createUser(u);
-		return ResponseEntity.ok(response);
+	@PutMapping("/createuser")
+	public ResponseEntity<User> upsert(@RequestBody User userCreate){
+		User response = userService.createUser(userCreate);
+		
+		System.out.println("STATUSCODEEE: " + ResponseEntity.ok(response));
+
 	}
-	
-	
 	
 	@PostMapping("/login")
 	public String loginVerify(@RequestBody User userCreds) throws ServletException, IOException{
