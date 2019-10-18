@@ -25,6 +25,11 @@ public class WatchlistService {
 		return watchlist;
 	}
 	
+	public Watchlist getWatchlistByUser(int ownerId) {
+		Watchlist userWatchlist = watchlistDao.getUserWatchlist(ownerId);
+		return userWatchlist;
+	}
+	
 	public Watchlist createWatchlist(Watchlist w) {
 		watchlistDao.create(w);
 		return w;

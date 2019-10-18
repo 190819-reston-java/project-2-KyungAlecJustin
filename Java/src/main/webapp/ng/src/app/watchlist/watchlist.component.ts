@@ -29,8 +29,15 @@ export class WatchlistComponent implements OnInit {
 	}
 
 	watchlistCreate: Object = {
-		"watchlistName": null
+		"watchlistName": null,
+		"watchlistOwner": null
 	};
+
+	createdWatchlist: Object = {
+		"watchlistId": null,
+		"watchlistName": null,
+		"watchlistOwner": null
+	}
 
 	//ENDPOINTS
 	movieUri = "http://localhost:8080/cineplay/addmovie";
@@ -46,21 +53,22 @@ export class WatchlistComponent implements OnInit {
 		viewForm.hidden = false;
 	}
 
+	//Creates watchlist name and adds it DB
 	submitWatchlist = function(event, searchMovies, createWL) {
 		event.preventDefault();	
 		console.log(createWL);	
 		this.watchlistCreate.watchlistName = createWL;
 		this.http.put(this.createWatchlistURI, this.watchlistCreate).subscribe(
 			(result => {
-				console.log("subscribed");
-				this.watchlistCreate = result;
-				console.log(result);
+				this.createdWatchlist = result;
+				console.log(this.createdWatchlist);
 
 			})
 		)
 		searchMovies.hidden = false;
 	}
 
+	//Searches and returns from API
 	submitMovie = function(event, title, movieTable, movieButton, exitButton) {
 		event.preventDefault();
 		movieTable.hidden = false;
@@ -74,6 +82,7 @@ export class WatchlistComponent implements OnInit {
 		);
 	}
 
+	//Add to watchlist from Movie Search button
 	addToWatchList = function(event) {
 		event.preventDefault();
 		this.newFilm.title = this.apiFilm.Title;

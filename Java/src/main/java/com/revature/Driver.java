@@ -11,6 +11,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.revature.model.User;
 import com.revature.repositories.IUserDAO;
+import com.revature.repositories.IWatchlistDAO;
 
 public class Driver {
 	
@@ -24,22 +25,9 @@ public class Driver {
 
 		IUserDAO userDAO = (IUserDAO) ac.getBean("userDAO");
 		
-		List<User> users = userDAO.findAll();
+		IWatchlistDAO watchlistDao = (IWatchlistDAO) ac.getBean("watchlistDAO");
 		
-		for(User u : users) {
-			System.out.println(u);
-		}
-		
-		User newUser = new User();
-		newUser.setUsername("SpringTest");
-		newUser.setUsrpwd("password");
-		newUser.setEmail("spring@email.com");
-		newUser.setFirstName("Spring");
-		newUser.setLastName("Test");
-		
-		userDAO.create(newUser);
-		
-		((ClassPathXmlApplicationContext) ac).close();
+		System.out.println(watchlistDao.findAllWatchlist());
 
 	}
 	

@@ -36,6 +36,7 @@ public class MovieController {
 		System.out.println("Reaching addmovie");
 		System.out.println(m);
 		System.out.println("CURRENT SESSION IN MOVIE CONTROLLER: " + this.sessionUser.getCurrentUser());
+		
 		Movie response = movieService.addMovie(m);
 		System.out.println(response);
 		

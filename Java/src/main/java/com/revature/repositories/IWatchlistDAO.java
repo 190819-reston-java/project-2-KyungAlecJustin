@@ -2,6 +2,7 @@ package com.revature.repositories;
 
 import java.util.List;
 
+import com.revature.model.Movie;
 import com.revature.model.Watchlist;
 
 public interface IWatchlistDAO {
@@ -13,4 +14,6 @@ public interface IWatchlistDAO {
 	public Watchlist create(Watchlist w);
 	
 	public Watchlist getUserWatchlist(int ownerId);
+	
+	public Watchlist addMovieToWatchlist(Watchlist w, Movie m);
 }

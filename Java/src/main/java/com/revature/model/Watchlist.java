@@ -20,10 +20,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Proxy;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "watchlist")
+@Proxy(lazy = false)
 @Component
 public class Watchlist implements Serializable {
 
@@ -42,6 +46,7 @@ public class Watchlist implements Serializable {
 	private User watchlistOwner;
 	
 	//AT Mapping CODE-------------------------------------------------------------------------------
+	@JsonIgnore
 	@OneToMany(mappedBy = "watchlist",cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
 	private Set<Movie> movies; 
 //	Lists movies in Watchlist;
@@ -56,6 +61,13 @@ public class Watchlist implements Serializable {
 
 	public Watchlist() {
 		super();
+	}
+	
+	public Watchlist(int watchlistId, String watchlistName, User watchlistOwner) {
+		super();
+		this.watchlistId = watchlistId;
+		this.watchlistName = watchlistName;
+		this.watchlistOwner = watchlistOwner;
 	}
 
 	public Watchlist(int watchlistId, String watchlistName, User watchlistOwner, Set<Movie> movies) {

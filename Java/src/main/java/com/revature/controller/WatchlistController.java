@@ -15,6 +15,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.model.Watchlist;
 import com.revature.services.WatchlistService;
+import com.revature.session.UserSession;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -22,6 +23,9 @@ public class WatchlistController {
 	
 	@Autowired
 	private WatchlistService watchlistService;
+	
+	@Autowired
+	private UserSession sessionUser;
 	
 	@GetMapping("/watchlists")
 	public List<Watchlist> listAllWatchlists(){
@@ -40,22 +44,24 @@ public class WatchlistController {
 //	}
 	
 	@PutMapping("/createwatchlist")
-	public String upsert(@RequestBody Watchlist watchlistCreate) throws JsonProcessingException{
+	public Watchlist upsert(@RequestBody Watchlist watchlistCreate) throws JsonProcessingException{
 		System.out.println("reaching watchlist controller " + watchlistCreate);
 		
-		ObjectMapper om = new ObjectMapper();
-		String response;
+		Watchlist newWatchlist = new Watchlist(
+				watchlistCreate.getWatchlistId(),
+				watchlistCreate.getWatchlistName(),
+				this.sessionUser.getCurrentUser());
+		this.watchlistService.createWatchlist(newWatchlist);
 		
-		try {
-			this.watchlistService.createWatchlist(watchlistCreate);
-			response = om.writeValueAsString(new ResponseEntity<String>(HttpStatus.CREATED));
-			return response;
-		} catch (RuntimeException e) {
-			response = om.writeValueAsString(new ResponseEntity<String>(HttpStatus.UNAUTHORIZED));
-			return response;
-		}
+		return newWatchlist;
 		
 		
+	}
+	
+	@GetMapping("/getUserWatchList")
+	public Watchlist getUserWatchlist(int userId) {
+		int ownerId = this.sessionUser.getCurrentUser().getUserId(); 
+		return watchlistService.getWatchlistByUser(ownerId);
 	}
 	
 
