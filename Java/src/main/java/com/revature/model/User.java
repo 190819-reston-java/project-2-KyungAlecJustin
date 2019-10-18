@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,7 +32,6 @@ public class User implements Serializable {
 	@Column(name = "username", unique=true)
 	private String username;
 	
-
 	@Column(name = "usrpwd")
 	private String usrpwd;
 	
@@ -46,8 +46,13 @@ public class User implements Serializable {
 	
 	//AT Mapping CODE-------------------------------------------------------------------------------
 	
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "writerId", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+			CascadeType.REFRESH})
 	private Set<Forum> forums;
+	
+	@OneToMany(mappedBy = "watchlistOwner", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+			CascadeType.REFRESH})
+	private Set<Watchlist> watchlists;
 	
 	//AT Mapping CODE-------------------------------------------------------------------------------
 

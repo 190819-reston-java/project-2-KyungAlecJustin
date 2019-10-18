@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -36,12 +37,12 @@ public class Watchlist implements Serializable {
 	@Column(name = "watchlist_name")
 	private String watchlistName;
 	
-	@Column(name = "owner_id")
-	private int ownerId;
+	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@JoinColumn(name="user_id")
+	private User watchlistOwner;
 	
 	//AT Mapping CODE-------------------------------------------------------------------------------
-	@OneToMany(mappedBy = "watchlist",cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
-			CascadeType.REFRESH })
+	@OneToMany(mappedBy = "watchlist",cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
 	private Set<Movie> movies; 
 //	Lists movies in Watchlist;
 //	
@@ -57,11 +58,11 @@ public class Watchlist implements Serializable {
 		super();
 	}
 
-	public Watchlist(int watchlistId, String watchlistName, int ownerId, Set<Movie> movies) {
+	public Watchlist(int watchlistId, String watchlistName, User watchlistOwner, Set<Movie> movies) {
 		super();
 		this.watchlistId = watchlistId;
 		this.watchlistName = watchlistName;
-		this.ownerId = ownerId;
+		this.watchlistOwner = watchlistOwner;
 		this.movies = movies;
 	}
 
@@ -81,12 +82,12 @@ public class Watchlist implements Serializable {
 		this.watchlistName = watchlistName;
 	}
 
-	public int getOwnerId() {
-		return ownerId;
+	public User getWatchlistOwner() {
+		return watchlistOwner;
 	}
 
-	public void setOwnerId(int ownerId) {
-		this.ownerId = ownerId;
+	public void setWatchlistOwner(User watchlistOwner) {
+		this.watchlistOwner = watchlistOwner;
 	}
 
 	public Set<Movie> getMovies() {
@@ -102,9 +103,9 @@ public class Watchlist implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((movies == null) ? 0 : movies.hashCode());
-		result = prime * result + ownerId;
 		result = prime * result + watchlistId;
 		result = prime * result + ((watchlistName == null) ? 0 : watchlistName.hashCode());
+		result = prime * result + ((watchlistOwner == null) ? 0 : watchlistOwner.hashCode());
 		return result;
 	}
 
@@ -122,8 +123,6 @@ public class Watchlist implements Serializable {
 				return false;
 		} else if (!movies.equals(other.movies))
 			return false;
-		if (ownerId != other.ownerId)
-			return false;
 		if (watchlistId != other.watchlistId)
 			return false;
 		if (watchlistName == null) {
@@ -131,15 +130,20 @@ public class Watchlist implements Serializable {
 				return false;
 		} else if (!watchlistName.equals(other.watchlistName))
 			return false;
+		if (watchlistOwner == null) {
+			if (other.watchlistOwner != null)
+				return false;
+		} else if (!watchlistOwner.equals(other.watchlistOwner))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Watchlist [watchlistId=" + watchlistId + ", watchlistName=" + watchlistName + ", ownerId=" + ownerId
-				+ ", movies=" + movies + "]";
+		return "Watchlist [watchlistId=" + watchlistId + ", watchlistName=" + watchlistName + ", watchlistOwner="
+				+ watchlistOwner + ", movies=" + movies + "]";
 	}
-	
+
 	
 	
 }

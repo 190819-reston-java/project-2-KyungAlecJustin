@@ -26,9 +26,6 @@ public class Forum implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int forumId;
 	
-	@Column(name = "writer_id")
-	private int writerId;
-	
 	@Column(name = "message")
 	private String message;
 	
@@ -37,45 +34,51 @@ public class Forum implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	private User user;
-	
-	//AT Mapping CODE-------------------------------------------------------------------------------
+	private User writerId;
 
 
 	public Forum() {
 		super();
 	}
 
-	public Forum(int forumId, int writerId, String message) {
+
+	public Forum(int forumId, String message, User writerId) {
 		super();
 		this.forumId = forumId;
-		this.writerId = writerId;
 		this.message = message;
+		this.writerId = writerId;
 	}
+
 
 	public int getForumId() {
 		return forumId;
 	}
 
+
 	public void setForumId(int forumId) {
 		this.forumId = forumId;
 	}
 
-	public int getWriterId() {
-		return writerId;
-	}
-
-	public void setWriterId(int writerId) {
-		this.writerId = writerId;
-	}
 
 	public String getMessage() {
 		return message;
 	}
 
+
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
+
+	public User getWriterId() {
+		return writerId;
+	}
+
+
+	public void setWriterId(User writerId) {
+		this.writerId = writerId;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -83,10 +86,10 @@ public class Forum implements Serializable {
 		int result = 1;
 		result = prime * result + forumId;
 		result = prime * result + ((message == null) ? 0 : message.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
-		result = prime * result + writerId;
+		result = prime * result + ((writerId == null) ? 0 : writerId.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -104,20 +107,23 @@ public class Forum implements Serializable {
 				return false;
 		} else if (!message.equals(other.message))
 			return false;
-		if (user == null) {
-			if (other.user != null)
+		if (writerId == null) {
+			if (other.writerId != null)
 				return false;
-		} else if (!user.equals(other.user))
-			return false;
-		if (writerId != other.writerId)
+		} else if (!writerId.equals(other.writerId))
 			return false;
 		return true;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Forum [forumId=" + forumId + ", writerId=" + writerId + ", message=" + message + ", user=" + user + "]";
+		return "Forum [forumId=" + forumId + ", message=" + message + ", writerId=" + writerId + "]";
 	}
+	
+	//AT Mapping CODE-------------------------------------------------------------------------------
+
+	
 
 
 	
