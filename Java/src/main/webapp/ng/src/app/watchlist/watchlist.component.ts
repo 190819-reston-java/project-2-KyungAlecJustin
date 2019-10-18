@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MovieApiService } from '../movie-api.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { SessionUserService } from '../session-user.service';
 
 @Component({
 	selector: 'app-watchlist',
@@ -10,7 +11,9 @@ import { Router } from '@angular/router';
 })
 export class WatchlistComponent implements OnInit {
 
-	constructor(private movieApi: MovieApiService, private http: HttpClient, private router: Router) {}
+	constructor(private movieApi: MovieApiService, private http: HttpClient, private router: Router, private currentUser: SessionUserService) {}
+
+	sessionUserUri: String = "http://localhost:8080/cineplay/getSessionUser";
 
 	apiFilm: Object = {
 		"Title": null,
@@ -93,5 +96,11 @@ export class WatchlistComponent implements OnInit {
 		window.location.reload();
 	}
 
-	ngOnInit() {}
+	ngOnInit() {
+		this.http.get(`${this.sessionUserUri}`).subscribe(
+			(response => {
+				this.currentUser.setCurrentUser(response);
+			})
+		);
+	}
 }

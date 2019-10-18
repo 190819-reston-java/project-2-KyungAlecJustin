@@ -7,40 +7,11 @@
 <h1>Community Chat</h1>
 <div id="chatroom">
     <div id="display-message">
-        <p>
-            Message will go here dfsdfdsfdsfdfdfdhfdsjfhdfjdhfdshfjdhfjdhfdjfhdjfhdjfhdjhfjdhfjdhfjdshfjdhfdjfhdjhjdsfdsf
-            dfsdfdsfdsfdfdfdhfdsjfhdfjdhfdshfjdhfjdhfdjfhdjfhdjfhdjhfjdhfjdhfjdshfjdhfdjfhdjhjdsfdsfdfdsfdsfdsfdsfdsfds
-            dfsdfdsfdsfdfdfdhfdsjfhdfjdhfdshfjdhfjdhfdjfhdjfhdjfhdjhfjdhfjdhfjdshfjdhfdjfhdjhjdsfdsfdfdsfdsfdsfdsfdsfdsdsfdsf
-            dfsdfdsfdsfdfdfdhfdsjfhdfjdhfdshfjdhfjdhfdjfhdjfhdjfhdjhfjdhfjdhfjdshfjdhfdjfhdjhjdsfdsfdfdsfdsfdsfdsfdsfdsdsfdsf
-            dsfdsfds
-        </p>
-        <p>Message will go here</p>
-        <p>Message will go here</p>
-        <p>Message will go here</p>
-        <p>Message will go here</p>
-        <p>Message will go here</p>
-        <p>Message will go here</p>
-        <p>Message will go here</p>
-        <p>Message will go here</p>
-        <p>Message will go here</p>
-        <p>Message will go here</p>
-        <p>Message will go here</p>
-        <p>Message will go here</p>
-        <p>Message will go here</p>
-        <p>Message will go here</p>
-        <p>Message will go here</p>
-        <p>Message will go here</p>
-        <p>Message will go here</p>
-        <p>Message will go here</p>
-        <p>Message will go here</p>
-        <p>Message will go here</p>
-        <p>Message will go here</p>
-        <p>Message will go here</p>
-        <p>Message will go here</p>
+        <p *ngFor="let pastMessage of pastMessages">{{pastMessage}}</p>
     </div>
     <br>
     <form>
-        <input type="text" id="message">
-        <input type="submit">
+        <input type="text" id="message" #message>
+        <input type="submit" (click)="submitMessage($event, message.value, message)">
     </form>
 </div>
