@@ -45,12 +45,31 @@ public class WatchlistDAO implements IWatchlistDAO {
 
 	@Override
 	@Transactional
-	public Watchlist findWatchlist(String watchlistName) {
-		Session s = sf.getCurrentSession(); 
+	public List<Movie> findWatchlist(String watchlistName) {
+		System.out.println("reaching finWatchlist in WatchlistDAODAO");
+
+		Session os = sf.openSession(); 
+		os.beginTransaction();
+		System.out.println(os);
 		
-		Watchlist w = (Watchlist) s.createQuery("");
+		@SuppressWarnings("unchecked")
+		List<Watchlist> watchlists = os.createCriteria(Watchlist.class).list();
 		
-		return w;
+		for(Watchlist w : watchlists) {
+			if (w.getWatchlistName().equals(watchlistName)) {
+				
+				int wid = w.getWatchlistId();
+				
+				@SuppressWarnings("unchecked")
+				List<Movie> movies = (List<Movie>) os.createQuery("FROM movies WHERE watchlist_id = :wid");
+				
+				((Query) movies).setInteger("wid", wid);
+				
+				return movies;
+			}
+		}
+		
+		return null;
 	}
 
 

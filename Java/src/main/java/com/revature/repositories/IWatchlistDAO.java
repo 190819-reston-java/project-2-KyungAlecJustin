@@ -9,7 +9,7 @@ public interface IWatchlistDAO {
 	
 	public List<Watchlist> findAllWatchlist();
 	
-	public Watchlist findWatchlist(String watchlistName);
+	public List<Movie> findWatchlist(String watchlistName);
 
 	public Watchlist create(Watchlist w);
 	
