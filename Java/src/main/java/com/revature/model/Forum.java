@@ -32,8 +32,6 @@ public class Forum implements Serializable {
 	@Column(name = "message")
 	private String message;
 	
-	@Column(name = "post_time")
-	private String postTime;
 	
 	//AT Mapping CODE-------------------------------------------------------------------------------
 
@@ -48,12 +46,11 @@ public class Forum implements Serializable {
 		super();
 	}
 
-	public Forum(int forumId, int writerId, String message, String postTime) {
+	public Forum(int forumId, int writerId, String message) {
 		super();
 		this.forumId = forumId;
 		this.writerId = writerId;
 		this.message = message;
-		this.postTime = postTime;
 	}
 
 	public int getForumId() {
@@ -80,37 +77,49 @@ public class Forum implements Serializable {
 		this.message = message;
 	}
 
-	public String getPostTime() {
-		return postTime;
-	}
-
-	public void setPostTime(String postTime) {
-		this.postTime = postTime;
-	}
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(forumId, message, postTime, writerId);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + forumId;
+		result = prime * result + ((message == null) ? 0 : message.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		result = prime * result + writerId;
+		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (!(obj instanceof Forum)) {
+		if (obj == null)
 			return false;
-		}
+		if (getClass() != obj.getClass())
+			return false;
 		Forum other = (Forum) obj;
-		return forumId == other.forumId && Objects.equals(message, other.message)
-				&& Objects.equals(postTime, other.postTime) && writerId == other.writerId;
+		if (forumId != other.forumId)
+			return false;
+		if (message == null) {
+			if (other.message != null)
+				return false;
+		} else if (!message.equals(other.message))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
+		if (writerId != other.writerId)
+			return false;
+		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Forum [forumId=" + forumId + ", writerId=" + writerId + ", message=" + message + ", postTime="
-				+ postTime + "]";
+		return "Forum [forumId=" + forumId + ", writerId=" + writerId + ", message=" + message + ", user=" + user + "]";
 	}
+
+
 	
 	
 

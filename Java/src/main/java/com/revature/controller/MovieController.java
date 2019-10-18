@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.model.Movie;
 import com.revature.services.MovieService;
+import com.revature.session.UserSession;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
@@ -20,6 +21,10 @@ public class MovieController {
 	
 	@Autowired
 	private MovieService movieService;
+	
+	@Autowired
+	private UserSession sessionUser;
+
 	
 	@GetMapping("/movies")
 	public List<Movie> listAllMovies(){
@@ -30,6 +35,7 @@ public class MovieController {
 	public ResponseEntity<Movie> upsert(@RequestBody Movie m){
 		System.out.println("Reaching addmovie");
 		System.out.println(m);
+		System.out.println("CURRENT SESSION IN MOVIE CONTROLLER: " + this.sessionUser.getCurrentUser());
 		Movie response = movieService.addMovie(m);
 		System.out.println(response);
 		

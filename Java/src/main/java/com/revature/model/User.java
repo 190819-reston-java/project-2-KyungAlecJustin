@@ -3,6 +3,7 @@ package com.revature.model;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.springframework.stereotype.Component;
 
@@ -26,13 +28,14 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userId;
 	
-	@Column(name = "username")
+	@Column(name = "username", unique=true)
 	private String username;
 	
+
 	@Column(name = "usrpwd")
 	private String usrpwd;
 	
-	@Column(name = "email")
+	@Column(name = "email", unique=true)
 	private String email;
 	
 	@Column(name = "first_name")
@@ -44,7 +47,7 @@ public class User implements Serializable {
 	//AT Mapping CODE-------------------------------------------------------------------------------
 	
 	@OneToMany(mappedBy = "user")
-	private List<Forum> forums;
+	private Set<Forum> forums;
 	
 	//AT Mapping CODE-------------------------------------------------------------------------------
 

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,7 +23,7 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name = "watchlist")
-//@Component
+@Component
 public class Watchlist implements Serializable {
 
 	private static final long serialVersionUID = 5508595899459911621L;
@@ -38,12 +39,11 @@ public class Watchlist implements Serializable {
 	@Column(name = "owner_id")
 	private int ownerId;
 	
-	@Column(name = "movie")
-	private int movie;
-	
 	//AT Mapping CODE-------------------------------------------------------------------------------
-//	@OneToMany(mappedBy = "watchlist")
-//	private List<Movie> movies; //Lists movies in Watchlist
+	@OneToMany(mappedBy = "watchlist",cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+			CascadeType.REFRESH })
+	private Set<Movie> movies; 
+//	Lists movies in Watchlist;
 //	
 	//HAVING TROUBLE WITH MANY TO MANY MAPPING
 //	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST} )
@@ -52,19 +52,17 @@ public class Watchlist implements Serializable {
 //			joinColumns = {@JoinColumn(name="watchlist_id")},
 //			inverseJoinColumns = {@JoinColumn(name = "movie_id")})
 //	private List<Movie> moviesWatchlist = new ArrayList<Movie>();
-	
-	//AT Mapping CODE-------------------------------------------------------------------------------
 
 	public Watchlist() {
 		super();
 	}
 
-	public Watchlist(int watchlistId, String watchlistName, int ownerId, int movie) {
+	public Watchlist(int watchlistId, String watchlistName, int ownerId, Set<Movie> movies) {
 		super();
 		this.watchlistId = watchlistId;
 		this.watchlistName = watchlistName;
 		this.ownerId = ownerId;
-		this.movie = movie;
+		this.movies = movies;
 	}
 
 	public int getWatchlistId() {
@@ -90,38 +88,58 @@ public class Watchlist implements Serializable {
 	public void setOwnerId(int ownerId) {
 		this.ownerId = ownerId;
 	}
-//
-//	public int getMovie() {
-//		return movie;
-//	}
-//
-//	public void setMovie(int movie) {
-//		this.movie = movie;
-//	}
+
+	public Set<Movie> getMovies() {
+		return movies;
+	}
+
+	public void setMovies(Set<Movie> movies) {
+		this.movies = movies;
+	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(movie, ownerId, watchlistId, watchlistName);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((movies == null) ? 0 : movies.hashCode());
+		result = prime * result + ownerId;
+		result = prime * result + watchlistId;
+		result = prime * result + ((watchlistName == null) ? 0 : watchlistName.hashCode());
+		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (!(obj instanceof Watchlist)) {
+		if (obj == null)
 			return false;
-		}
+		if (getClass() != obj.getClass())
+			return false;
 		Watchlist other = (Watchlist) obj;
-		return movie == other.movie && ownerId == other.ownerId && watchlistId == other.watchlistId
-				&& Objects.equals(watchlistName, other.watchlistName);
+		if (movies == null) {
+			if (other.movies != null)
+				return false;
+		} else if (!movies.equals(other.movies))
+			return false;
+		if (ownerId != other.ownerId)
+			return false;
+		if (watchlistId != other.watchlistId)
+			return false;
+		if (watchlistName == null) {
+			if (other.watchlistName != null)
+				return false;
+		} else if (!watchlistName.equals(other.watchlistName))
+			return false;
+		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "Watchlist [watchlistId=" + watchlistId + ", watchlistName=" + watchlistName + ", ownerId=" + ownerId
-				+ ", movie=" + movie + "]";
+				+ ", movies=" + movies + "]";
 	}
-
+	
+	
 	
 }
