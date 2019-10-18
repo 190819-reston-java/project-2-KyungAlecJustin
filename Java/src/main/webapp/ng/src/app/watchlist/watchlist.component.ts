@@ -28,13 +28,20 @@ export class WatchlistComponent implements OnInit {
 		"released": null
 	}
 
-	createdWatchlist: Object = {
+	watchlistCreate: Object = {
 		"watchlistName": null,
-		"ownerId": null,
-		"movie": null
+		"watchlistOwner": null
 	};
 
+	createdWatchlist: Object = {
+		"watchlistId": null,
+		"watchlistName": null,
+		"watchlistOwner": null
+	}
+
+	//ENDPOINTS
 	movieUri = "http://localhost:8080/cineplay/addmovie";
+	createWatchlistURI = "http://localhost:8080/cineplay/createwatchlist"
 
 	showCreate = function(createForm, viewForm) {
 		createForm.hidden = false;
@@ -46,20 +53,22 @@ export class WatchlistComponent implements OnInit {
 		viewForm.hidden = false;
 	}
 
-	submitWatchlist = function(event, searchMovies) {
-		event.preventDefault();
-		let createWatchlistURI = "http://localhost:8080/cineplay/createwatchlist";
-		this.http.put(createWatchlistURI).subscribe(
+	//Creates watchlist name and adds it DB
+	submitWatchlist = function(event, searchMovies, createWL) {
+		event.preventDefault();	
+		console.log(createWL);	
+		this.watchlistCreate.watchlistName = createWL;
+		this.http.put(this.createWatchlistURI, this.watchlistCreate).subscribe(
 			(result => {
-				console.log("subscribed")
-				console.log(result);
-				this.watchlistname = result;
+				this.createdWatchlist = result;
+				console.log(this.createdWatchlist);
 
 			})
 		)
 		searchMovies.hidden = false;
 	}
 
+	//Searches and returns from API
 	submitMovie = function(event, title, movieTable, movieButton, exitButton) {
 		event.preventDefault();
 		movieTable.hidden = false;
@@ -73,6 +82,7 @@ export class WatchlistComponent implements OnInit {
 		);
 	}
 
+	//Add to watchlist from Movie Search button
 	addToWatchList = function(event) {
 		event.preventDefault();
 		this.newFilm.title = this.apiFilm.Title;

@@ -17,6 +17,9 @@ export class MainComponent implements OnInit {
   today: String = this.month + "/" + this.day;
   trailer: Object;
 
+
+
+
   //Can use the following for feature film
   popularURI: String = "https://api.themoviedb.org/3/movie/now_playing?api_key=69464c49beeffbf72f4680011dafb90d&language=en-US&page=1"
 

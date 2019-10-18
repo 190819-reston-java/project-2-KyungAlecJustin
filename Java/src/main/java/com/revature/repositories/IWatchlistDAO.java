@@ -14,4 +14,6 @@ public interface IWatchlistDAO {
 	public Watchlist create(Watchlist w);
 	
 	public Watchlist getUserWatchlist(int ownerId);
+	
+	public Watchlist addMovieToWatchlist(Watchlist w, Movie m);
 }

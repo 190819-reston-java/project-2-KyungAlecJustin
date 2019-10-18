@@ -25,14 +25,10 @@ public class ForumDAO implements IForumDAO {
 
 		Session os = sf.openSession();
 		os.beginTransaction();
-		
-		System.out.println(os);
-		
+				
 		@SuppressWarnings("unchecked")
 		List<Forum> forums = os.createCriteria(Forum.class).list();	
-		
-		System.out.println(forums);
-		
+				
 		os.getTransaction().commit();
 		os.close();
 		

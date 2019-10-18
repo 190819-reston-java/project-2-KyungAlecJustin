@@ -20,10 +20,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Proxy;
 import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name = "movies")
+@Proxy(lazy = false)
 @Component
 public class Movie implements Serializable {
 
@@ -49,6 +51,7 @@ public class Movie implements Serializable {
 	@Column(name = "released_date")
 	private String released;
 	
+	//fetch = FetchType.LAZY
 	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name="watchlist_id")
 	private Watchlist watchlist;
