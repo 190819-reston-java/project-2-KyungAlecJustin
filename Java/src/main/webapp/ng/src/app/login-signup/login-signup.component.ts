@@ -12,7 +12,7 @@ export class LoginSignupComponent implements OnInit {
 	constructor(private router: Router, private loginAuthentication: LoginAuthenticationService) {}
 
 	loginUri = "http://localhost:8080/cineplay/login";
-	createUri = "http://localhost:8080/cineplay/createuser"
+	signupUri = "http://localhost:8080/cineplay/signup"
 
 	userCreds: Object = {
 		"username": null,
@@ -64,7 +64,7 @@ export class LoginSignupComponent implements OnInit {
 		this.userCreate.email = cemail;
 		this.userCreate.firstName = cfirstname;
 		this.userCreate.lastName = clastname;
-		this.loginAuthentication.http.put(this.createUri, this.userCreate).subscribe(
+		this.loginAuthentication.http.put(this.signupUri, this.userCreate).subscribe(
 			(response => {
 				if (response.statuCode === "OK") {
 					alert("USER CREATION SUCCESSFUL")
