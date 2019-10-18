@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieApiService } from '../movie-api.service';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-watchlist',
@@ -9,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class WatchlistComponent implements OnInit {
 
-	constructor(private movieApi: MovieApiService, private http: HttpClient) {}
+	constructor(private movieApi: MovieApiService, private http: HttpClient, private router: Router) {}
 
 	apiFilm: Object = {
 		"Title": null,
@@ -47,7 +48,6 @@ export class WatchlistComponent implements OnInit {
 
 	submitWatchlist = function(event, searchMovies) {
 		event.preventDefault();
-		console.log("Watchlist");
 		let createWatchlistURI = "http://localhost:8080/cineplay/createwatchlist";
 		this.http.put(createWatchlistURI).subscribe(
 			(result => {
@@ -60,10 +60,11 @@ export class WatchlistComponent implements OnInit {
 		searchMovies.hidden = false;
 	}
 
-	submitMovie = function(event, title, movieTable, movieButton) {
+	submitMovie = function(event, title, movieTable, movieButton, exitButton) {
 		event.preventDefault();
 		movieTable.hidden = false;
 		movieButton.hidden = false;
+		exitButton.hidden = false;
 		let uri = this.movieApi.getUri() + title;
 		this.http.get(uri).subscribe(
 			(result => {
@@ -74,7 +75,6 @@ export class WatchlistComponent implements OnInit {
 
 	addToWatchList = function(event) {
 		event.preventDefault();
-
 		this.newFilm.title = this.apiFilm.Title;
 		this.newFilm.director = this.apiFilm.Director;
 		this.newFilm.released = this.apiFilm.Released;
@@ -86,6 +86,11 @@ export class WatchlistComponent implements OnInit {
 				console.log(request);
 			})
 		);
+	}
+
+	exit = function(event) {
+		event.preventDefault();
+		window.location.reload();
 	}
 
 	ngOnInit() {}
