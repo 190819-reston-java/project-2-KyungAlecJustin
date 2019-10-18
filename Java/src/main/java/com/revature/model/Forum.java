@@ -26,91 +26,106 @@ public class Forum implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int forumId;
 	
-	@Column(name = "writer_id")
-	private int writerId;
-	
 	@Column(name = "message")
 	private String message;
 	
-	@Column(name = "post_time")
-	private String postTime;
 	
 	//AT Mapping CODE-------------------------------------------------------------------------------
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	private User user;
-	
-	//AT Mapping CODE-------------------------------------------------------------------------------
+	private User writerId;
 
 
 	public Forum() {
 		super();
 	}
 
-	public Forum(int forumId, int writerId, String message, String postTime) {
+
+	public Forum(int forumId, String message, User writerId) {
 		super();
 		this.forumId = forumId;
-		this.writerId = writerId;
 		this.message = message;
-		this.postTime = postTime;
+		this.writerId = writerId;
 	}
+
 
 	public int getForumId() {
 		return forumId;
 	}
 
+
 	public void setForumId(int forumId) {
 		this.forumId = forumId;
 	}
 
-	public int getWriterId() {
-		return writerId;
-	}
-
-	public void setWriterId(int writerId) {
-		this.writerId = writerId;
-	}
 
 	public String getMessage() {
 		return message;
 	}
 
+
 	public void setMessage(String message) {
 		this.message = message;
 	}
 
-	public String getPostTime() {
-		return postTime;
+
+	public User getWriterId() {
+		return writerId;
 	}
 
-	public void setPostTime(String postTime) {
-		this.postTime = postTime;
+
+	public void setWriterId(User writerId) {
+		this.writerId = writerId;
 	}
+
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(forumId, message, postTime, writerId);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + forumId;
+		result = prime * result + ((message == null) ? 0 : message.hashCode());
+		result = prime * result + ((writerId == null) ? 0 : writerId.hashCode());
+		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (!(obj instanceof Forum)) {
+		if (obj == null)
 			return false;
-		}
+		if (getClass() != obj.getClass())
+			return false;
 		Forum other = (Forum) obj;
-		return forumId == other.forumId && Objects.equals(message, other.message)
-				&& Objects.equals(postTime, other.postTime) && writerId == other.writerId;
+		if (forumId != other.forumId)
+			return false;
+		if (message == null) {
+			if (other.message != null)
+				return false;
+		} else if (!message.equals(other.message))
+			return false;
+		if (writerId == null) {
+			if (other.writerId != null)
+				return false;
+		} else if (!writerId.equals(other.writerId))
+			return false;
+		return true;
 	}
+
 
 	@Override
 	public String toString() {
-		return "Forum [forumId=" + forumId + ", writerId=" + writerId + ", message=" + message + ", postTime="
-				+ postTime + "]";
+		return "Forum [forumId=" + forumId + ", message=" + message + ", writerId=" + writerId + "]";
 	}
+	
+	//AT Mapping CODE-------------------------------------------------------------------------------
+
+	
+
+
 	
 	
 

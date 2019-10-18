@@ -80,6 +80,9 @@ public class UserController {
 	
 	@GetMapping("/logout")
 	public void logout() {
+		System.out.println("reached logout");
+		System.out.println(this.sessionUser.getCurrentUser());
 		this.sessionUser.setCurrentUser(null);
+		System.out.println(this.sessionUser.getCurrentUser());
 	}
 }
