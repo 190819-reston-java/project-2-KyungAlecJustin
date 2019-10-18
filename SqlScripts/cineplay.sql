@@ -28,6 +28,19 @@ released_date VARCHAR(50)
 );
 SELECT * FROM movies;
 
+INSERT INTO movies VALUES
+	(DEFAULT, 'director', 'plot', 'https://m.media-amazon.com/images/M/MV5BMzM1YzkzMTMtMGEzOC00MjRmLTk3NjgtYTM2MmIzYWYzZmI3XkEyXkFqcGdeQXVyNjEwNjY3NzU@._V1_SX300.jpg', '18 Oct 2019', 'title', 5),
+	(DEFAULT, 'director2', 'plot2', 'https://m.media-amazon.com/images/M/MV5BMzM1YzkzMTMtMGEzOC00MjRmLTk3NjgtYTM2MmIzYWYzZmI3XkEyXkFqcGdeQXVyNjEwNjY3NzU@._V1_SX300.jpg', '18 Oct 2019', 'title2', 5),
+	(DEFAULT, 'director3', 'plot3', 'https://m.media-amazon.com/images/M/MV5BMzM1YzkzMTMtMGEzOC00MjRmLTk3NjgtYTM2MmIzYWYzZmI3XkEyXkFqcGdeQXVyNjEwNjY3NzU@._V1_SX300.jpg', '18 Oct 2019', 'title3', 5),
+	(DEFAULT, 'director4', 'plot4', 'https://m.media-amazon.com/images/M/MV5BMzM1YzkzMTMtMGEzOC00MjRmLTk3NjgtYTM2MmIzYWYzZmI3XkEyXkFqcGdeQXVyNjEwNjY3NzU@._V1_SX300.jpg', '18 Oct 2019', 'title4', 5);
+
+DELETE FROM movies
+WHERE movie_id = 4;
+
+INSERT INTO movies(watchlist_id)
+WHERE movie_id = 1;
+
+
 DROP TABLE forum;
 CREATE TABLE forum (
 forum_id SERIAL PRIMARY KEY NOT NULL,
@@ -35,6 +48,9 @@ writer_id INTEGER REFERENCES users(user_id) NOT NULL,
 message VARCHAR(1000)
 );
 SELECT * FROM forum;
+
+DELETE FROM forum
+WHERE user_id IS NULL;
 
 INSERT INTO forum VALUES
 	(DEFAULT, 1, 'OUR FIRST MESSAGE');
@@ -47,6 +63,9 @@ owner_id INTEGER REFERENCES users(user_id) NOT NULL,
 movie INTEGER REFERENCES movies(movie_id) NOT NULL
 );
 SELECT * FROM watchlist;
+
+INSERT INTO watchlist VALUES
+	(DEFAULT, 'TESTLIST', 5);
 
 --CREATE TABLE project_2.forum(
 --id serial,

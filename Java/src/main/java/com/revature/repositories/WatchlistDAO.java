@@ -2,6 +2,7 @@ package com.revature.repositories;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.revature.model.Movie;
+import com.revature.model.User;
 import com.revature.model.Watchlist;
 
 @Repository
@@ -38,12 +41,31 @@ public class WatchlistDAO implements IWatchlistDAO {
 
 	@Override
 	@Transactional
-	public Watchlist findWatchlist(String watchlistName) {
-		Session s = sf.getCurrentSession();
+	public List<Movie> findWatchlist(String watchlistName) {
+		System.out.println("reaching finWatchlist in WatchlistDAODAO");
+
+		Session os = sf.openSession(); 
+		os.beginTransaction();
+		System.out.println(os);
 		
-		Watchlist w = (Watchlist) s.createQuery("");
+		@SuppressWarnings("unchecked")
+		List<Watchlist> watchlists = os.createCriteria(Watchlist.class).list();
 		
-		return w;
+		for(Watchlist w : watchlists) {
+			if (w.getWatchlistName().equals(watchlistName)) {
+				
+				int wid = w.getWatchlistId();
+				
+				@SuppressWarnings("unchecked")
+				List<Movie> movies = (List<Movie>) os.createQuery("FROM movies WHERE watchlist_id = :wid");
+				
+				((Query) movies).setInteger("wid", wid);
+				
+				return movies;
+			}
+		}
+		
+		return null;
 	}
 
 
