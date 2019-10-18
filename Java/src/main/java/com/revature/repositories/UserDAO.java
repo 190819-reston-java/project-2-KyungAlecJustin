@@ -78,8 +78,8 @@ public class UserDAO implements IUserDAO {
 //		User u = (User) os.createCriteria(User.class);
 		
 		for(User u : users) {
-			if (u.getUsername() == username) {
-				if (u.getUsrpwd() == userpwd) {
+			if (u.getUsername().equals(username)) {
+				if (u.getUsrpwd().equals(userpwd)) {
 					return true;
 				}
 			}

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,10 +24,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.model.User;
 import com.revature.repositories.UserDAO;
 import com.revature.services.UserService;
+import com.revature.session.UserSession;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -35,82 +40,49 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private UserSession sessionUser;
+	
 	@RequestMapping(value = "/users", method=RequestMethod.GET)
 	public List<User> findAll(){		
 		return userService.findAll();
 	}
 
-	@PutMapping("/create")
-	public ResponseEntity<User> upsert(@RequestBody User u){
-		User response = userService.createUser(u);
+	@PutMapping("/createuser")
+	public ResponseEntity<User> upsert(@RequestBody User userCreate){
+		User response = userService.createUser(userCreate);
 		
-		return ResponseEntity.ok(response);
+		System.out.println("STATUSCODEEE: " + ResponseEntity.ok(response));
+
 	}
-	
-	//temporary leaving it like this 
-//	@PostMapping("/login")
-//	public ResponseEntity<User> loginVerify(HttpServletRequest req, HttpServletResponse resp) throws IOException{
-//		System.out.println("Login reached in Spring:UserController");
-//		HttpSession session = req.getSession();
-//		
-//		String username = req.getParameter("username");
-//		String userpwd = req.getParameter("password");
-//		
-//		if (userService.getLogin(username, userpwd)) {
-//			//to where?
-//			resp.sendRedirect("/main");
-//		} else {
-//			//to where?
-//			resp.sendRedirect("/index");
-//		}
-//		
-//		
-//		return null;
-//	}
-	
-//	@PostMapping("/login")
-//	public void loginVerify(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-//		System.out.println("Login reached in Spring:UserController");
-//		HttpSession session = req.getSession();
-//		
-//		String username = req.getParameter("username");
-//		String userpwd = req.getParameter("password");
-//		
-//		System.out.println("user input is :" +username + userpwd);
-//		
-//		if (userService.getLogin(username, userpwd)) {
-//			System.out.println("login succ");
-//			//to where?
-//			resp.sendRedirect("/main");
-//		} else {
-//			System.out.println("login fail");
-//			//to where?
-//			resp.sendRedirect("/index");
-//		}
-//	}
 	
 	@PostMapping("/login")
-
-	public void loginVerify(@RequestBody String userCreds) throws ServletException, IOException{
-		System.out.println("Login reached in Spring:UserController");
-//		System.out.println(userCreds ["username"]);
-//		HttpSession session = req.getSession();
-//		
-//		userCreds.
-//		
-//		System.out.println("user input is :" +username + userpwd);
-//		
-//		if (userService.getLogin(username, userpwd)) {
-//			System.out.println("login succ");
-//			//to where?
-//			resp.sendRedirect("/main");
-//		} else {
-//			System.out.println("login fail");
-//			//to where?
-//			resp.sendRedirect("/index");
-//		}
-
+	public String loginVerify(@RequestBody User userCreds) throws ServletException, IOException{
+		ObjectMapper om = new ObjectMapper();
+		String response;
+		List<User> userList = this.userService.findAll();
+		User currentUser = null;
+		
+		if (this.userService.getLogin(userCreds.getUsername(), userCreds.getUsrpwd())) {
+			for (User u : userList) {
+				if (u.getUsername().equals(userCreds.getUsername())) {
+					if (u.getUsrpwd().equals(userCreds.getUsrpwd())) {
+						currentUser = u;
+					}
+				}
+			}
+			
+			this.sessionUser.setCurrentUser(currentUser);
+			response = om.writeValueAsString(new ResponseEntity<String>(HttpStatus.ACCEPTED));
+			return response;
+		} else {
+			response = om.writeValueAsString(new ResponseEntity<String>(HttpStatus.UNAUTHORIZED));
+			return response;
+		}
 	}
 	
-
+	@GetMapping("/logout")
+	public void logout() {
+		this.sessionUser.setCurrentUser(null);
+	}
 }

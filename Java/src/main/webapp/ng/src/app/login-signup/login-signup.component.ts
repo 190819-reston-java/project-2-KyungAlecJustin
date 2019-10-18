@@ -11,9 +11,26 @@ import { LoginAuthenticationService } from '../login-authentication.service';
 export class LoginSignupComponent implements OnInit {
 	constructor(private router: Router, private loginAuthentication: LoginAuthenticationService) {}
 
-	// username : string;
-	// password : string;
-	loginUri = "/login";
+	loginUri = "http://localhost:8080/cineplay/login";
+	createUri = "http://localhost:8080/cineplay/createuser"
+
+	userCreds: Object = {
+		"username": null,
+		"usrpwd": null,
+		"email": null,
+		"firstName": null,
+		"lastName": null
+	}
+
+	userCreate: Object = {
+		"username": null,
+		"usrpwd": null,
+		"email": null,
+		"firstName": null,
+		"lastName": null
+	}
+
+
 
 	showLogin = function(loginForm, signUpForm) {
 		loginForm.hidden = false;
@@ -27,23 +44,35 @@ export class LoginSignupComponent implements OnInit {
 
 	submitLoginInfo = function(event, username, password) {
 		event.preventDefault();
-		let loginInfo = {
-			username: username,
-			password: password
-		};
-		this.loginAuthentication.http.post(this.loginUri, loginInfo).subscribe(
-			response => {
-				if (response.status >= 200 && response.status < 300) {
-					this.router.navigate(["main"]);
+		this.userCreds.username = username;
+		this.userCreds.usrpwd = password;
+		this.loginAuthentication.http.post(this.loginUri, this.userCreds).subscribe(
+			(response => {
+				if (response.statusCode === "ACCEPTED") {
+					this.router.navigate(['main']);
 				} else {
-					console.log("WRONG USERNAME AND PASSWORD")
+					alert("Incorrect username or password");
 				}
-			}
+			})
 		);
-		// this.username = username;
-		// this.password = password;
-		// console.log(username, password);
-		
+	}
+
+	submitCreateUser = function(event, cusername, cpassword, cemail, cfirstname, clastname) {
+		event.preventDefault();
+		this.userCreate.username = cusername;
+		this.userCreate.usrpwd = cpassword;
+		this.userCreate.email = cemail;
+		this.userCreate.firstName = cfirstname;
+		this.userCreate.lastName = clastname;
+		this.loginAuthentication.http.put(this.createUri, this.userCreate).subscribe(
+			(response => {
+				if (response.statuCode === "OK") {
+					alert("USER CREATION SUCCESSFUL")
+				} else {
+					alert("USER CREATION UNSUCCESSFUL");
+				}
+			})
+		);
 	}
 
 	ngOnInit() {

@@ -11,22 +11,22 @@
 		<p>Enter your password:</p>
 		<input type="password" #password>
 		<br>
-		<input type="submit" #loginSubmit (click)="submitLoginInfo($event, username.value, password.value)">
+		<input type="submit" (click)="submitLoginInfo($event, username.value, password.value)">
 	</form>
     <h4 (click)="showSignUp(signUpForm, loginForm)">Sign Up</h4>
 	<form #signUpForm hidden>
 		<p>Enter a username:</p>
-		<input type="text">
+		<input type="text" #cusername>
 		<p>Enter a password:</p>
-		<input type="text">
+		<input type="password" #cpassword>
 		<p>Enter your email:</p>
-		<input type="text">
+		<input type="text" #cemail>
 		<p>Enter your first name:</p>
-		<input type="text">
+		<input type="text" #cfirstname>
 		<p>Enter your last name:</p>
-		<input type="text">
+		<input type="text" #clastname>
 		<br>
-		<input type="submit">
+		<input type="submit" (click)="submitCreateUser($event, cusername.value, cpassword.value, cemail.value, cfirstname.value, clastname.value)">
 	</form>
   </div>
 </div>

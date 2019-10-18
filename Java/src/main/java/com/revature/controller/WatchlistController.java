@@ -28,7 +28,9 @@ public class WatchlistController {
 	
 	@PutMapping("/createwatchlist")
 	public ResponseEntity<Watchlist> upsert(@RequestBody Watchlist w){
+		System.out.println("reaching watch list " + w);
 		Watchlist response = watchlistService.createWatchlist(w);
+		System.out.println("WL response: " + response);
 		return ResponseEntity.ok(response);
 	}
 	

@@ -28,7 +28,12 @@ public class MovieController {
 	
 	@PutMapping("/addmovie")
 	public ResponseEntity<Movie> upsert(@RequestBody Movie m){
+		System.out.println("Reaching addmovie");
+		System.out.println(m);
 		Movie response = movieService.addMovie(m);
+		System.out.println(response);
+		
+		ResponseEntity.ok().body(null);
 		
 		return ResponseEntity.ok(response);
 	}
