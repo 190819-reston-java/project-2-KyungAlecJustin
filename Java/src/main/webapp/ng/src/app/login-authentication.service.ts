@@ -13,9 +13,9 @@ export class LoginAuthenticationService {
     return this.loginUri;
   }
 
-  createUri = "http://localhost:8080/cineplay/createuser"
+  signupUri = "http://localhost:8080/cineplay/signup"
   getCreateuser(): Object {
-    return this.createUri;
+    return this.signupUri;
   }
 
 

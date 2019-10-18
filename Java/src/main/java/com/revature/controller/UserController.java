@@ -4,16 +4,10 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,15 +15,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.HttpServerErrorException;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.model.User;
-import com.revature.repositories.UserDAO;
 import com.revature.services.UserService;
 import com.revature.session.UserSession;
 
@@ -48,13 +38,19 @@ public class UserController {
 		return userService.findAll();
 	}
 
-	@PutMapping("/createuser")
-	public ResponseEntity<User> upsert(@RequestBody User userCreate){
-		User response = userService.createUser(userCreate);
+	@PutMapping("/signup")
+	public String upsert(@RequestBody User userCreate) throws JsonProcessingException{
+		ObjectMapper om = new ObjectMapper();
+		String response;
 		
-		System.out.println("STATUSCODEEE: " + ResponseEntity.ok(response));
-		return ResponseEntity.ok(response);
-
+		try {
+			this.userService.createUser(userCreate);
+			response = om.writeValueAsString(new ResponseEntity<String>(HttpStatus.CREATED));
+			return response;
+		} catch (RuntimeException e) {
+			response = om.writeValueAsString(new ResponseEntity<String>(HttpStatus.FORBIDDEN));
+			return response;
+		}
 	}
 	
 	@PostMapping("/login")

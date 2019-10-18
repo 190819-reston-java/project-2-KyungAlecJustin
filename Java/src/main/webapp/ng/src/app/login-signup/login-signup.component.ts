@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginAuthenticationService } from '../login-authentication.service';
+import { HttpClient } from "@angular/common/http";
 
 
 @Component({
@@ -9,10 +9,10 @@ import { LoginAuthenticationService } from '../login-authentication.service';
 	styleUrls: ['./login-signup.component.css']
 })
 export class LoginSignupComponent implements OnInit {
-	constructor(private router: Router, private loginAuthentication: LoginAuthenticationService) {}
+	constructor(private router: Router, private http: HttpClient) {}
 
 	loginUri = "http://localhost:8080/cineplay/login";
-	createUri = "http://localhost:8080/cineplay/createuser"
+	signupUri = "http://localhost:8080/cineplay/signup"
 
 	userCreds: Object = {
 		"username": null,
@@ -46,12 +46,12 @@ export class LoginSignupComponent implements OnInit {
 		event.preventDefault();
 		this.userCreds.username = username;
 		this.userCreds.usrpwd = password;
-		this.loginAuthentication.http.post(this.loginUri, this.userCreds).subscribe(
+		this.http.post(this.loginUri, this.userCreds).subscribe(
 			(response => {
 				if (response.statusCode === "ACCEPTED") {
 					this.router.navigate(['main']);
 				} else {
-					alert("Incorrect username or password");
+					alert("Incorrect username or password.");
 				}
 			})
 		);
@@ -64,12 +64,12 @@ export class LoginSignupComponent implements OnInit {
 		this.userCreate.email = cemail;
 		this.userCreate.firstName = cfirstname;
 		this.userCreate.lastName = clastname;
-		this.loginAuthentication.http.put(this.createUri, this.userCreate).subscribe(
+		this.http.put(this.signupUri, this.userCreate).subscribe(
 			(response => {
-				if (response.statuCode === "OK") {
-					alert("USER CREATION SUCCESSFUL")
+				if (response.statusCode === "CREATED") {
+					alert("Sign up successful");
 				} else {
-					alert("USER CREATION UNSUCCESSFUL");
+					alert("Sign up unsuccessful. Username or email already exists.");
 				}
 			})
 		);

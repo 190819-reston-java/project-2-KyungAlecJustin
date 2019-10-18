@@ -29,7 +29,7 @@
 	<form>
 		<p>Add a movie to your watchlist</p>
 		<input type="text" #title placeholder="Search by title">
-		<input type="submit" (click)="submitMovie($event, title.value, movieTable, movieButton)">
+		<input type="submit" (click)="submitMovie($event, title.value, movieTable, movieButton, exitButton)">
 	</form>
 	<br><br>
 	<table #movieTable hidden>
@@ -51,5 +51,8 @@
 		</tbody>
 	</table>
 	<br>
-	<button #movieButton hidden (click)="addToWatchList($event)">Add to Watchlist</button>
+	<div id="buttons">
+		<button #movieButton hidden (click)="addToWatchList($event)">Add to Watchlist</button>
+		<button #exitButton hidden (click)="exit($event)">Exit</button>
+	</div>
 </div>
