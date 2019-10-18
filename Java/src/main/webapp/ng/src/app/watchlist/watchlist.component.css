@@ -59,8 +59,8 @@
 
 #search-movies {
     position: absolute;
-    left: 25%;
-    top: 25%;
+    left: 12.5%;
+    top: 22%;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
@@ -74,7 +74,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    width: 50%;
+    width: 75%;
     border: 3px solid rgb(255, 0, 85);
 }
 
@@ -99,7 +99,7 @@
     margin: auto;
     border-collapse: collapse;
     color: white;
-    font-size: 0.5em;
+    font-size: 0.85em;
     width: 100%;
 }
 
@@ -113,10 +113,20 @@
   border: 2px solid rgb(255, 0, 85);
 }
 
+#search-movies #buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #search-movies button {
     background-color: rgb(255, 0, 85);
     border-color: rgb(255, 0, 85);
-    border-radius: 10px;
     color: white;
-    font-size: 0.5em;
+    font-size: 0.75em;
+    padding: 0% 5%;
+    border-radius: 10px;;
 }
