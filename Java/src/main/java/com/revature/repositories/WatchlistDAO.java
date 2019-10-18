@@ -10,12 +10,16 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.model.Watchlist;
+import com.revature.session.UserSession;
 
 @Repository
 public class WatchlistDAO implements IWatchlistDAO {
 	
 	@Autowired
 	private SessionFactory sf;
+	
+	@Autowired
+	private UserSession sessionUser;
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
@@ -50,7 +54,10 @@ public class WatchlistDAO implements IWatchlistDAO {
 	@Override
 	@Transactional
 	public Watchlist create(Watchlist newWatchlist) {
+		System.out.println("Reaching DAO watchlist");
+		System.out.println("USER SESSION IN DAO: " + this.sessionUser.getCurrentUser());
 		//Session s = sf.getCurrentSession();
+		//System.out.println("Session in DAO " + os);
 		Session os = sf.openSession();
 		System.out.println(os);
 

@@ -28,13 +28,13 @@ export class WatchlistComponent implements OnInit {
 		"released": null
 	}
 
-	createdWatchlist: Object = {
-		"watchlistName": null,
-		"ownerId": null,
-		"movie": null
+	watchlistCreate: Object = {
+		"watchlistName": null
 	};
 
+	//ENDPOINTS
 	movieUri = "http://localhost:8080/cineplay/addmovie";
+	createWatchlistURI = "http://localhost:8080/cineplay/createwatchlist"
 
 	showCreate = function(createForm, viewForm) {
 		createForm.hidden = false;
@@ -46,14 +46,15 @@ export class WatchlistComponent implements OnInit {
 		viewForm.hidden = false;
 	}
 
-	submitWatchlist = function(event, searchMovies) {
-		event.preventDefault();
-		let createWatchlistURI = "http://localhost:8080/cineplay/createwatchlist";
-		this.http.put(createWatchlistURI).subscribe(
+	submitWatchlist = function(event, searchMovies, createWL) {
+		event.preventDefault();	
+		console.log(createWL);	
+		this.watchlistCreate.watchlistName = createWL;
+		this.http.put(this.createWatchlistURI, this.watchlistCreate).subscribe(
 			(result => {
-				console.log("subscribed")
+				console.log("subscribed");
+				this.watchlistCreate = result;
 				console.log(result);
-				this.watchlistname = result;
 
 			})
 		)

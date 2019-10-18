@@ -22,13 +22,6 @@
 		<property name="password" value="revature" />
 	</bean> -->
 	
-	<bean id="ourDatasource" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="org.postgresql.Driver"/>
-		<property name="url" value="#{systemEnvironment['CINEPLAYURL']}"/>
-		<property name="username" value="#{systemEnvironment['CINEPLAYUSERNAME']}"/>
-		<property name="password" value="#{systemEnvironment['CINEPLAYPASSWORD']}"/>
-	</bean>
-	
 
 	<bean id="ourDatasource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="org.postgresql.Driver"/>
