@@ -51,7 +51,7 @@ export class LoginSignupComponent implements OnInit {
 				if (response.statusCode === "ACCEPTED") {
 					this.router.navigate(['main']);
 				} else {
-					alert("WRONG USERNAME OR PASSWORD");
+					alert("Incorrect username or password");
 				}
 			})
 		);
