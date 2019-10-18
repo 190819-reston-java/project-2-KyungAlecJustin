@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SessionUserService } from '../session-user.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-explore',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExploreComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http: HttpClient, private currentUser: SessionUserService) {}
+
+  sessionUserUri: String = "http://localhost:8080/cineplay/getSessionUser";
 
   ngOnInit() {
+    this.http.get(`${this.sessionUserUri}`).subscribe(
+      (response => {
+        this.currentUser.setCurrentUser(response);
+      })
+    );
   }
 
 }

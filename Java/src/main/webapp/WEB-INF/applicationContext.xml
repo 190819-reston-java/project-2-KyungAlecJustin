@@ -11,7 +11,6 @@
 		base-package="com.revature" />
 	<tx:annotation-driven />
   
-<!--
 	<bean id="ourDatasource"
 		class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName"
@@ -20,14 +19,15 @@
 			value="jdbc:postgresql://database-1.czitmou0wboc.us-east-1.rds.amazonaws.com:5432/test" />
 		<property name="username" value="postgres" />
 		<property name="password" value="revature" />
-	</bean> -->
 
-	<bean id="ourDatasource" class="org.apache.commons.dbcp.BasicDataSource">
+  </bean>
+
+	<!-- <bean id="ourDatasource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="org.postgresql.Driver"/>
 		<property name="url" value="#{systemEnvironment['CINEPLAYURL']}"/>
 		<property name="username" value="#{systemEnvironment['CINEPLAYUSERNAME']}"/>
 		<property name="password" value="#{systemEnvironment['CINEPLAYPASSWORD']}"/>
-	</bean>
+	</bean> -->
 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">

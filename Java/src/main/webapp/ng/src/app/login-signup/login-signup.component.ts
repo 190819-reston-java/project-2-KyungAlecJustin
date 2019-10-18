@@ -30,8 +30,6 @@ export class LoginSignupComponent implements OnInit {
 		"lastName": null
 	}
 
-
-
 	showLogin = function(loginForm, signUpForm) {
 		loginForm.hidden = false;
 		signUpForm.hidden = true;
@@ -68,6 +66,7 @@ export class LoginSignupComponent implements OnInit {
 			(response => {
 				if (response.statusCode === "CREATED") {
 					alert("Sign up successful");
+					window.location.reload();
 				} else {
 					alert("Sign up unsuccessful. Username or email already exists.");
 				}
