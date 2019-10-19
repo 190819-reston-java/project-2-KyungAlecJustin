@@ -11,6 +11,7 @@ export class ChatroomComponent implements OnInit {
 
   constructor(private http: HttpClient, private currentUser: SessionUserService) {}
 
+  //ENDPOINTS
   allForumsUri = "http://localhost:8080/cineplay/forums";
   forumUri = "http://localhost:8080/cineplay/createforum";
   sessionUserUri: String = "http://localhost:8080/cineplay/getSessionUser";

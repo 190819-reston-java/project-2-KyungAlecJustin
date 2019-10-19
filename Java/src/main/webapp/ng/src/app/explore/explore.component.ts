@@ -11,6 +11,7 @@ export class ExploreComponent implements OnInit {
 
   constructor(private http: HttpClient, private currentUser: SessionUserService) {}
 
+  //ENDPOINTS
   sessionUserUri: String = "http://localhost:8080/cineplay/getSessionUser";
 
   ngOnInit() {

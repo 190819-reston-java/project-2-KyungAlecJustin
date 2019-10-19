@@ -20,7 +20,7 @@
             <p>Enter the title of the movie:</p>
             <input type="text" #title>
             <br>
-            <input type="submit" (click)="submitCreation($event, username.value, password.value)">
+            <!-- <input type="submit" (click)="submitCreation($event, username.value, password.value)"> -->
         </form>
     </div>
 </div>
@@ -43,11 +43,12 @@
         </thead>
         <tbody>
             <tr>
-                <td>{{apiFilm.Title}}</td>
+                <td><a href="https://www.reddit.com/r/movies/search/?q={{apiFilm.Title}}&restrict_sr=1" target="_blank">{{apiFilm.Title}}</a></td>
                 <td>{{apiFilm.Director}}</td>
                 <td>{{apiFilm.Released}}</td>
                 <td>{{apiFilm.Plot}}</td>
             </tr>
+
         </tbody>
     </table>
     <br>

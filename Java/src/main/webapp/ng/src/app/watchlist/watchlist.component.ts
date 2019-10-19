@@ -13,9 +13,10 @@ export class WatchlistComponent implements OnInit {
 
 	constructor(private movieApi: MovieApiService, private http: HttpClient, private router: Router, private currentUser: SessionUserService) {}
 
+	//ENDPOINTS
 	sessionUserUri: String = "http://localhost:8080/cineplay/getSessionUser";
 
-	apiFilm: Object = {
+	apiFilm: any = {
 		"Title": null,
 		"Director": null,
 		"Released": null,

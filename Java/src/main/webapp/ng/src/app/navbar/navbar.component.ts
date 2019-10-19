@@ -11,6 +11,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(private router: Router, private http: HttpClient) {}
 
+  //ENDPOINTS
   logoutUri = "http://localhost:8080/cineplay/logout"
 
   logout = function(event) {
