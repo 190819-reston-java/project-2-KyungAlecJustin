@@ -18,6 +18,8 @@ export class MainComponent implements OnInit {
   today: any = this.month + "/" + this.day;
   trailer: Object;
   popularURI: String = "https://api.themoviedb.org/3/movie/now_playing?api_key=69464c49beeffbf72f4680011dafb90d&language=en-US&page=1";
+
+  //ENDPOINTS
   sessionUserUri: String = "http://localhost:8080/cineplay/getSessionUser";
 
   ngOnInit() {

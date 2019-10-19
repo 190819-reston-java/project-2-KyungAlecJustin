@@ -11,8 +11,9 @@ import { HttpClient } from "@angular/common/http";
 export class LoginSignupComponent implements OnInit {
 	constructor(private router: Router, private http: HttpClient) {}
 
+	// ENDPOINTS
 	loginUri = "http://localhost:8080/cineplay/login";
-	signupUri = "http://localhost:8080/cineplay/signup"
+	signupUri = "http://localhost:8080/cineplay/signup";
 
 	userCreds: Object = {
 		"username": null,
