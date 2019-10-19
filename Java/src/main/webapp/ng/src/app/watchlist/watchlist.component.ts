@@ -15,7 +15,7 @@ export class WatchlistComponent implements OnInit {
 
 	sessionUserUri: String = "http://localhost:8080/cineplay/getSessionUser";
 
-	apiFilm: Object = {
+	apiFilm: any = {
 		"Title": null,
 		"Director": null,
 		"Released": null,
