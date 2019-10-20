@@ -71,7 +71,7 @@ export class ChatroomComponent implements OnInit, AfterViewChecked {
     this.displayMessage.nativeElement.scrollTop = this.displayMessage.nativeElement.scrollHeight;
   }
 
-  //this results in a console error, but still works?
+ // this results in a console error, but still works?
   ngAfterViewChecked() {
     this.displayMessage.nativeElement.scrollTop = this.displayMessage.nativeElement.scrollHeight;
   }

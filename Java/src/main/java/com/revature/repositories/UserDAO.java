@@ -2,6 +2,7 @@ package com.revature.repositories;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class UserDAO implements IUserDAO {
 		os.beginTransaction();
 		
 		@SuppressWarnings("unchecked")
-		List<User> users = os.createCriteria(User.class).list();
+		List<User> users = os.createCriteria(User.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 				
 		os.getTransaction().commit();
 		os.close();
