@@ -93,6 +93,16 @@ public class WatchlistController {
 		return wlbn;
 	}
 	
+	@GetMapping("/moviesinwatchlist")
+	@ResponseBody 
+	public List<Movie> listMoviesInWatchlist(Integer watchlistId) {
+		//Used for testing
+		watchlistId = 5;
+		
+		List<Movie> moviesInWatchlist = watchlistService.getMoviesInWatchlist(watchlistId);
+		
+		return moviesInWatchlist;
+	}
 	
 
 }

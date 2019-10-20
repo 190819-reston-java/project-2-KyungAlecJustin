@@ -36,6 +36,11 @@ public class WatchlistService {
 
 	}
 	
+	public List<Movie> getMoviesInWatchlist(Integer watchlistId) {
+		return watchlistDao.getMoviesInWatchlist(watchlistId);
+
+	}
+	
 	public Watchlist createWatchlist(Watchlist w) {
 		watchlistDao.create(w);
 		return w;
