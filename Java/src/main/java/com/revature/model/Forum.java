@@ -1,7 +1,6 @@
 package com.revature.model;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name = "forum")
-//@Component
+@Component
 public class Forum implements Serializable {
 
 	private static final long serialVersionUID = 1713982536513702898L;
@@ -29,13 +28,9 @@ public class Forum implements Serializable {
 	@Column(name = "message")
 	private String message;
 	
-	
-	//AT Mapping CODE-------------------------------------------------------------------------------
-
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User writerId;
-
 
 	public Forum() {
 		super();
@@ -120,13 +115,6 @@ public class Forum implements Serializable {
 	public String toString() {
 		return "Forum [forumId=" + forumId + ", message=" + message + ", writerId=" + writerId + "]";
 	}
-	
-	//AT Mapping CODE-------------------------------------------------------------------------------
-
-	
-
-
-	
-	
+		
 
 }
