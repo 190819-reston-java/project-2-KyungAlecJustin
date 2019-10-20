@@ -17,23 +17,43 @@ export class MainComponent implements OnInit {
   month: any = String(new Date().getMonth() + 1);
   today: any = this.month + "/" + this.day;
   trailer: Object;
-  popularURI: String = "https://api.themoviedb.org/3/movie/now_playing?api_key=69464c49beeffbf72f4680011dafb90d&language=en-US&page=1";
+  allWatchlists: String[] =[];
 
   //ENDPOINTS
   sessionUserUri: String = "http://localhost:8080/cineplay/getSessionUser";
+  popularURI: String = "https://api.themoviedb.org/3/movie/now_playing?api_key=69464c49beeffbf72f4680011dafb90d&language=en-US&page=1";
+  allWatchlistsUri = "http://localhost:8080/cineplay/watchlists";
 
   ngOnInit() {
+    // set user information in current session
     this.http.get(`${this.sessionUserUri}`).subscribe(
       (response => {
         this.currentUser.setCurrentUser(response);
       })
     );
 
+    // get currently trending/playing movie info
     let featureFilmAPICall = this.http.get(`${this.popularURI}`);
     featureFilmAPICall.subscribe((result => {
-      console.log(result);
       this.featureFilm = result;
     }));
+
+    //display watchlists on feed
+    let i = 0;
+    this.http.get(`${this.allWatchlistsUri}`).subscribe(
+      (result => {
+        for (let w in result) {
+          if (result[w].watchlistId % Math.round((Math.random() * 5) + 1) === 0) {
+            this.allWatchlists.push(result[w].watchlistName);
+            // this.allWatchlists.push(result[w].watchlistOwner.username + " created: " +result[w].watchlistName);
+            i++;
+            if (i > 5) {
+              break;
+            }
+          }
+        }
+      })
+    )
   }
 
 }

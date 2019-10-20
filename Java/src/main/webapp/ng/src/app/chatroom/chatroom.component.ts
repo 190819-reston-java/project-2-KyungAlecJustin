@@ -41,7 +41,7 @@ export class ChatroomComponent implements OnInit {
         alert("Message cannot be empty.");
       }
     } else {
-      alert("Please login first.");
+      alert("Please login first to send a message.");
     }
   }
 
