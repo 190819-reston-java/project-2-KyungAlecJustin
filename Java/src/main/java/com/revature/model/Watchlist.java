@@ -23,6 +23,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Proxy;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -40,6 +41,7 @@ public class Watchlist implements Serializable {
 	
 	@Column(name = "watchlist_name")
 	private String watchlistName;
+	
 	
 	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name="user_id")

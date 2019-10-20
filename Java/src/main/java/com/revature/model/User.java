@@ -17,6 +17,9 @@ import javax.persistence.UniqueConstraint;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "users")
 @Component
@@ -43,20 +46,16 @@ public class User implements Serializable {
 	
 	@Column(name = "last_name")
 	private String lastName;
-	
-	//AT Mapping CODE-------------------------------------------------------------------------------
-	
+		
 	@OneToMany(mappedBy = "writerId", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH})
 	private Set<Forum> forums;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "watchlistOwner", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH})
-	private Set<Watchlist> watchlists;
+	private List<Watchlist> watchlists;
 	
-	//AT Mapping CODE-------------------------------------------------------------------------------
-
-
 	public User() {
 		super();
 	}
@@ -143,9 +142,6 @@ public class User implements Serializable {
 		return "User [userId=" + userId + ", username=" + username + ", usrpwd=" + usrpwd + ", email=" + email
 				+ ", firstName=" + firstName + ", lastName=" + lastName + "]";
 	}
-	
-	
-	
 	
 
 }

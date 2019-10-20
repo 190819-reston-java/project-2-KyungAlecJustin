@@ -8,11 +8,11 @@
 - Users can login
 - User can logout
 - Users can sign-up
-- Main page is a feed created playlists by the user
-- Main page holds a posters
-- User can search for certain or specific playlists from other users
-- User can create their own playlist 
-- Users can communicate with each other in a community forum
+- Main page contains a feed of other users' watchlist
+- Main page holds posters of popular movies
+- User can search for certain or specific watchlists from other users
+- User can create their own watchlist
+- Users can engage in a community chat
 
 
 # Project 2 Specifications

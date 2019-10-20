@@ -2,6 +2,7 @@ package com.revature.repositories;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -97,42 +98,28 @@ public class WatchlistDAO implements IWatchlistDAO {
 	@Override
 	@Transactional
 	public List<Watchlist> getUserWatchlists(int ownerId) {
-		Session s = sf.getCurrentSession();
+		//Session s = sf.getCurrentSession();
+		//System.out.println(s.isOpen());
+		Session os = sf.openSession();
+		System.out.println(os.isOpen());
+
+//		os.beginTransaction();
+
 
 		//Remove later
 		System.out.println("USER SESSION IN DAO GET WATCHLIST ID: " + this.sessionUser.getCurrentUser());
 		System.out.println("USER ID FROM SESSION: " + this.sessionUser.getCurrentUser().getUserId());
 		
-		//Session os = sf.openSession();
-		
-		
-		//os.beginTransaction();
-	
-		System.out.println(s.isOpen());
-//
-//		 
-//		//Query userWatchlist = s.createQuery("from Watchlist");
-//
-//		Watchlist userWatchlist = (Watchlist) os.createQuery("select User.username, Watchlist.watchlistName INNER JOIN Watchlist ON Watchlist.watchlistId = User.userId WHERE User.userId = :sessionId");
-//		//int userSessionId = this.sessionUser.getCurrentUser().getUserId();
+
+		List<Watchlist> userWatchlists = (List<Watchlist>) os.createCriteria(Watchlist.class).add(Restrictions.eq("watchlistOwner.userId", ownerId)).list();
 //		
-//		((Query) userWatchlist).setInteger("sessionId", ownerId);
-//		
-//		//Query sq = ((Query) userWatchlist).setInteger("sessionId", ownerId);
-//		
-//		List<Watchlist> watchlists = ((Query) userWatchlist).list();
-//		for(Watchlist wl : watchlists){
-//			System.out.println(wl);
-//		}
-//		
-//		
-//		//Remove later
-//		System.out.println(userWatchlist);
+//		System.out.println(userWatchlists);
 //		
 //		os.getTransaction().commit();
-		
-		List<Watchlist> userWatchlists = (List<Watchlist>) s.createCriteria(Watchlist.class).add(Restrictions.eq("users.user_id", ownerId));
- 		
+		os.close();
+//		
+		System.out.println(os.isOpen());
+// 		
 		return userWatchlists;
 
 	}
