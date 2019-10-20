@@ -6,16 +6,19 @@
 
 <div id="create-view">
     <div id="create-view-tabs">
-        <h4 (click)="showSearch(createForm, viewForm, moviesSearch)">Search for a Movie</h4>
-        <h4 (click)="showCreate(createForm, viewForm)">Create a Watchlist</h4>
+        <h4 (click)="showSearch(createForm, viewLists, moviesSearch)">Search for a Movie</h4>
+        <h4 (click)="showCreate(createForm, viewLists)">Create a Watchlist</h4>
         <form #createForm hidden>
             <p>Enter the name of your new watchlist:</p>
             <input type="text" #createWL>
             <br>
             <input type="submit" (click)="submitWatchlist($event, createWL.value, searchMovies)">
         </form>
-        <h4 (click)="showView(createForm, viewForm)">View/Update Your Watchlists</h4>
-        <div #viewForm hidden></div>
+        <h4 (click)="showView(createForm, viewLists)">View/Update Your Watchlists</h4>
+        <br>
+        <div #viewLists hidden>
+          <p *ngFor="let watchlist of userWatchlistsDisplay">{{watchlist}}</p>
+        </div>
     </div>
 </div>
 

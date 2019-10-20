@@ -15,6 +15,9 @@ export class WatchlistComponent implements OnInit {
 
 	//ENDPOINTS
 	sessionUserUri: String = "http://localhost:8080/cineplay/getSessionUser";
+	movieUri = "http://localhost:8080/cineplay/addmovie";
+	createWatchlistURI = "http://localhost:8080/cineplay/createwatchlist";
+	watchlistsByIdUri = "http://localhost:8080/cineplay/getUserWatchlists";
 
 	apiFilm: any = {
 		"Title": null,
@@ -42,32 +45,42 @@ export class WatchlistComponent implements OnInit {
 		"watchlistName": null,
 		"watchlistOwner": null
 	}
-  
-	//ENDPOINTS
-	movieUri = "http://localhost:8080/cineplay/addmovie";
-	createWatchlistURI = "http://localhost:8080/cineplay/createwatchlist"
 
+	// userWatchlist: Object = {
+	// 	"watchlistName": null,
+	// 	"owner": null
+	// }
 
-	userWatchlist: Object = {
-		"watchlistName": null,
-		"owner": null
-	}
+	userWatchlists: Object[] = [];
+	userWatchlistsDisplay: String[] = []
 
 	//Header Actions
-	showCreate = function(createForm, viewForm) {
+	showCreate = function(createForm, viewLists) {
 		createForm.hidden = false;
-		viewForm.hidden = true;
+		viewLists.hidden = true;
 	}
 
-	showSearch = function(createForm, viewForm, moviesSearch) {
+	showSearch = function(createForm, viewLists, moviesSearch) {
 		createForm.hidden = true;
-		viewForm.hidden = true;
+		viewLists.hidden = true;
 		moviesSearch.hidden = false;
 	}
 
-	showView = function (createForm, viewForm) {
+	showView = function (createForm, viewLists) {
 		createForm.hidden = true;
-		viewForm.hidden = false;
+		viewLists.hidden = false;
+		if (this.currentUser.getCurrentUser() !== null) {
+			this.http.get(this.watchlistsByIdUri).subscribe(
+				result => {
+					for (let w in result) {
+						this.userWatchlists.push(result);
+						this.userWatchlistsDisplay.push(result[w].watchlistName);
+					}
+				}
+			)
+		} else {
+			this.userWatchlistsDisplay.push("Login to see your watchlists.");
+		}
 	}
 
 	//Creates watchlist name and adds it DB
@@ -119,19 +132,19 @@ export class WatchlistComponent implements OnInit {
 	}
 
 	//View own watchlists
-	viewWatchlists = function(event){
-		console.log("view watchlists button clicked");
-		event.preventDefault();
-		this.http.get(this.userWatchlistsURI).subscribe(
-			result => {
-				console.log("Sending to backend");
-				console.log(result);
-				this.userWatchlist = result;
-				console.log("Retrieved from backend");
-			}
-		)
+	// viewWatchlists = function(event){
+	// 	console.log("view watchlists button clicked");
+	// 	event.preventDefault();
+	// 	this.http.get(this.userWatchlistsURI).subscribe(
+	// 		result => {
+	// 			console.log("Sending to backend");
+	// 			console.log(result);
+	// 			this.userWatchlist = result;
+	// 			console.log("Retrieved from backend");
+	// 		}
+	// 	)
 
-	}
+	// }
 
 	//Add to watchlist from Movie Search button
 	addToWatchList = function(event) {
@@ -158,8 +171,6 @@ export class WatchlistComponent implements OnInit {
 		this.http.get(`${this.sessionUserUri}`).subscribe(
 			(response => {
 				this.currentUser.setCurrentUser(response);
-				//Will remove later
-				console.log(response);
 
 			})
 
