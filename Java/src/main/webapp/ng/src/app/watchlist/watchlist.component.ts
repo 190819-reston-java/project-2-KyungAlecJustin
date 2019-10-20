@@ -51,24 +51,45 @@ export class WatchlistComponent implements OnInit {
 		viewForm.hidden = true;
 	}
 
-	showView = function(createForm, viewForm) {
+	showSearch = function(createForm, viewForm, moviesSearch) {
+		createForm.hidden = true;
+		viewForm.hidden = true;
+		moviesSearch.hidden = false;
+	}
+
+	showView = function (createForm, viewForm) {
 		createForm.hidden = true;
 		viewForm.hidden = false;
 	}
 
 	//Creates watchlist name and adds it DB
-	submitWatchlist = function(event, searchMovies, createWL) {
-		event.preventDefault();	
-		console.log(createWL);	
-		this.watchlistCreate.watchlistName = createWL;
-		this.http.put(this.createWatchlistURI, this.watchlistCreate).subscribe(
-			(result => {
-				this.createdWatchlist = result;
-				console.log(this.createdWatchlist);
+	submitWatchlist = function(event, createWL) {
+		event.preventDefault();
+		if (createWL != "") {
+			this.watchlistCreate.watchlistName = createWL;
+			this.http.put(this.createWatchlistURI, this.watchlistCreate).subscribe(
+				(result => {
+					this.createdWatchlist = result;
+					console.log(this.createdWatchlist);
 
+				})
+			)	
+		} else {
+			alert("Name of the watchlist cannot be empty.");
+		}
+	}
+
+	//Searches and returns from API
+	moviesSearchBar = function(event, searchTitle, moviesSearchTable, exitButton) {
+		event.preventDefault();
+		moviesSearchTable.hidden = false;
+		exitButton.hidden = false;
+		let uri = this.movieApi.getUri() + searchTitle;
+		this.http.get(uri).subscribe(
+			(result => {
+				this.apiFilm = result;
 			})
-		)
-		searchMovies.hidden = false;
+		);
 	}
 
 	//Searches and returns from API
@@ -101,9 +122,9 @@ export class WatchlistComponent implements OnInit {
 		);
 	}
 
-	exit = function(event) {
+	exit = function(event, searchMovies) {
 		event.preventDefault();
-		window.location.reload();
+		searchMovies.hidden = true;
 	}
 
 	ngOnInit() {
