@@ -6,7 +6,7 @@
 
 <h1>Community Chat</h1>
 <div id="chatroom">
-    <div id="display-message">
+    <div id="display-message" #displayMessage>
         <p *ngFor="let pastMessage of pastMessages">{{pastMessage}}</p>
     </div>
     <br>

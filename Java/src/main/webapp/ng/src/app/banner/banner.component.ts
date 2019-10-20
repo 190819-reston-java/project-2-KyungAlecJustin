@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BannerComponent implements OnInit {
   
-  loginPictures: string[] = ["bladerunner", "dunkirk", "her", "hereditary", "interstellar", "johnwick",
-  "lostintranslation", "shapeofwater", "suspiria", "theshining"];
+  loginPictures: string[] = ["bladerunner", "dunkirk", "hereditary", "interstellar", "lostintranslation",
+    "shapeofwater", "spiritedaway", "theshining"];
   pictureRandomizer: number = Math.round(Math.random() * (this.loginPictures.length - 1));
   loginBanner: string = "../../assets/images/" + this.loginPictures[this.pictureRandomizer] + "-still.png";
   filmInfo: string;
