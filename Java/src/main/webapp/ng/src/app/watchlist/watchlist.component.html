@@ -6,9 +6,7 @@
 
 <div id="create-view">
     <div id="create-view-tabs">
-
         <h4 (click)="showSearch(createForm, viewForm, moviesSearch)">Search for a Movie</h4>
-
         <h4 (click)="showCreate(createForm, viewForm)">Create a Watchlist</h4>
         <form #createForm hidden>
             <p>Enter the name of your new watchlist:</p>
@@ -16,14 +14,12 @@
             <br>
             <input type="submit" (click)="submitWatchlist($event, createWL.value, searchMovies)">
         </form>
-
         <h4 (click)="showView(createForm, viewForm)">View/Update Your Watchlists</h4>
         <div #viewForm hidden></div>
     </div>
 </div>
 
 <div class="search-movies" #moviesSearch hidden>
-
   <form>
       <p>Search for a movie:</p>
     <input type="text" #searchTitle placeholder="Search by title">
