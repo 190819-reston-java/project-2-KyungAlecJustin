@@ -60,16 +60,24 @@ export class WatchlistComponent implements OnInit {
 	//Creates watchlist name and adds it DB
 	submitWatchlist = function(event, searchMovies, createWL) {
 		event.preventDefault();	
-		console.log(createWL);	
-		this.watchlistCreate.watchlistName = createWL;
-		this.http.put(this.createWatchlistURI, this.watchlistCreate).subscribe(
-			(result => {
-				this.createdWatchlist = result;
-				console.log(this.createdWatchlist);
-
-			})
-		)
-		searchMovies.hidden = false;
+		//will remove later
+		console.log(createWL);
+		if(this.currentUser.setCurrentUser() !== null){
+			if(createWL != ""){
+				this.watchlistCreate.watchlistName = createWL;
+				this.http.put(this.createWatchlistURI, this.watchlistCreate).subscribe(
+					(result => {
+						this.createdWatchlist = result;
+						console.log("created WL info for backend" + this.createdWatchlist);
+					})
+				)
+				searchMovies.hidden = false;
+			} else {
+				alert("Please enter watchlist name");
+			}
+		} else {
+			alert("Please log in to create watchlist");
+		}
 	}
 
 	//Searches and returns from API
@@ -95,7 +103,7 @@ export class WatchlistComponent implements OnInit {
 		this.newFilm.plot = this.apiFilm.Plot;
 		this.newFilm.poster = this.apiFilm.Poster;
 		console.log(this.newFilm);
-		this.http.put(this.movieUri, this.newFilm).subscribe(
+		this.http.put(this.movieURI, this.newFilm).subscribe(
 			(request => {
 				console.log(request);
 			})
@@ -111,7 +119,11 @@ export class WatchlistComponent implements OnInit {
 		this.http.get(`${this.sessionUserUri}`).subscribe(
 			(response => {
 				this.currentUser.setCurrentUser(response);
+				//Will remove later
+				console.log(response);
+
 			})
+
 		);
 	}
 }

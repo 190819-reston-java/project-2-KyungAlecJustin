@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
@@ -92,35 +93,47 @@ public class WatchlistDAO implements IWatchlistDAO {
 		return newWatchlist;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
-	public Watchlist getUserWatchlist(int ownerId) {
-		
+	public List<Watchlist> getUserWatchlists(int ownerId) {
+		Session s = sf.getCurrentSession();
+
 		//Remove later
 		System.out.println("USER SESSION IN DAO GET WATCHLIST ID: " + this.sessionUser.getCurrentUser());
 		System.out.println("USER ID FROM SESSION: " + this.sessionUser.getCurrentUser().getUserId());
 		
-		Session os = sf.openSession();
-		
-		os.beginTransaction();
-		
-		Watchlist userWatchlist = (Watchlist) os.createQuery("FROM watchlist WHERE user_id = :sessionId");
-		int userSessionId = this.sessionUser.getCurrentUser().getUserId();
-		
-		System.out.println(os.isOpen());
-		
-		((Query) userWatchlist).setInteger("sessionId", userSessionId);
+		//Session os = sf.openSession();
 		
 		
-
+		//os.beginTransaction();
+	
+		System.out.println(s.isOpen());
+//
+//		 
+//		//Query userWatchlist = s.createQuery("from Watchlist");
+//
+//		Watchlist userWatchlist = (Watchlist) os.createQuery("select User.username, Watchlist.watchlistName INNER JOIN Watchlist ON Watchlist.watchlistId = User.userId WHERE User.userId = :sessionId");
+//		//int userSessionId = this.sessionUser.getCurrentUser().getUserId();
+//		
+//		((Query) userWatchlist).setInteger("sessionId", ownerId);
+//		
+//		//Query sq = ((Query) userWatchlist).setInteger("sessionId", ownerId);
+//		
+//		List<Watchlist> watchlists = ((Query) userWatchlist).list();
+//		for(Watchlist wl : watchlists){
+//			System.out.println(wl);
+//		}
+//		
+//		
+//		//Remove later
+//		System.out.println(userWatchlist);
+//		
+//		os.getTransaction().commit();
 		
-		//Remove later
-		System.out.println(userWatchlist);
-		
-		os.getTransaction().commit();
-		
-		
-		return userWatchlist;
+		List<Watchlist> userWatchlists = (List<Watchlist>) s.createCriteria(Watchlist.class).add(Restrictions.eq("users.user_id", ownerId));
+ 		
+		return userWatchlists;
 
 	}
 
