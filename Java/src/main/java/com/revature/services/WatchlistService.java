@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.model.Movie;
+import com.revature.model.User;
 import com.revature.model.Watchlist;
 import com.revature.repositories.IWatchlistDAO;
 
@@ -14,6 +15,9 @@ public class WatchlistService {
 	
 	@Autowired
 	private IWatchlistDAO watchlistDao;
+	
+	@Autowired 
+	private UserService userService;
 	
 	public List<Watchlist> getAllWatchlist(){
 		List<Watchlist> watchlists = watchlistDao.findAllWatchlist();
@@ -27,9 +31,9 @@ public class WatchlistService {
 	}
 	
 
-	public List<Watchlist> getWatchlistByUser(int ownerId) {
-		List<Watchlist> userWatchlist = watchlistDao.getUserWatchlists(ownerId);
-		return userWatchlist;
+	public List<Watchlist> getWatchlistByUser(Integer ownerId) {
+		return watchlistDao.getUserWatchlists(ownerId);
+
 	}
 	
 	public Watchlist createWatchlist(Watchlist w) {

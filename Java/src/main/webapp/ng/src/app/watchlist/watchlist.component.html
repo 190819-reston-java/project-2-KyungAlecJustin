@@ -23,6 +23,8 @@
         <form #viewForm hidden>
 
             <input type="submit" value="View Your Watchlists" (click)="viewWatchlists($event)">
+            <p *ngFor="let userWatchlist of userWatchlists">{{userWatchlist.watchlistName}}</p>
+
         </form>
     </div>
 </div>

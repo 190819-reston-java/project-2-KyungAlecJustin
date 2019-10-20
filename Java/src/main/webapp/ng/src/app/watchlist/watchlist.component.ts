@@ -46,6 +46,11 @@ export class WatchlistComponent implements OnInit {
 		"watchlistOwner": null
 	}
 
+	userWatchlist: Object = {
+		"watchlistName": null,
+		"owner": null
+	}
+
 	//Header Actions
 	showCreate = function(createForm, viewForm) {
 		createForm.hidden = false;
@@ -116,7 +121,10 @@ export class WatchlistComponent implements OnInit {
 		event.preventDefault();
 		this.http.get(this.userWatchlistsURI).subscribe(
 			result => {
-				console.log("Sending to backend")
+				console.log("Sending to backend");
+				console.log(result);
+				this.userWatchlist = result;
+				console.log("Retrieved from backend");
 			}
 		)
 

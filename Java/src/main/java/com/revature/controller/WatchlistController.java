@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -61,23 +62,19 @@ public class WatchlistController {
 		
 	}
 	
-	@GetMapping("/getUserWatchlists")
-	public List<Watchlist> getUserWatchlists(Integer userId) {
-		
-		System.out.println("Reaching get users WL");
-		
-		//TESTING
-		System.out.println(this.sessionUser.getCurrentUser().getUserId());		
-		userId = this.sessionUser.getCurrentUser().getUserId();
-		System.out.println("Session USER:" + userId);
 
+	@SuppressWarnings("unchecked")
+	@GetMapping("/getUserWatchlists")
+	@ResponseBody 
+	public List<Watchlist>  getUserWatchlists(Integer ownerId) {
+		ownerId = sessionUser.getCurrentUser().getUserId();
+		System.out.println("OWNER ID: " + ownerId);
 		
-		List<Watchlist> userWL = watchlistService.getWatchlistByUser(userId);
-		
-		System.out.println(userWL);
+		List<Watchlist> userWL = watchlistService.getWatchlistByUser(ownerId);
 		
 		return userWL;
 	}
+	
 	
 	@PostMapping("/watchlistbyname")
 	public List<Movie> getWatchlistByName(@RequestBody String watchlistName) throws JsonProcessingException {
@@ -93,9 +90,9 @@ public class WatchlistController {
 			
 		}
 		
-		
 		return wlbn;
 	}
+	
 	
 
 }

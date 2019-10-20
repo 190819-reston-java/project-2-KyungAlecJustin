@@ -3,6 +3,7 @@ package com.revature.repositories;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.model.Movie;
+import com.revature.model.User;
 import com.revature.model.Watchlist;
 import com.revature.session.UserSession;
 
@@ -94,40 +96,50 @@ public class WatchlistDAO implements IWatchlistDAO {
 		return newWatchlist;
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	@Transactional
-	public List<Watchlist> getUserWatchlists(int ownerId) {
+//	@SuppressWarnings("unchecked")
+//	@Override
+//	@Transactional
+//	public List<Watchlist> getUserWatchlists(int ownerId) {
 		//Session s = sf.getCurrentSession();
 		//System.out.println(s.isOpen());
-		Session os = sf.openSession();
-		System.out.println(os.isOpen());
-
+//		Session os = sf.openSession();
+//		System.out.println(os.isOpen());
+//
 //		os.beginTransaction();
-
-
-		//Remove later
-		System.out.println("USER SESSION IN DAO GET WATCHLIST ID: " + this.sessionUser.getCurrentUser());
-		System.out.println("USER ID FROM SESSION: " + this.sessionUser.getCurrentUser().getUserId());
-		
-
-		List<Watchlist> userWatchlists = (List<Watchlist>) os.createCriteria(Watchlist.class).add(Restrictions.eq("watchlistOwner.userId", ownerId)).list();
+//
+//
+//		//Remove later
+//		System.out.println("USER SESSION IN DAO GET WATCHLIST ID: " + this.sessionUser.getCurrentUser());
+//		System.out.println("USER ID FROM SESSION: " + this.sessionUser.getCurrentUser().getUserId());
 //		
-//		System.out.println(userWatchlists);
-//		
+//
+//		List<Watchlist> userWatchlists = (List<Watchlist>) os.createCriteria(Watchlist.class).add(Restrictions.eq("watchlistOwner.userId", ownerId)).list();
+////		
 //		os.getTransaction().commit();
-		os.close();
-//		
-		System.out.println(os.isOpen());
-// 		
-		return userWatchlists;
-
-	}
+//		os.close();
+////		
+//		System.out.println(os.isOpen());
+//// 		
+//		return userWatchlists;
+//
+//	}
 
 	@Override
 	public Watchlist addMovieToWatchlist(Watchlist w, Movie m) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public List<Watchlist> getUserWatchlists(Integer ownerId){
+		System.out.println("Reached WL DAO for USWL");
+		Session s = sf.openSession();	
+		System.out.println(s.isOpen());
+		System.out.println(ownerId);
+		
+		return (List<Watchlist>) s.createCriteria(Watchlist.class).add(Restrictions.eq("watchlistOwner.userId", ownerId)).list();
 	}
 
 }
