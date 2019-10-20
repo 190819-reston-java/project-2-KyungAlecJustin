@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { SessionUserService } from '../session-user.service';
 
@@ -9,8 +9,9 @@ import { SessionUserService } from '../session-user.service';
 })
 export class ChatroomComponent implements OnInit {
 
-  constructor(private http: HttpClient, private currentUser: SessionUserService) {}
-
+  constructor(private http: HttpClient, private currentUser: SessionUserService, private renderer: Renderer2) {}
+  
+  //ENDPOINTS
   allForumsUri = "http://localhost:8080/cineplay/forums";
   forumUri = "http://localhost:8080/cineplay/createforum";
   sessionUserUri: String = "http://localhost:8080/cineplay/getSessionUser";
@@ -22,6 +23,7 @@ export class ChatroomComponent implements OnInit {
 
   pastMessages: String[] = [];
   allMessages: String[] = [];
+  
 
   submitMessage = function(event, message, messageInput) {
     event.preventDefault();
@@ -32,6 +34,7 @@ export class ChatroomComponent implements OnInit {
         this.http.put(this.forumUri, this.newMessage).subscribe(
           (response => {
             window.location.reload();
+
           })
         );
       } else {
@@ -46,15 +49,19 @@ export class ChatroomComponent implements OnInit {
     this.http.get(`${this.allForumsUri}`).subscribe(
       (result => {
         for (let m in result) {
-          this.pastMessages.push(result[m].writerId.firstName + " " + result[m].writerId.lastName + ": " + result[m].message);
-        }
+          this.pastMessages.push(result[m].writerId.username + ": " + result[m].message);
+        } 
       })
     );
 
     this.http.get(`${this.sessionUserUri}`).subscribe(
       (response => {
         this.currentUser.setCurrentUser(response);
+
+        //Will remove later, used for testing
+        console.log(response);
       })
     );
+
   }
 }

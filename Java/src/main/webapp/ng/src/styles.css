@@ -1,14 +1,14 @@
 @import "~bootstrap/dist/css/bootstrap.css";
-
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 html {
     height: 100%;
 }
 
 body {
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  height: 100%;
-  margin: 0;
-  background-color: rgb(13, 13, 13);
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 100%;
+    margin: 0;
+    background-color: rgb(13, 13, 13);
 }

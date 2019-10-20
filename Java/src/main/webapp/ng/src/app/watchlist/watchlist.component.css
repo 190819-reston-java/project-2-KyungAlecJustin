@@ -108,6 +108,7 @@
     border: 2px solid rgb(255, 0, 85);
 }
 
+
 .search-movies td {
   padding: 5px 20px;
   border: 2px solid rgb(255, 0, 85);
@@ -128,5 +129,11 @@
     color: white;
     font-size: 0.75em;
     padding: 0% 5%;
-    border-radius: 10px;;
+    border-radius: 10px;
+    ;
+}
+
+a {
+    color: white;
+    text-decoration: none;
 }

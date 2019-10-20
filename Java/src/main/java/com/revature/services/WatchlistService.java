@@ -26,8 +26,9 @@ public class WatchlistService {
 		return movies;
 	}
 	
-	public Watchlist getWatchlistByUser(int ownerId) {
-		Watchlist userWatchlist = watchlistDao.getUserWatchlist(ownerId);
+
+	public List<Watchlist> getWatchlistByUser(int ownerId) {
+		List<Watchlist> userWatchlist = watchlistDao.getUserWatchlists(ownerId);
 		return userWatchlist;
 	}
 	

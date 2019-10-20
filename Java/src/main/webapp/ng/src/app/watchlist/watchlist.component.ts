@@ -13,9 +13,10 @@ export class WatchlistComponent implements OnInit {
 
 	constructor(private movieApi: MovieApiService, private http: HttpClient, private router: Router, private currentUser: SessionUserService) {}
 
+	//ENDPOINTS
 	sessionUserUri: String = "http://localhost:8080/cineplay/getSessionUser";
 
-	apiFilm: Object = {
+	apiFilm: any = {
 		"Title": null,
 		"Director": null,
 		"Released": null,
@@ -63,6 +64,7 @@ export class WatchlistComponent implements OnInit {
 	}
 
 	//Creates watchlist name and adds it DB
+
 	submitWatchlist = function(event, createWL) {
 		event.preventDefault();
 		if (createWL != "") {
@@ -115,7 +117,7 @@ export class WatchlistComponent implements OnInit {
 		this.newFilm.plot = this.apiFilm.Plot;
 		this.newFilm.poster = this.apiFilm.Poster;
 		console.log(this.newFilm);
-		this.http.put(this.movieUri, this.newFilm).subscribe(
+		this.http.put(this.movieURI, this.newFilm).subscribe(
 			(request => {
 				console.log(request);
 			})
@@ -131,7 +133,11 @@ export class WatchlistComponent implements OnInit {
 		this.http.get(`${this.sessionUserUri}`).subscribe(
 			(response => {
 				this.currentUser.setCurrentUser(response);
+				//Will remove later
+				console.log(response);
+
 			})
+
 		);
 	}
 }

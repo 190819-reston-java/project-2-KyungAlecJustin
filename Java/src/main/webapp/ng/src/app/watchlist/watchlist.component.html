@@ -18,10 +18,10 @@
         <form #viewForm hidden>
             <p>Enter the name of your new watchlist:</p>
             <input type="text" #name>
-            <p>Enter the title of the movie:</p>
-            <input type="text" #title>
-            <br>
-            <input type="submit" (click)="submitCreation($event, username.value, password.value)">
+            <!-- <p>Enter the title of the movie:</p>
+            <input type="text" #title> 
+            <br>-->
+            <!-- <input type="submit" (click)="submitCreation($event, username.value, password.value)"> -->
         </form>
     </div>
 </div>
@@ -64,27 +64,33 @@
         <input type="submit" (click)="submitMovie($event, title.value, movieTable, movieButton, exitButton)">
     </form>
     <br><br>
-    <table #movieTable hidden>
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Director</th>
-                <th>Release Date</th>
-                <th>Plot</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{apiFilm.Title}}</td>
-                <td>{{apiFilm.Director}}</td>
-                <td>{{apiFilm.Released}}</td>
-                <td>{{apiFilm.Plot}}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div>
+        <table #movieTable hidden>
+            <thead>
+                <tr>
+                    <th>Poster</th>
+                    <th>Title</th>
+                    <th>Director</th>
+                    <th>Release Date</th>
+                    <th>Plot</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><img src={{apiFilm.Poster}} width="80"></td>
+                    <td><a href="https://www.reddit.com/r/movies/search/?q={{apiFilm.Title}}&restrict_sr=1" target="_blank">{{apiFilm.Title}}</a></td>
+                    <td>{{apiFilm.Director}}</td>
+                    <td>{{apiFilm.Released}}</td>
+                    <td>{{apiFilm.Plot}}</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
     <br>
     <div class="buttons">
         <button #movieButton hidden (click)="addToWatchList($event)">Add to Watchlist</button>
         <button #exitButton hidden (click)="exit($event, searchMovies)">Exit</button>
     </div>
+
 </div>
