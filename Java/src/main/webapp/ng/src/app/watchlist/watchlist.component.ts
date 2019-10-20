@@ -46,8 +46,10 @@ export class WatchlistComponent implements OnInit {
 	//ENDPOINTS
 	movieUri = "http://localhost:8080/cineplay/addmovie";
 	createWatchlistURI = "http://localhost:8080/cineplay/createwatchlist";
+	
+	///ALEC MADE ENPOINTS
 	moviesInWatchlistURI = "http://localhost:8080/cineplay/moviesinwatchlist";
-	getUsersWatchlistURI = "http://localhost:8080/cineplay/getUserWatchlists";
+	watchlistByIdUri = "http://localhost:8080/cineplay/getUserWatchlists";
 
 	userWatchlist: Object = {
 		"watchlistName": null,
@@ -119,11 +121,11 @@ export class WatchlistComponent implements OnInit {
 		);
 	}
 
-	//View own watchlists
+	//View own watchlists CHANGED
 	viewWatchlists = function(event){
 		console.log("view watchlists button clicked");
 		event.preventDefault();
-		this.http.get(this.getUsersWatchlistURI).subscribe(
+		this.http.get(this.watchlistByIdUri).subscribe(
 			result => {
 				console.log("Sending to backend");
 				console.log(result);
@@ -134,7 +136,7 @@ export class WatchlistComponent implements OnInit {
 
 	}
 
-	//View movies
+	//View movies MADE BY ALEC
 	viewMovies = function(event){
 		console.log("view watchlists button clicked");
 		event.preventDefault();
@@ -147,7 +149,7 @@ export class WatchlistComponent implements OnInit {
 			}
 		)
 	}
-
+	///////////////////////////////////////////////////////////////////////
 	//Add to watchlist from Movie Search button
 	addToWatchList = function(event) {
 		event.preventDefault();
