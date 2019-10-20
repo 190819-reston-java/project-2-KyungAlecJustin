@@ -15,6 +15,9 @@ export class WatchlistComponent implements OnInit {
 
 	//ENDPOINTS
 	sessionUserUri: String = "http://localhost:8080/cineplay/getSessionUser";
+	movieUri = "http://localhost:8080/cineplay/addmovie";
+	createWatchlistURI = "http://localhost:8080/cineplay/createwatchlist";
+	userWatchlistsURI = "http://localhost:8080/cineplay/getUserWatchlists";
 
 	apiFilm: any = {
 		"Title": null,
@@ -43,10 +46,7 @@ export class WatchlistComponent implements OnInit {
 		"watchlistOwner": null
 	}
 
-	//ENDPOINTS
-	movieUri = "http://localhost:8080/cineplay/addmovie";
-	createWatchlistURI = "http://localhost:8080/cineplay/createwatchlist"
-
+	//Header Actions
 	showCreate = function(createForm, viewForm) {
 		createForm.hidden = false;
 		viewForm.hidden = true;
@@ -64,21 +64,21 @@ export class WatchlistComponent implements OnInit {
 	}
 
 	//Creates watchlist name and adds it DB
-
 	submitWatchlist = function(event, createWL) {
 		event.preventDefault();
-		if (createWL != "") {
+		//if (createWL != "") {
 			this.watchlistCreate.watchlistName = createWL;
+			console.log(createWL);
 			this.http.put(this.createWatchlistURI, this.watchlistCreate).subscribe(
 				(result => {
 					this.createdWatchlist = result;
-					console.log(this.createdWatchlist);
-
+					console.log("CREATED WATCHLIST: "+ this.createdWatchlist);
+					alert("Watchlist Created");
 				})
 			)	
-		} else {
-			alert("Name of the watchlist cannot be empty.");
-		}
+		//} else {
+		//	alert("Name of the watchlist cannot be empty.");
+		//}
 	}
 
 	//Searches and returns from API
@@ -94,6 +94,8 @@ export class WatchlistComponent implements OnInit {
 		);
 	}
 
+
+
 	//Searches and returns from API
 	submitMovie = function(event, title, movieTable, movieButton, exitButton) {
 		event.preventDefault();
@@ -106,6 +108,18 @@ export class WatchlistComponent implements OnInit {
 				this.apiFilm = result;
 			})
 		);
+	}
+
+	//View own watchlists
+	viewWatchlists = function(event){
+		console.log("view watchlists button clicked");
+		event.preventDefault();
+		this.http.get(this.userWatchlistsURI).subscribe(
+			result => {
+				console.log("Sending to backend")
+			}
+		)
+
 	}
 
 	//Add to watchlist from Movie Search button
@@ -122,6 +136,12 @@ export class WatchlistComponent implements OnInit {
 				console.log(request);
 			})
 		);
+	}
+
+
+	viewUserWatchlists = function(event) {
+		event.preventDefault();
+		this.http.get("")
 	}
 
 	exit = function(event, searchMovies) {

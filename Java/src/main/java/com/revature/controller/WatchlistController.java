@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.model.Movie;
+import com.revature.model.User;
 import com.revature.model.Watchlist;
 import com.revature.services.WatchlistService;
 import com.revature.session.UserSession;
@@ -61,13 +62,15 @@ public class WatchlistController {
 	}
 	
 	@GetMapping("/getUserWatchlists")
-	public List<Watchlist> getUserWatchlists(int userId) {
+	public List<Watchlist> getUserWatchlists(Integer userId) {
 		
-		//System.out.println("Reaching get users WL");
+		System.out.println("Reaching get users WL");
 		
 		//TESTING
-		System.out.println(this.sessionUser.getCurrentUser().getUserId());
-		userId = this.sessionUser.getCurrentUser().getUserId(); 
+		System.out.println(this.sessionUser.getCurrentUser().getUserId());		
+		userId = this.sessionUser.getCurrentUser().getUserId();
+		System.out.println("Session USER:" + userId);
+
 		
 		List<Watchlist> userWL = watchlistService.getWatchlistByUser(userId);
 		
