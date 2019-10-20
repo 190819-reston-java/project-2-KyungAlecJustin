@@ -43,7 +43,7 @@ public class Watchlist implements Serializable {
 	private String watchlistName;
 	
 	
-	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name="user_id")
 	private User watchlistOwner;
 	

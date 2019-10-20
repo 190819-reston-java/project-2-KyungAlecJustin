@@ -42,11 +42,18 @@ export class WatchlistComponent implements OnInit {
 		"watchlistName": null,
 		"watchlistOwner": null
 	}
-
+  
 	//ENDPOINTS
 	movieUri = "http://localhost:8080/cineplay/addmovie";
 	createWatchlistURI = "http://localhost:8080/cineplay/createwatchlist"
 
+
+	userWatchlist: Object = {
+		"watchlistName": null,
+		"owner": null
+	}
+
+	//Header Actions
 	showCreate = function(createForm, viewForm) {
 		createForm.hidden = false;
 		viewForm.hidden = true;
@@ -109,6 +116,21 @@ export class WatchlistComponent implements OnInit {
 				this.apiFilm = result;
 			})
 		);
+	}
+
+	//View own watchlists
+	viewWatchlists = function(event){
+		console.log("view watchlists button clicked");
+		event.preventDefault();
+		this.http.get(this.userWatchlistsURI).subscribe(
+			result => {
+				console.log("Sending to backend");
+				console.log(result);
+				this.userWatchlist = result;
+				console.log("Retrieved from backend");
+			}
+		)
+
 	}
 
 	//Add to watchlist from Movie Search button
