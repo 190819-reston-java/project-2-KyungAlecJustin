@@ -66,26 +66,30 @@ export class WatchlistComponent implements OnInit {
 	//Creates watchlist name and adds it DB
 	submitWatchlist = function(event, createWL) {
 		event.preventDefault();
-		//if (createWL != "") {
-			this.watchlistCreate.watchlistName = createWL;
-			console.log(createWL);
-			this.http.put(this.createWatchlistURI, this.watchlistCreate).subscribe(
-				(result => {
-					this.createdWatchlist = result;
-					console.log("CREATED WATCHLIST: "+ this.createdWatchlist);
-					alert("Watchlist Created");
-				})
-			)	
-		//} else {
-		//	alert("Name of the watchlist cannot be empty.");
-		//}
+
+		if (this.currentUser.getCurrentUser() !== null) {
+			if (createWL != "") {
+				this.watchlistCreate.watchlistName = createWL;
+				this.http.put(this.createWatchlistURI, this.watchlistCreate).subscribe(
+					(result => {
+						this.createdWatchlist = result;
+						console.log(this.createdWatchlist);
+
+					})
+				)
+			} else {
+				alert("Name of the watchlist cannot be empty.");
+			}
+		} else {
+			alert("Please login first to create a watchlist.");
+		}
+
 	}
 
 	//Searches and returns from API
-	moviesSearchBar = function(event, searchTitle, moviesSearchTable, exitButton) {
+	moviesSearchBar = function(event, searchTitle, moviesSearchTable) {
 		event.preventDefault();
 		moviesSearchTable.hidden = false;
-		exitButton.hidden = false;
 		let uri = this.movieApi.getUri() + searchTitle;
 		this.http.get(uri).subscribe(
 			(result => {

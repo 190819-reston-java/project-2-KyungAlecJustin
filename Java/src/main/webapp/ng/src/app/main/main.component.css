@@ -11,13 +11,6 @@ h1 {
     display: flex;
 }
 
-.movie {
-    width: 33.33%;
-    background: black;
-    transition: all 0.2s ease;
-    animation: down-bump 0.4s ease;
-}
-
 .movie:hover .movie-overview {
     visibility: visible;
 }
@@ -37,4 +30,12 @@ h1 {
     padding: 5%;
     border-radius: 15px;
     border: 2px solid rgb(255, 0, 85);
+}
+
+#watchlist-feed {
+    font-family: 'Hepta Slab', serif;
+    color: white;
+    width: 50%;
+    margin: auto;
+    text-align: center;
 }
