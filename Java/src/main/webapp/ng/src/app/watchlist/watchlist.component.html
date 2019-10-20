@@ -6,6 +6,7 @@
 
 <div id="create-view">
     <div id="create-view-tabs">
+        <h4 (click)="showSearch(createForm, viewForm, moviesSearch)">Search for a Movie</h4>
         <h4 (click)="showCreate(createForm, viewForm)">Create a Watchlist</h4>
         <form #createForm hidden>
             <p>Enter the name of your new watchlist:</p>
@@ -13,29 +14,22 @@
             <br>
             <input type="submit" (click)="submitWatchlist($event, createWL.value, searchMovies)">
         </form>
-        <h4 (click)="showSearch(createForm, viewForm, moviesSearch)">Search for a Movie</h4>
-        <h4 (click)="showView(createForm, viewForm)">View Your Watchlists</h4>
-        <form #viewForm hidden>
-            <p>Enter the name of your new watchlist:</p>
-            <input type="text" #name>
-            <!-- <p>Enter the title of the movie:</p>
-            <input type="text" #title> 
-            <br>-->
-            <!-- <input type="submit" (click)="submitCreation($event, username.value, password.value)"> -->
-        </form>
+        <h4 (click)="showView(createForm, viewForm)">View/Update Your Watchlists</h4>
+        <div #viewForm hidden></div>
     </div>
 </div>
 
 <div class="search-movies" #moviesSearch hidden>
   <form>
-      <p>Search for a movie</p>
+      <p>Search for a movie:</p>
     <input type="text" #searchTitle placeholder="Search by title">
-    <input type="submit" (click)="moviesSearchBar($event, searchTitle.value, moviesSearchTable, exitSearchButton)">
+    <input type="submit" (click)="moviesSearchBar($event, searchTitle.value, moviesSearchTable)">
   </form>
   <br><br>
   <table #moviesSearchTable hidden>
     <thead>
       <tr>
+        <th>Poster</th>
         <th>Title</th>
         <th>Director</th>
         <th>Release Date</th>
@@ -44,7 +38,8 @@
     </thead>
     <tbody>
       <tr>
-        <td>{{apiFilm.Title}}</td>
+        <td><img src={{apiFilm.Poster}} width="80"></td>
+        <td><a href="https://www.reddit.com/r/movies/search/?q={{apiFilm.Title}}&restrict_sr=1" target="_blank">{{apiFilm.Title}}</a></td>
         <td>{{apiFilm.Director}}</td>
         <td>{{apiFilm.Released}}</td>
         <td>{{apiFilm.Plot}}</td>
@@ -53,13 +48,13 @@
   </table>
   <br>
   <div class="buttons">
-    <button #exitSearchButton hidden (click)="exit($event, moviesSearch)">Exit</button>
+    <button #exitSearchButton (click)="exit($event, moviesSearch)">Exit</button>
   </div>
 </div>
 
 <div class="search-movies" #searchMovies hidden>
     <form>
-        <p>Add a movie to your watchlist</p>
+        <p>Add a movie to your watchlist:</p>
         <input type="text" #title placeholder="Search by title">
         <input type="submit" (click)="submitMovie($event, title.value, movieTable, movieButton, exitButton)">
     </form>

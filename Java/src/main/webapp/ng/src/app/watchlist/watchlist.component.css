@@ -67,7 +67,7 @@
     color: white;
     font-family: 'Hepta Slab', serif;
     background-color: rgba(0, 0, 0, 0.95);
-    padding: 10%;
+    padding: 7.5%;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
@@ -133,7 +133,11 @@
     ;
 }
 
-a {
+.search-movies a {
     color: white;
     text-decoration: none;
+}
+
+.search-movies a:hover {
+  color: rgb(255, 0, 85);
 }
