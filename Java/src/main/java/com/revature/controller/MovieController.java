@@ -32,7 +32,8 @@ public class MovieController {
 	}
 	
 	@PutMapping("/addmovie")
-	public ResponseEntity<Movie> upsert(@RequestBody Movie m){
+	public ResponseEntity<Movie> upsert(@RequestBody Movie m)
+			{
 		System.out.println("Reaching addmovie");
 		System.out.println(m);
 		System.out.println("CURRENT SESSION IN MOVIE CONTROLLER: " + this.sessionUser.getCurrentUser());
