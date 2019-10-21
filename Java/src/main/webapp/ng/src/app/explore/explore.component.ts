@@ -13,7 +13,9 @@ export class ExploreComponent implements OnInit {
 
   //ENDPOINTS
   sessionUserUri: String = "http://localhost:8080/cineplay/getSessionUser";
-
+  allWatchlistsUri = "http://localhost:8080/cineplay/watchlists";
+  moviesInWatchlistUri = "http://localhost:8080/cineplay/moviesinwatchlist";
+  
   // //JENKINS ENDPOINTS
   // sessionUserUri: String = "http://ec2-3-92-47-77.compute-1.amazonaws.com:8080/cineplay/getSessionUser";
  
@@ -39,6 +41,48 @@ export class ExploreComponent implements OnInit {
   
 
 
+  allWatchlists: Object[] = [];
+  matchingWatchlists: Object[] = [];
+  movies: Object[] = [];
+
+  findWatchlist = function(event, watchlistName, watchlists, matchedWatchlists) {
+    event.preventDefault();
+    this.matchingWatchlists = [];
+    if (watchlistName.value != "") {
+      for (let i = 0; i < this.allWatchlists.length; i++) {
+        if (this.allWatchlists[i].watchlistName === watchlistName.value) {
+          watchlists.hidden = true;
+          matchedWatchlists.hidden = false;
+          this.matchingWatchlists.push(this.allWatchlists[i]);
+        }
+      }
+      watchlistName.value = "";
+    } else {
+      alert("Name of watchlist cannot be empty.");
+    }
+  }
+
+  viewMovies = function (contentsOfWatchlist) {
+    this.movies = [];
+    contentsOfWatchlist.hidden = false;
+    for (let i = 0; i < this.matchingWatchlists.length; i++) {
+      this.http.post(this.moviesInWatchlistUri, this.matchingWatchlists[i].watchlistId).subscribe(
+        (result => {
+          for (let m in result) {
+            this.movies.push(result[m]);
+          }
+        })
+      )
+    }
+  }
+
+  exit = function (event, searchMovies, everyWatchlists, matchedWatchlists) {
+    event.preventDefault();
+    searchMovies.hidden = true;
+    everyWatchlists.hidden = false;
+    matchedWatchlists.hidden = true;
+  }
+
   ngOnInit() {
     this.http.get(`${this.sessionUserUri}`).subscribe(
       (response => {
@@ -46,22 +90,14 @@ export class ExploreComponent implements OnInit {
       })
     );
 
-    //display watchlists on feed
-    let i = 0;
-    this.http.get(`${this.allWatchlistsUri}`).subscribe(
+    this.allWatchlists = [];
+    this.http.get(this.allWatchlistsUri).subscribe(
       (result => {
         for (let w in result) {
-        if (result[w].watchlistId % Math.round((Math.random() * 5) + 1) === 0) {
-          this.allWatchlists.push(result[w].watchlistName);
-          // this.allWatchlists.push(result[w].watchlistOwner.username + " created: " +result[w].watchlistName);
-          i++;
-          if (i > 5) {
-             break;
-             }
-           }
-         }
+          this.allWatchlists.push(result[w]);
+        }
       })
-     )
+    )
   }
 
 }

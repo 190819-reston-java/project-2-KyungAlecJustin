@@ -55,7 +55,6 @@
     </div>
 </div>
 
-<!--  -->
 <div class="search-movies" #searchMovies hidden>
     <form>
         <p>Add a movie to your watchlist:</p>
@@ -88,7 +87,7 @@
     </div>
     <br>
     <div class="buttons">
-        <button #movieButton hidden (click)="addToWatchList($event)">Add to Watchlist</button>
+        <button #movieButton hidden (click)="addToWatchlist($event)">Add to Watchlist</button>
         <button #exitButton hidden (click)="exit($event, searchMovies)">Exit</button>
     </div>
 </div>
@@ -116,7 +115,7 @@
     </table>
     <br>
     <div class="buttons">
-        <button>Add to Watchlist</button>
+        <button (click)="revealSearchMovies($event, searchMovies, contentsOfWatchlist)">Add More Movies</button>
         <button #exitSearchButton (click)="exit($event, contentsOfWatchlist)">Exit</button>
     </div>
 </div>

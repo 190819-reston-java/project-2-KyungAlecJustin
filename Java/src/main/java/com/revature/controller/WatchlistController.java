@@ -85,10 +85,9 @@ public class WatchlistController {
 //		}
 //	}
 	
-	@GetMapping("/moviesinwatchlist")
+	@PostMapping("/moviesinwatchlist")
 	@ResponseBody 
 	public List<Movie> listMoviesInWatchlist(@RequestBody Integer watchlistId) {
-		
 		List<Movie> moviesInWatchlist = watchlistService.getMoviesInWatchlist(watchlistId);
 		
 		return moviesInWatchlist;

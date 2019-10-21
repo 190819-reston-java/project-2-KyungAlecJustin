@@ -17,7 +17,7 @@ export class MainComponent implements OnInit {
   month: any = String(new Date().getMonth() + 1);
   today: any = this.month + "/" + this.day;
   trailer: Object;
-  allWatchlists: String[] =[];
+  // allWatchlists: String[] = [];
 
   //ENDPOINTS
   sessionUserUri: String = "http://localhost:8080/cineplay/getSessionUser";
@@ -41,5 +41,4 @@ export class MainComponent implements OnInit {
       this.featureFilm = result;
     }));
   }
-
 }

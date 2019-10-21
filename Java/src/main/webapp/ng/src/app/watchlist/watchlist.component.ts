@@ -11,35 +11,14 @@ import { SessionUserService } from '../session-user.service';
 })
 export class WatchlistComponent implements OnInit {
 
-	constructor(private movieApi: MovieApiService, private http: HttpClient, private router: Router, private currentUser: SessionUserService) {}
+	constructor(private movieApi: MovieApiService, private http: HttpClient, private router: Router, private currentUser: SessionUserService) { }
 
 	//ENDPOINTS
 	sessionUserUri: String = "http://localhost:8080/cineplay/getSessionUser";
 	movieUri = "http://localhost:8080/cineplay/addmovie";
 	createWatchlistURI = "http://localhost:8080/cineplay/createwatchlist";
 	watchlistsByIdUri = "http://localhost:8080/cineplay/getUserWatchlists";
-
-	moviesInWatchlistURI = "http://localhost:8080/cineplay/moviesinwatchlist";
-  //Duplicate?
- // moviesInWatchlistUri = "http://localhost:8080/cineplay/moviesinwatchlist";
-
-	watchlistByIdUri = "http://localhost:8080/cineplay/getUserWatchlists";
-
-	//NEW URI TO ADD MOVIE TO WATCHLIST --ALEC
-	movieToWatchlistUri = "http://localhost:8080/cineplay/addmovietowatchlist";
-
-	// //JENKINS BUILD ENDPOINTS
-	// sessionUserUri: String = "http://ec2-3-92-47-77.compute-1.amazonaws.com:8080/cineplay/getSessionUser";
-	// movieUri = "http://ec2-3-92-47-77.compute-1.amazonaws.com:8080/cineplay/addmovie";
-	// createWatchlistURI = "http://ec2-3-92-47-77.compute-1.amazonaws.com:8080/cineplay/createwatchlist";
-	// watchlistsByIdUri = "http://ec2-3-92-47-77.compute-1.amazonaws.com:8080/cineplay/getUserWatchlists";
-	// moviesInWatchlistURI = "http://ec2-3-92-47-77.compute-1.amazonaws.com:8080/cineplay/moviesinwatchlist";
-	// watchlistByIdUri = "http://ec2-3-92-47-77.compute-1.amazonaws.com:8080/cineplay/getUserWatchlists";
-
-	// //NEW URI TO ADD MOVIE TO WATCHLIST --ALEC
-	// movieToWatchlistUri = "http://ec2-3-92-47-77.compute-1.amazonaws.com:8080/cineplay/addmovietowatchlist";
-
-
+	moviesInWatchlistUri = "http://localhost:8080/cineplay/moviesinwatchlist";
 
 	apiFilm: any = {
 		"Title": null,
@@ -70,16 +49,16 @@ export class WatchlistComponent implements OnInit {
 
 
 	userWatchlists: Object[] = [];
-	userWatchlistsDisplay: String[] = [];
+	userWatchlistsDisplay: String[] =[];
 	movies: Object[] = [];
 
 	//Header Actions
-	showCreate = function(createForm, viewLists) {
+	showCreate = function (createForm, viewLists) {
 		createForm.hidden = false;
 		viewLists.hidden = true;
 	}
 
-	showSearch = function(createForm, viewLists, moviesSearch) {
+	showSearch = function (createForm, viewLists, moviesSearch) {
 		createForm.hidden = true;
 		viewLists.hidden = true;
 		moviesSearch.hidden = false;
@@ -88,6 +67,8 @@ export class WatchlistComponent implements OnInit {
 	showView = function (createForm, viewLists) {
 		createForm.hidden = true;
 		viewLists.hidden = false;
+		this.userWatchlists = [];
+		this.userWatchlistsDisplay = [];
 		if (this.currentUser.getCurrentUser() !== null) {
 			this.http.get(this.watchlistsByIdUri).subscribe(
 				result => {
@@ -103,7 +84,7 @@ export class WatchlistComponent implements OnInit {
 	}
 
 	//Creates watchlist name and adds it DB
-	submitWatchlist = function(event, createWL) {
+	submitWatchlist = function (event, createWL) {
 		event.preventDefault();
 		if (this.currentUser.getCurrentUser() !== null) {
 			if (createWL != "") {
@@ -122,7 +103,7 @@ export class WatchlistComponent implements OnInit {
 	}
 
 	//Searches and returns from API
-	moviesSearchBar = function(event, searchTitle, moviesSearchTable) {
+	moviesSearchBar = function (event, searchTitle, moviesSearchTable) {
 		event.preventDefault();
 		moviesSearchTable.hidden = false;
 		let uri = this.movieApi.getUri() + searchTitle;
@@ -134,7 +115,7 @@ export class WatchlistComponent implements OnInit {
 	}
 
 	//Searches and returns from API
-	submitMovie = function(event, title, movieTable, movieButton, exitButton) {
+	submitMovie = function (event, title, movieTable, movieButton, exitButton) {
 		event.preventDefault();
 		movieTable.hidden = false;
 		movieButton.hidden = false;
@@ -162,34 +143,33 @@ export class WatchlistComponent implements OnInit {
 				)
 			}
 		}
-		console.log(this.movies);
 	}
-	
-	//Add to watchlist from Movie Search button
-	addToWatchList = function(event) {
 
-		//Will remove later
-		console.log("add to watchlist pressed")
+	//Add to watchlist from Movie Search button
+	revealSearchMovies = function (event, searchMovies, contentsOfWatchlist) {
+		event.preventDefault();
+		searchMovies.hidden = false;
+		contentsOfWatchlist.hidden = true;
+	}
+
+	addToWatchlist = function(event) {
 		event.preventDefault();
 		this.newFilm.title = this.apiFilm.Title;
 		this.newFilm.director = this.apiFilm.Director;
 		this.newFilm.released = this.apiFilm.Released;
 		this.newFilm.plot = this.apiFilm.Plot;
 		this.newFilm.poster = this.apiFilm.Poster;
-
-		//this.createdWatchlist 
-
 		console.log(this.newFilm);
-		this.http.put(this.movieUri, this.newFilm).subscribe(
-			(request => {
+		// this.http.put(this.movieUri, this.newFilm).subscribe(
+		// 	(request => {
 
-				this.newFilm = request;
-				console.log(this.newFilm);
-			})
-		);
+		// 		this.newFilm = request;
+		// 		console.log(this.newFilm);
+		// 	})
+		// );
 	}
 
-	exit = function(event, searchMovies) {
+	exit = function (event, searchMovies) {
 		event.preventDefault();
 		searchMovies.hidden = true;
 	}

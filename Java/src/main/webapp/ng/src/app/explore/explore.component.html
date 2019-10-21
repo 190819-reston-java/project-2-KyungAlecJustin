@@ -6,17 +6,43 @@
 
 <h1>Search for Watchlists Within the Community</h1>
 <form>
-    <input type="text" placeholder="Enter the name of the watchlist" #watchlistSearch>
-    <input type="submit" (click)="searchForWatchlist($event, watchlistSearch.value)">
-
+    <input type="text" #watchlistName placeholder="Enter the name of the watchlist">
+    <input type="submit" (click)="findWatchlist($event, watchlistName, everyWatchlists, matchedWatchlists)">
 </form>
 <br><br>
-
-
-<div id="feed">
-    <h1>See What Watchlists People Are Creating</h1>
-    <div id="watchlist-feed">
-        <!-- like an insta-feed, get a poster of a movie in watchlist and display it above title -->
-        <p *ngFor="let watchlist of allWatchlists">{{watchlist}}</p>
+<div id="watchlists">
+    <div class="watchlist-tabs" #everyWatchlists>
+        <p *ngFor="let watchlist of allWatchlists">{{watchlist.watchlistName}}
+        </p>
     </div>
+    <div id="matched" class="watchlist-tabs" #matchedWatchlists hidden>
+        <p *ngFor="let watchlist of matchingWatchlists" (click)="viewMovies(contentsOfWatchlist)">{{watchlist.watchlistName}}</p>
+    </div>
+</div>
+<div id="contents-of-watchlist" #contentsOfWatchlist hidden>
+  <table>
+    <thead>
+      <tr>
+        <th>Poster</th>
+        <th>Title</th>
+        <th>Director</th>
+        <th>Release Date</th>
+        <th>Plot</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let movie of movies">
+        <td><img src={{movie.poster}} width="80"></td>
+        <td><a href="https://www.reddit.com/r/movies/search/?q={{movie.title}}&restrict_sr=1"
+            target="_blank">{{movie.title}}</a></td>
+        <td>{{movie.director}}</td>
+        <td>{{movie.released}}</td>
+        <td>{{movie.plot}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <div class="buttons">
+    <button #exitSearchButton (click)="exit($event, contentsOfWatchlist, everyWatchlists, matchedWatchlists)">Exit</button>
+  </div>
 </div>
