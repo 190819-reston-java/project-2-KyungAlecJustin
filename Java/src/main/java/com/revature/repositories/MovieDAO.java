@@ -49,6 +49,22 @@ public class MovieDAO implements IMovieDAO {
 		
 		return newMovie;
 	}
+	
+	@Override
+	@Transactional
+	public Movie addMovieToDatabase(Movie newMovie) {
+		//Session s = sf.getCurrentSession();
+		Session os = sf.openSession();
+
+		os.beginTransaction();
+		
+		System.out.println(newMovie);
+		os.save(newMovie);
+		os.getTransaction().commit();
+		os.close();
+		
+		return newMovie;
+	}
 
 
 

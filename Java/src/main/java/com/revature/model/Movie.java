@@ -21,7 +21,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Proxy;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "movies")
@@ -53,6 +56,8 @@ public class Movie implements Serializable {
 	
 	//fetch = FetchType.LAZY
 	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@JsonIgnore
+	@NonNull
 	@JoinColumn(name="watchlist_id")
 	private Watchlist watchlist;
 	

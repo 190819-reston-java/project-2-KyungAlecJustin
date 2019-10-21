@@ -10,4 +10,6 @@ public interface IMovieDAO {
 			
 	public Movie addMovie(Movie m);
 
+	Movie addMovieToDatabase(Movie newMovie);
+
 }

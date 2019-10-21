@@ -2,8 +2,10 @@ package com.revature.repositories;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
@@ -24,12 +26,12 @@ public class ForumDAO implements IForumDAO {
 		//Session s = sf.getCurrentSession();
 
 		Session os = sf.openSession();
-		os.beginTransaction();
+		//os.beginTransaction();
 				
 		@SuppressWarnings("unchecked")
-		List<Forum> forums = os.createCriteria(Forum.class).list();	
+		List<Forum> forums = os.createCriteria(Forum.class).addOrder(Order.asc("forumId")).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();	
 				
-		os.getTransaction().commit();
+		//os.getTransaction().commit();
 		os.close();
 		
 		return forums;

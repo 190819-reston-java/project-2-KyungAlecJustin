@@ -16,6 +16,10 @@ export class NavbarComponent implements OnInit {
   logoutUri = "http://localhost:8080/cineplay/logout"
   sessionUserUri: String = "http://localhost:8080/cineplay/getSessionUser";
 
+  // //JENKINS ENDPOINTS
+  // logoutUri = "http://ec2-3-92-47-77.compute-1.amazonaws.com:8080/cineplay/logout"
+  // sessionUserUri: String = "http://ec2-3-92-47-77.compute-1.amazonaws.com:8080/cineplay/getSessionUser";
+
   logout = function(event) {
     event.preventDefault();
     this.http.get(this.logoutUri).subscribe();

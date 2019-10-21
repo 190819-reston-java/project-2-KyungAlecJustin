@@ -15,6 +15,10 @@ export class LoginSignupComponent implements OnInit {
 	loginUri = "http://localhost:8080/cineplay/login";
 	signupUri = "http://localhost:8080/cineplay/signup";
 
+	// //JENKINS ENDPOINTS
+	// loginUri = "http://ec2-3-92-47-77.compute-1.amazonaws.com:8080/cineplay/login";
+	// signupUri = "http://ec2-3-92-47-77.compute-1.amazonaws.com:8080/cineplay/signup";
+
 	userCreds: Object = {
 		"username": null,
 		"usrpwd": null,

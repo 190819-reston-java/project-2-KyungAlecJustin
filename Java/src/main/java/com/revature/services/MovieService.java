@@ -25,5 +25,10 @@ public class MovieService {
 		return m;
 	}
 	
+	public Movie addMovieToWatchlist(Movie newMovie) {
+		movieDao.addMovieToDatabase(newMovie);
+		return newMovie;
+	}
+	
 
 }
