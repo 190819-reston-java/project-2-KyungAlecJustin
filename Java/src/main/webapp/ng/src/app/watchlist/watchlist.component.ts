@@ -192,7 +192,9 @@ export class WatchlistComponent implements OnInit {
 		console.log(this.newFilm);
 		this.http.put(this.movieUri, this.newFilm).subscribe(
 			(request => {
-				console.log(request);
+
+				this.newFilm = request;
+				console.log(this.newFilm);
 			})
 		);
 	}
