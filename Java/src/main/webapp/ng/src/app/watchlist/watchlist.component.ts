@@ -91,6 +91,7 @@ export class WatchlistComponent implements OnInit {
 				this.watchlistCreate.watchlistName = createWL;
 				this.http.put(this.createWatchlistURI, this.watchlistCreate).subscribe(
 					(result => {
+						alert("Watchlist Created!")
 						this.createdWatchlist = result;
 					})
 				)
@@ -130,6 +131,7 @@ export class WatchlistComponent implements OnInit {
 
 	//View movies inside watchlist
 	viewMovies = function (certainWatchlist, contentsOfWatchlist) {
+		console.log("View movies clicked");
 		contentsOfWatchlist.hidden = false;
 		this.movies = [];
 		for (let i = 0; i < this.userWatchlists.length; i++) {
@@ -147,12 +149,14 @@ export class WatchlistComponent implements OnInit {
 
 	//Add to watchlist from Movie Search button
 	revealSearchMovies = function (event, searchMovies, contentsOfWatchlist) {
+		console.log("Reveal Search Movies pressed")
 		event.preventDefault();
 		searchMovies.hidden = false;
 		contentsOfWatchlist.hidden = true;
 	}
 
 	addToWatchlist = function(event) {
+
 		event.preventDefault();
 		this.newFilm.title = this.apiFilm.Title;
 		this.newFilm.director = this.apiFilm.Director;
@@ -160,14 +164,18 @@ export class WatchlistComponent implements OnInit {
 		this.newFilm.plot = this.apiFilm.Plot;
 		this.newFilm.poster = this.apiFilm.Poster;
 		console.log(this.newFilm);
-		// this.http.put(this.movieUri, this.newFilm).subscribe(
-		// 	(request => {
-
-		// 		this.newFilm = request;
-		// 		console.log(this.newFilm);
-		// 	})
-		// );
+		for (let i=0; i < this.userWatchlists[i].watchlistId, i++) {
+			this.createdWatchlist.watchlistId = this.userWatchlists[i].watchlistId;
+			this.http.put(this.movieUri, this.newFilm, this.createdWatchlist).subscribe(
+				(request => {
+					console.log(request);
+					this.newFilm = request;
+				})
+			)
+		}
 	}
+
+
 
 	exit = function (event, searchMovies) {
 		event.preventDefault();

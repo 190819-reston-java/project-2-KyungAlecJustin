@@ -20,9 +20,9 @@ public class MovieService {
 		
 	}
 	
-	public Movie addMovie(Movie m) {
-		movieDao.addMovie(m);
-		return m;
+	public Movie addMovie(Movie newMovie) {
+		movieDao.addMovie(newMovie);
+		return newMovie;
 	}
 	
 	public Movie addMovieToWatchlist(Movie newMovie) {
