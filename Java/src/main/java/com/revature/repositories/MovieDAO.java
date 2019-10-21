@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.model.Movie;
+import com.revature.model.Watchlist;
 
 @Repository
 public class MovieDAO implements IMovieDAO {
@@ -41,6 +42,10 @@ public class MovieDAO implements IMovieDAO {
 		Session os = sf.openSession();
 
 		os.beginTransaction();
+		
+		//possible use?
+//		Watchlist watchlistId = (Watchlist) os.get(Watchlist.class, newMovie.getWatchlist().getWatchlistId());
+//		newMovie.setWatchlist(watchlistId);
 		
 		System.out.println(newMovie);
 		os.save(newMovie);
