@@ -45,6 +45,20 @@ public class MovieController {
 		return ResponseEntity.ok(response);
 	}
 	
+//	@PutMapping("/addmovietowatchlist")
+//	public ResponseEntity<Movie> upsertToWatchlist(@RequestBody Movie m){
+//		System.out.println("Reaching addmovie to watchlist");
+//		System.out.println(m);
+//		System.out.println("CURRENT SESSION IN MOVIE CONTROLLER: " + this.sessionUser.getCurrentUser().getUserId());
+//		
+//		Movie response = movieService.addMovie(m);
+//		System.out.println(response);
+//		
+//		ResponseEntity.ok().body(null);
+//		
+//		return ResponseEntity.ok(response);
+//	}
+//	
 	
 
 }

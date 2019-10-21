@@ -18,6 +18,23 @@ export class WatchlistComponent implements OnInit {
 	movieUri = "http://localhost:8080/cineplay/addmovie";
 	createWatchlistURI = "http://localhost:8080/cineplay/createwatchlist";
 	watchlistsByIdUri = "http://localhost:8080/cineplay/getUserWatchlists";
+	moviesInWatchlistURI = "http://localhost:8080/cineplay/moviesinwatchlist";
+	watchlistByIdUri = "http://localhost:8080/cineplay/getUserWatchlists";
+
+	//NEW URI TO ADD MOVIE TO WATCHLIST --ALEC
+	movieToWatchlistUri = "http://localhost:8080/cineplay/addmovietowatchlist";
+
+	// //JENKINS BUILD ENDPOINTS
+	// sessionUserUri: String = "http://ec2-3-92-47-77.compute-1.amazonaws.com:8080/cineplay/getSessionUser";
+	// movieUri = "http://ec2-3-92-47-77.compute-1.amazonaws.com:8080/cineplay/addmovie";
+	// createWatchlistURI = "http://ec2-3-92-47-77.compute-1.amazonaws.com:8080/cineplay/createwatchlist";
+	// watchlistsByIdUri = "http://ec2-3-92-47-77.compute-1.amazonaws.com:8080/cineplay/getUserWatchlists";
+	// moviesInWatchlistURI = "http://ec2-3-92-47-77.compute-1.amazonaws.com:8080/cineplay/moviesinwatchlist";
+	// watchlistByIdUri = "http://ec2-3-92-47-77.compute-1.amazonaws.com:8080/cineplay/getUserWatchlists";
+
+	// //NEW URI TO ADD MOVIE TO WATCHLIST --ALEC
+	// movieToWatchlistUri = "http://ec2-3-92-47-77.compute-1.amazonaws.com:8080/cineplay/addmovietowatchlist";
+
 
 	apiFilm: any = {
 		"Title": null,
@@ -45,15 +62,6 @@ export class WatchlistComponent implements OnInit {
 		"watchlistName": null,
 		"watchlistOwner": null
 	}
-
-  
-	//ENDPOINTS
-	movieUri = "http://localhost:8080/cineplay/addmovie";
-	createWatchlistURI = "http://localhost:8080/cineplay/createwatchlist";
-	
-	///ALEC MADE ENPOINTS
-	moviesInWatchlistURI = "http://localhost:8080/cineplay/moviesinwatchlist";
-	watchlistByIdUri = "http://localhost:8080/cineplay/getUserWatchlists";
 
 
 	userWatchlists: Object[] = [];
@@ -169,14 +177,20 @@ export class WatchlistComponent implements OnInit {
 	///////////////////////////////////////////////////////////////////////
 	//Add to watchlist from Movie Search button
 	addToWatchList = function(event) {
+
+		//Will remove later
+		console.log("add to watchlist pressed")
 		event.preventDefault();
 		this.newFilm.title = this.apiFilm.Title;
 		this.newFilm.director = this.apiFilm.Director;
 		this.newFilm.released = this.apiFilm.Released;
 		this.newFilm.plot = this.apiFilm.Plot;
 		this.newFilm.poster = this.apiFilm.Poster;
+
+		//CHANGED THIS CODE (HARDCODED)
+		this.newFilm.watchlist = 1;
 		console.log(this.newFilm);
-		this.http.put(this.movieURI, this.newFilm).subscribe(
+		this.http.put(this.movieUri, this.newFilm).subscribe(
 			(request => {
 				console.log(request);
 			})

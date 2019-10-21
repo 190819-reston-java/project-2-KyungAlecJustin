@@ -16,6 +16,11 @@ export class ChatroomComponent implements OnInit, AfterViewChecked {
   forumUri = "http://localhost:8080/cineplay/createforum";
   sessionUserUri: String = "http://localhost:8080/cineplay/getSessionUser";
 
+    // //JENKINS ENDPOINTS
+    // allForumsUri = "http://ec2-3-92-47-77.compute-1.amazonaws.com:8080/cineplay/forums";
+    // forumUri = "http://ec2-3-92-47-77.compute-1.amazonaws.com:8080/cineplay/createforum";
+    // sessionUserUri: String = "http://ec2-3-92-47-77.compute-1.amazonaws.com:8080/cineplay/getSessionUser";
+
   newMessage: Object = {
     "message": null,
     "writerId": null

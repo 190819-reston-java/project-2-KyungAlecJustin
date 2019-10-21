@@ -36,7 +36,7 @@ public class WatchlistDAO implements IWatchlistDAO {
 		os.beginTransaction();
 		
 		@SuppressWarnings("unchecked")
-		List<Watchlist> watchlists = os.createCriteria(Watchlist.class).list();
+		List<Watchlist> watchlists = os.createCriteria(Watchlist.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		
 		System.out.println(os.isOpen());
 		os.getTransaction().commit();
@@ -57,7 +57,7 @@ public class WatchlistDAO implements IWatchlistDAO {
 		System.out.println(os);
 		
 		@SuppressWarnings("unchecked")
-		List<Watchlist> watchlists = os.createCriteria(Watchlist.class).list();
+		List<Watchlist> watchlists = os.createCriteria(Watchlist.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 		
 		for(Watchlist w : watchlists) {
 			if (w.getWatchlistName().equals(watchlistName)) {
@@ -112,7 +112,7 @@ public class WatchlistDAO implements IWatchlistDAO {
 		System.out.println(s.isOpen());
 		System.out.println(ownerId);
 		
-		return (List<Watchlist>) s.createCriteria(Watchlist.class).add(Restrictions.eq("watchlistOwner.userId", ownerId)).list();
+		return (List<Watchlist>) s.createCriteria(Watchlist.class).add(Restrictions.eq("watchlistOwner.userId", ownerId)).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -123,7 +123,7 @@ public class WatchlistDAO implements IWatchlistDAO {
 		System.out.println(s.isOpen());
 		System.out.println(watchlistId);
 		
-		return (List<Movie>) s.createCriteria(Movie.class).add(Restrictions.eq("watchlist.watchlistId", watchlistId)).list();
+		return (List<Movie>) s.createCriteria(Movie.class).add(Restrictions.eq("watchlist.watchlistId", watchlistId)).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 	}
 
 }
