@@ -16,6 +16,7 @@ export class WatchlistComponent implements OnInit {
 	//ENDPOINTS
 	sessionUserUri: String = "http://localhost:8080/cineplay/getSessionUser";
 	movieUri = "http://localhost:8080/cineplay/addmovie";
+	watchlistUri = "http://localhost:8080/cineplay/addmoviewatchlist";
 	createWatchlistURI = "http://localhost:8080/cineplay/createwatchlist";
 	watchlistsByIdUri = "http://localhost:8080/cineplay/getUserWatchlists";
 	moviesInWatchlistUri = "http://localhost:8080/cineplay/moviesinwatchlist";
@@ -41,16 +42,17 @@ export class WatchlistComponent implements OnInit {
 		"watchlistOwner": null
 	};
 
-	createdWatchlist: Object = {
-		"watchlistId": null,
-		"watchlistName": null,
-		"watchlistOwner": null
-	}
+	// createdWatchlist: Object = {
+	// 	"watchlistId": null,
+	// 	"watchlistName": null,
+	// 	"watchlistOwner": null
+	// }
 
 
 	userWatchlists: Object[] = [];
 	userWatchlistsDisplay: String[] =[];
 	movies: Object[] = [];
+	currentWatchlistId = Object;
 
 	//Header Actions
 	showCreate = function (createForm, viewLists) {
@@ -78,8 +80,6 @@ export class WatchlistComponent implements OnInit {
 					}
 				}
 			)
-		} else {
-			this.userWatchlistsDisplay.push("Login to see your watchlists.");
 		}
 	}
 
@@ -87,14 +87,16 @@ export class WatchlistComponent implements OnInit {
 	submitWatchlist = function (event, createWL) {
 		event.preventDefault();
 		if (this.currentUser.getCurrentUser() !== null) {
-			if (createWL != "") {
-				this.watchlistCreate.watchlistName = createWL;
+			if (createWL.value != "") {
+				this.watchlistCreate.watchlistName = createWL.value;
 				this.http.put(this.createWatchlistURI, this.watchlistCreate).subscribe(
 					(result => {
 						alert("Watchlist Created!")
 						this.createdWatchlist = result;
+						alert("New watchlist created.");
 					})
 				)
+				createWL.value = "";
 			} else {
 				alert("Name of the watchlist cannot be empty.");
 			}
@@ -136,6 +138,7 @@ export class WatchlistComponent implements OnInit {
 		this.movies = [];
 		for (let i = 0; i < this.userWatchlists.length; i++) {
 			if (this.userWatchlists[i].watchlistName === certainWatchlist.innerText) {
+				this.currentWatchlistId = this.userWatchlists[i];
 				this.http.post(this.moviesInWatchlistUri, this.userWatchlists[i].watchlistId).subscribe(
 					(result => {
 						for (let m in result) {
@@ -155,23 +158,33 @@ export class WatchlistComponent implements OnInit {
 		contentsOfWatchlist.hidden = true;
 	}
 
-	addToWatchlist = function(event) {
 
-		event.preventDefault();
-		this.newFilm.title = this.apiFilm.Title;
-		this.newFilm.director = this.apiFilm.Director;
-		this.newFilm.released = this.apiFilm.Released;
-		this.newFilm.plot = this.apiFilm.Plot;
-		this.newFilm.poster = this.apiFilm.Poster;
-		console.log(this.newFilm);
-		for (let i=0; i < this.userWatchlists[i].watchlistId, i++) {
-			this.createdWatchlist.watchlistId = this.userWatchlists[i].watchlistId;
-			this.http.put(this.movieUri, this.newFilm, this.createdWatchlist).subscribe(
-				(request => {
-					console.log(request);
-					this.newFilm = request;
-				})
-			)
+	addToWatchlist = function (event) {
+		if (this.currentUser.getCurrentUser() !== null) {
+			event.preventDefault();
+			this.newFilm.title = this.apiFilm.Title;
+			this.newFilm.director = this.apiFilm.Director;
+			this.newFilm.released = this.apiFilm.Released;
+			this.newFilm.plot = this.apiFilm.Plot;
+			this.newFilm.poster = this.apiFilm.Poster;
+			for (let i = 0; i < this.userWatchlists.length; i++) {
+				if (this.currentWatchlistId.watchlistId === this.userWatchlists[i].watchlistId) {
+					this.http.put(this.movieUri, this.newFilm).subscribe(
+						console.log("Success?")
+					)
+					this.http.put(this.watchlistUri, this.currentWatchlistId).subscribe(
+						console.log("Work pls")
+					)
+				}
+			}
+		// this.http.put(this.movieUri, this.newFilm).subscribe(
+		// 	(request => {
+
+		// 		this.newFilm = request;
+		// 		console.log(this.newFilm);
+		// 	})
+		// );
+
 		}
 	}
 
