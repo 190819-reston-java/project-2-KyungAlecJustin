@@ -3,12 +3,14 @@ package com.revature.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.model.Movie;
@@ -36,14 +38,19 @@ public class MovieController {
 	}
 	
 	@PutMapping("/addmovie")
-	public ResponseEntity<Movie> upsert(@RequestBody Movie m, Integer watchlistId)
+	public ResponseEntity<Movie> upsert(@RequestBody Movie m, Watchlist w)
 			{
 		System.out.println("Reaching addmovie");
 		System.out.println(m);
 		System.out.println("CURRENT SESSION IN MOVIE CONTROLLER: " + this.sessionUser.getCurrentUser());
 		
+		System.out.println(w);
+		
 		Movie response = movieService.addMovie(m);
-		//movie.setWatchlist(w);
+		
+		movie.setWatchlist(w);
+		
+		System.out.println(w);
 	
 		
 		System.out.println(response);
@@ -53,6 +60,13 @@ public class MovieController {
 		return ResponseEntity.ok(response);
 	}
 	
+	@PutMapping
+	@ResponseBody
+	public ResponseEntity<Movie> addMovie(Movie newMovie){
+		movieService.addMovie(newMovie);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(newMovie);
+	}
 //	@PutMapping("/addmovietowatchlist")
 //	public ResponseEntity<Movie> upsertToWatchlist(@RequestBody Movie m){
 //		System.out.println("Reaching addmovie to watchlist");
