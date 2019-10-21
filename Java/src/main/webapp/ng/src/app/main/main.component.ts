@@ -17,12 +17,12 @@ export class MainComponent implements OnInit {
   month: any = String(new Date().getMonth() + 1);
   today: any = this.month + "/" + this.day;
   trailer: Object;
-  allWatchlists: String[] =[];
+  // allWatchlists: String[] = [];
 
   //ENDPOINTS
   sessionUserUri: String = "http://localhost:8080/cineplay/getSessionUser";
   popularURI: String = "https://api.themoviedb.org/3/movie/now_playing?api_key=69464c49beeffbf72f4680011dafb90d&language=en-US&page=1";
-  allWatchlistsUri = "http://localhost:8080/cineplay/watchlists";
+  // allWatchlistsUri = "http://localhost:8080/cineplay/watchlists";
 
   // //JENKINS ENDPOINTS
   // sessionUserUri: String = "http://ec2-3-92-47-77.compute-1.amazonaws.com:8080/cineplay/getSessionUser";
@@ -43,21 +43,20 @@ export class MainComponent implements OnInit {
     }));
 
     //display watchlists on feed
-    let i = 0;
-    this.http.get(`${this.allWatchlistsUri}`).subscribe(
-      (result => {
-        for (let w in result) {
-          if (result[w].watchlistId % Math.round((Math.random() * 5) + 1) === 0) {
-            this.allWatchlists.push(result[w].watchlistName);
-            // this.allWatchlists.push(result[w].watchlistOwner.username + " created: " +result[w].watchlistName);
-            i++;
-            if (i > 5) {
-              break;
-            }
-          }
-        }
-      })
-    )
+    // let i = 0;
+    // this.allWatchlists = [];
+    // this.http.get(`${this.allWatchlistsUri}`).subscribe(
+    //   (result => {
+    //     for (let w in result) {
+    //       if (result[w].watchlistId % Math.round((Math.random() * 5) + 1) === 0) {
+    //         this.allWatchlists.push(result[w].watchlistOwner.username + " created: " + result[w].watchlistName);
+    //         i++;
+    //         if (i > 10) {
+    //           break;
+    //         }
+    //       }
+    //     }
+    //   })
+    // )
   }
-
 }

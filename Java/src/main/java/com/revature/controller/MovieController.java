@@ -32,7 +32,7 @@ public class MovieController {
 	}
 	
 	@PutMapping("/addmovie")
-	public ResponseEntity<Movie> upsert(@RequestBody Movie m)
+	public ResponseEntity<Movie> upsert(@RequestBody Movie m, Integer watchlistId)
 			{
 		System.out.println("Reaching addmovie");
 		System.out.println(m);

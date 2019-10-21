@@ -29,14 +29,18 @@ input[type=submit] {
 #watchlists {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     text-align: center;
-    width: 100%;
     font-family: 'Hepta Slab', serif;
+    width: 800px;
+    border: solid rgb(255, 0, 85) 3px;
+    height: 500px;
+    margin: auto;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
-#watchlists-tabs {
+.watchlists-tabs {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -45,46 +49,86 @@ input[type=submit] {
     width: 100%;
 }
 
-#watchlist-tabs h4 {
+.watchlist-tabs p {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
     color: white;
     margin-top: 2%;
+    font-size: 1.5em;
 }
 
-#watchlist-tabs h4:hover {
+#matched p:hover {
     color: rgb(255, 0, 85);
 }
 
-.watchlist-titles h5 {
-    margin-left: auto;
-    margin-right: auto;
-    width: 25%;
-    color: white;
-    margin-top: 2%;
-    font-size: 0.75em;
+#contents-of-watchlist {
+  position: absolute;
+  left: 12.5%;
+  top: 22%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  font-family: 'Hepta Slab', serif;
+  background-color: rgba(0, 0, 0, 0.95);
+  padding: 7.5%;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 75%;
+  border: 3px solid rgb(255, 0, 85);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 550px;
 }
 
-.watchlist-titles h5:hover {
-    color: rgb(255, 0, 85);
+#contents-of-watchlist table {
+  text-align: center;
+  margin: auto;
+  border-collapse: collapse;
+  color: white;
+  font-size: 0.85em;
+  width: 100%;
 }
 
-table {
-    text-align: center;
-    margin: auto;
-    border-collapse: collapse;
-    color: white;
-    font-size: 0.5em;
-    width: 50%;
+#contents-of-watchlist th {
+  padding: 5px 20px;
+  border: 2px solid rgb(255, 0, 85);
 }
 
-th {
-    padding: 5px 20px;
-    border: 2px solid rgb(255, 0, 85);
+
+#contents-of-watchlist td {
+  padding: 5px 20px;
+  border: 2px solid rgb(255, 0, 85);
 }
 
-td {
-    padding: 5px 20px;
-    border: 2px solid rgb(255, 0, 85);
+#contents-of-watchlist .buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#contents-of-watchlist button {
+  background-color: rgb(255, 0, 85);
+  border-color: rgb(255, 0, 85);
+  color: white;
+  font-size: 0.75em;
+  padding: 0% 5%;
+  border-radius: 10px;
+  ;
+}
+
+#contents-of-watchlist a {
+  color: white;
+  text-decoration: none;
+}
+
+#contents-of-watchlist a:hover {
+  color: rgb(255, 0, 85);
 }
