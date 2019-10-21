@@ -170,7 +170,8 @@ export class WatchlistComponent implements OnInit {
 			for (let i = 0; i < this.userWatchlists.length; i++) {
 				if (this.currentWatchlistId.watchlistId === this.userWatchlists[i].watchlistId) {
 					this.http.put(this.movieUri, this.newFilm).subscribe(
-						console.log("Success?")
+						alert("Added to watchlist")
+						// console.log("Success?")
 					)
 					this.http.put(this.watchlistUri, this.currentWatchlistId).subscribe(
 						console.log("Work pls")

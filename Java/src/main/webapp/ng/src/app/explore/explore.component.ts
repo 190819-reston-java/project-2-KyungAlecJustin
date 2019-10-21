@@ -65,6 +65,7 @@ export class ExploreComponent implements OnInit {
     for (let i = 0; i < this.matchingWatchlists.length; i++) {
       this.http.post(this.moviesInWatchlistUri, this.matchingWatchlists[i].watchlistId).subscribe(
         (result => {
+          console.log(result);
           for (let m in result) {
             this.movies.push(result[m]);
           }
