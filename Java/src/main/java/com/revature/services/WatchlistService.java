@@ -26,7 +26,9 @@ public class WatchlistService {
 	}
 	
 	public List<Movie> getWatchlistByName(String watchlistName) {
+		System.out.println("==WatchlistService: reaching method");
 		List<Movie> movies = watchlistDao.findWatchlist(watchlistName);
+		System.out.println("==WatchlistService: after list of movies " + movies);
 		return movies;
 	}
 	
