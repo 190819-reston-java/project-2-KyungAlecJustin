@@ -6,16 +6,20 @@
 
 <div id="create-view">
     <div id="create-view-tabs">
-        <h4 (click)="showSearch(createForm, viewForm, moviesSearch)">Search for a Movie</h4>
-        <h4 (click)="showCreate(createForm, viewForm)">Create a Watchlist</h4>
+        <h4 (click)="showSearch(createForm, viewLists, moviesSearch)">Search for a Movie</h4>
+        <h4 (click)="showCreate(createForm, viewLists)">Create a Watchlist</h4>
         <form #createForm hidden>
             <p>Enter the name of your new watchlist:</p>
             <input type="text" #createWL>
             <br>
             <input type="submit" (click)="submitWatchlist($event, createWL.value)">
         </form>
-        <h4 (click)="showView(createForm, viewForm)">View/Update Your Watchlists</h4>
-        <div #viewForm hidden></div>
+        <h4 (click)="showView(createForm, viewLists)">View/Update Your Watchlists</h4>
+        <br>
+        <div id="view-list" #viewLists hidden>
+          <p *ngFor="let watchlist of userWatchlistsDisplay" (click)="viewMovies(certainWatchlist, contentsOfWatchlist)"
+            #certainWatchlist>{{watchlist}}</p>
+        </div>
     </div>
 </div>
 
@@ -50,7 +54,6 @@
     <div class="buttons">
         <button #exitSearchButton (click)="exit($event, moviesSearch)">Exit</button>
     </div>
-
 </div>
 
 <div class="search-movies" #searchMovies hidden>
@@ -88,5 +91,33 @@
         <button #movieButton hidden (click)="addToWatchList($event)">Add to Watchlist</button>
         <button #exitButton hidden (click)="exit($event, searchMovies)">Exit</button>
     </div>
+</div>
 
+<div id="contents-of-watchlist" #contentsOfWatchlist hidden>
+    <table>
+      <thead>
+        <tr>
+          <th>Poster</th>
+          <th>Title</th>
+          <th>Director</th>
+          <th>Release Date</th>
+          <th>Plot</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let movie of movies">
+          <td><img src={{movie.poster}} width="80"></td>
+          <td><a href="https://www.reddit.com/r/movies/search/?q={{movie.title}}&restrict_sr=1"
+              target="_blank">{{movie.title}}</a></td>
+          <td>{{movie.director}}</td>
+          <td>{{movie.released}}</td>
+          <td>{{movie.plot}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <div class="buttons">
+        <button>Add to Watchlist</button>
+        <button #exitSearchButton (click)="exit($event, contentsOfWatchlist)">Exit</button>
+    </div>
 </div>

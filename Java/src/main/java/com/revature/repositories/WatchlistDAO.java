@@ -98,33 +98,6 @@ public class WatchlistDAO implements IWatchlistDAO {
 		return newWatchlist;
 	}
 
-//	@SuppressWarnings("unchecked")
-//	@Override
-//	@Transactional
-//	public List<Watchlist> getUserWatchlists(int ownerId) {
-		//Session s = sf.getCurrentSession();
-		//System.out.println(s.isOpen());
-//		Session os = sf.openSession();
-//		System.out.println(os.isOpen());
-//
-//		os.beginTransaction();
-//
-//
-//		//Remove later
-//		System.out.println("USER SESSION IN DAO GET WATCHLIST ID: " + this.sessionUser.getCurrentUser());
-//		System.out.println("USER ID FROM SESSION: " + this.sessionUser.getCurrentUser().getUserId());
-//		
-//
-//		List<Watchlist> userWatchlists = (List<Watchlist>) os.createCriteria(Watchlist.class).add(Restrictions.eq("watchlistOwner.userId", ownerId)).list();
-////		
-//		os.getTransaction().commit();
-//		os.close();
-////		
-//		System.out.println(os.isOpen());
-//// 		
-//		return userWatchlists;
-//
-//	}
 
 	@Override
 	public Watchlist addMovieToWatchlist(Watchlist w, Movie m) {
@@ -142,6 +115,17 @@ public class WatchlistDAO implements IWatchlistDAO {
 		System.out.println(ownerId);
 		
 		return (List<Watchlist>) s.createCriteria(Watchlist.class).add(Restrictions.eq("watchlistOwner.userId", ownerId)).list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Movie> getMoviesInWatchlist(Integer watchlistId) {
+		System.out.println("Reached WL DAO for Movies in WL");
+		Session s = sf.openSession();	
+		System.out.println(s.isOpen());
+		System.out.println(watchlistId);
+		
+		return (List<Movie>) s.createCriteria(Movie.class).add(Restrictions.eq("watchlist.watchlistId", watchlistId)).list();
 	}
 
 }
