@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -76,7 +78,7 @@ public class WatchlistController {
 	}
 	
 	
-	@PostMapping("/watchlistbyname")
+	@RequestMapping(value = "/watchlistbyname", method = RequestMethod.GET)
 	public List<Movie> getWatchlistByName(@RequestBody String watchlistName) throws JsonProcessingException {
 		System.out.println(watchlistName);
 		ObjectMapper om = new ObjectMapper();
@@ -85,12 +87,11 @@ public class WatchlistController {
 		System.out.println(wlbn);
 		
 		try {
+			return wlbn;
 			
 		}catch (RuntimeException e) {
-			
+			return wlbn;
 		}
-		
-		return wlbn;
 	}
 	
 	
