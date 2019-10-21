@@ -57,7 +57,13 @@ public class WatchlistDAO implements IWatchlistDAO {
 		System.out.println(os);
 		
 		@SuppressWarnings("unchecked")
-		List<Watchlist> watchlists = os.createCriteria(Watchlist.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+
+		//List<Watchlist> watchlists = os.createCriteria(Watchlist.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+
+		List<Watchlist> watchlists = os.createCriteria(Watchlist.class).list();
+		//@SuppressWarnings("unchecked")
+		//List<Movie> wlbn = os.createCriteria(Watchlist.class).add(Restrictions.eq("watchlistName", watchlistName)).list();
+
 		
 		for(Watchlist w : watchlists) {
 			if (w.getWatchlistName().equals(watchlistName)) {
