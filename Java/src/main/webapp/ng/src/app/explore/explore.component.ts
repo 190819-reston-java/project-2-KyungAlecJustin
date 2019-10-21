@@ -18,6 +18,8 @@ export class ExploreComponent implements OnInit {
   
   // //JENKINS ENDPOINTS
   // sessionUserUri: String = "http://ec2-3-92-47-77.compute-1.amazonaws.com:8080/cineplay/getSessionUser";
+ 
+  watchlistByNameUri = "http://localhost:8080/cineplay/watchlistbyname";
 
 
   searchForWatchlist = function(event, watchlistSearch) {
