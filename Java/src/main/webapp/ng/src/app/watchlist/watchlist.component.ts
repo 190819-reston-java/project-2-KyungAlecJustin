@@ -18,6 +18,7 @@ export class WatchlistComponent implements OnInit {
 	movieUri = "http://localhost:8080/cineplay/addmovie";
 	createWatchlistURI = "http://localhost:8080/cineplay/createwatchlist";
 	watchlistsByIdUri = "http://localhost:8080/cineplay/getUserWatchlists";
+	moviesInWatchlistUri = "http://localhost:8080/cineplay/moviesinwatchlist";
 
 	apiFilm: any = {
 		"Title": null,
@@ -46,18 +47,9 @@ export class WatchlistComponent implements OnInit {
 		"watchlistOwner": null
 	}
 
-  
-	//ENDPOINTS
-	movieUri = "http://localhost:8080/cineplay/addmovie";
-	createWatchlistURI = "http://localhost:8080/cineplay/createwatchlist";
-	
-	///ALEC MADE ENPOINTS
-	moviesInWatchlistURI = "http://localhost:8080/cineplay/moviesinwatchlist";
-	watchlistByIdUri = "http://localhost:8080/cineplay/getUserWatchlists";
-
-
 	userWatchlists: Object[] = [];
-	userWatchlistsDisplay: String[] = []
+	userWatchlistsDisplay: String[] = [];
+	movies: Object[] = [];
 
 	//Header Actions
 	showCreate = function(createForm, viewLists) {
@@ -78,7 +70,7 @@ export class WatchlistComponent implements OnInit {
 			this.http.get(this.watchlistsByIdUri).subscribe(
 				result => {
 					for (let w in result) {
-						this.userWatchlists.push(result);
+						this.userWatchlists.push(result[w]);
 						this.userWatchlistsDisplay.push(result[w].watchlistName);
 					}
 				}
@@ -89,7 +81,6 @@ export class WatchlistComponent implements OnInit {
 	}
 
 	//Creates watchlist name and adds it DB
-
 	submitWatchlist = function(event, createWL) {
 		event.preventDefault();
 		if (this.currentUser.getCurrentUser() !== null) {
@@ -98,8 +89,6 @@ export class WatchlistComponent implements OnInit {
 				this.http.put(this.createWatchlistURI, this.watchlistCreate).subscribe(
 					(result => {
 						this.createdWatchlist = result;
-						console.log(this.createdWatchlist);
-
 					})
 				)
 			} else {
@@ -136,37 +125,24 @@ export class WatchlistComponent implements OnInit {
 		);
 	}
 
-
-	//View own watchlists CHANGED
-	viewWatchlists = function(event){
-		console.log("view watchlists button clicked");
-		event.preventDefault();
-		this.http.get(this.watchlistByIdUri).subscribe(
-			result => {
-				console.log("Sending to backend");
-				console.log(result);
-				this.userWatchlist = result;
-				console.log("Retrieved from backend");
+	//View movies inside watchlist
+	viewMovies = function (certainWatchlist, contentsOfWatchlist) {
+		contentsOfWatchlist.hidden = false;
+		this.movies = [];
+		for (let i = 0; i < this.userWatchlists.length; i++) {
+			if (this.userWatchlists[i].watchlistName === certainWatchlist.innerText) {
+				this.http.post(this.moviesInWatchlistUri, this.userWatchlists[i].watchlistId).subscribe(
+					(result => {
+						for (let m in result) {
+							this.movies.push(result[m]);
+						}
+					})
+				)
 			}
-		)
-
+		}
+		console.log(this.movies);
 	}
-
-
-	//View movies MADE BY ALEC
-	viewMovies = function(event){
-		console.log("view watchlists button clicked");
-		event.preventDefault();
-		this.http.get(this.moviesInWatchlistURI).subscribe(
-			result => {
-				console.log("Sending to backend");
-				console.log(result);
-				this.userWatchlist = result;
-				console.log("Retrieved from backend");
-			}
-		)
-	}
-	///////////////////////////////////////////////////////////////////////
+	
 	//Add to watchlist from Movie Search button
 	addToWatchList = function(event) {
 		event.preventDefault();
