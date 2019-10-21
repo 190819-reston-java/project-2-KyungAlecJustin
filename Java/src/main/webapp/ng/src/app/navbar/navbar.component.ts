@@ -10,7 +10,7 @@ import { SessionUserService } from '../session-user.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private router: Router, private http: HttpClient, private currentUser: SessionUserService) {}
+  constructor(private router: Router, private http: HttpClient, public currentUser: SessionUserService) {}
 
   //ENDPOINTS
   logoutUri = "http://localhost:8080/cineplay/logout"
