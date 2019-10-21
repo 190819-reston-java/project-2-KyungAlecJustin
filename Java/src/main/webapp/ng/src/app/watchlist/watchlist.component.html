@@ -12,7 +12,7 @@
             <p>Enter the name of your new watchlist:</p>
             <input type="text" #createWL>
             <br>
-            <input type="submit" (click)="submitWatchlist($event, createWL.value)">
+            <input type="submit" (click)="submitWatchlist($event, createWL)">
         </form>
         <h4 (click)="showView(createForm, viewLists)">View/Update Your Watchlists</h4>
         <br>
