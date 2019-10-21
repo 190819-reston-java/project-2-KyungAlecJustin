@@ -35,13 +35,11 @@ public class ForumController {
 
 	@PutMapping("/createforum")
 	public String upsert(@RequestBody Forum f) throws JsonProcessingException {
-		System.out.println("IN THE UPSERT");
-		System.out.println(this.sessionUser.getCurrentUser());
 		Forum newMessage = new Forum(
 				f.getForumId(),
 				f.getMessage(),
 				this.sessionUser.getCurrentUser()
-				);
+			);
 		this.forumService.createForum(newMessage);
 		ObjectMapper om = new ObjectMapper();
 		String response = om.writeValueAsString(new ResponseEntity<String>(HttpStatus.ACCEPTED));

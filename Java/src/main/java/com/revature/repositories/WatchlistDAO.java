@@ -31,7 +31,6 @@ public class WatchlistDAO implements IWatchlistDAO {
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<Watchlist> findAllWatchlist() {
-		//Session s = sf.getCurrentSession();
 		
 		Session os = sf.openSession();
 		os.beginTransaction();
@@ -48,41 +47,11 @@ public class WatchlistDAO implements IWatchlistDAO {
 		
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	@Transactional
-	public List<Watchlist> findWatchlist(String watchlistName) {
-		System.out.println("reaching finWatchlist in WatchlistDAO");
-
-		Session os = sf.openSession(); 
-		os.beginTransaction();
-		System.out.println(os.isConnected());
-		
-		System.out.println("REACHING BEFORE HIBERNATE CRITERIA");
-		
-		//@SuppressWarnings("unchecked")
-		List<Watchlist> watchlists = os.createCriteria(Watchlist.class).add(Restrictions.eq("watchlistName", watchlistName)).list();
-		//List<Watchlist> watchlists = os.createQuery("FROM Watchlist WHERE watchlistName = :wln").list();
-		//Query watchlists = (Query) os.createQuery("FROM Watchlist WHERE watchlistName = :wln").setString("wln", watchlistName).list();
-
-		
-		System.out.println(watchlists);
-		
-		os.getTransaction().commit();
-		//os.close();
-		System.out.println(os.isOpen());
-		System.out.println("reaching end");
-		return watchlists;
-	}
-
 
 	@Override
 	@Transactional
 	public Watchlist create(Watchlist newWatchlist) {
-		System.out.println("Reaching DAO watchlist");
-		System.out.println("USER SESSION IN DAO: " + this.sessionUser.getCurrentUser());
-		//Session s = sf.getCurrentSession();
-		//System.out.println("Session in DAO " + os);
+		System.out.println("User Session in Session Dao: " + this.sessionUser.getCurrentUser().getUsername());
 		Session os = sf.openSession();
 
 		os.beginTransaction();
@@ -106,7 +75,6 @@ public class WatchlistDAO implements IWatchlistDAO {
 	@Override
 	@Transactional
 	public List<Watchlist> getUserWatchlists(Integer ownerId){
-		System.out.println("Reached WL DAO for USWL");
 		Session s = sf.openSession();	
 		System.out.println(s.isOpen());
 		System.out.println(ownerId);
@@ -117,7 +85,6 @@ public class WatchlistDAO implements IWatchlistDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Movie> getMoviesInWatchlist(Integer watchlistId) {
-		System.out.println("Reached WL DAO for Movies in WL");
 		Session s = sf.openSession();	
 		System.out.println(s.isOpen());
 		System.out.println(watchlistId);

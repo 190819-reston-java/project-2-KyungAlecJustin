@@ -21,7 +21,6 @@ public class UserDAO implements IUserDAO {
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<User> findAll() {
-		//Session s = sf.getCurrentSession();
 		Session os = sf.openSession(); 
 		os.beginTransaction();
 		
@@ -50,8 +49,7 @@ public class UserDAO implements IUserDAO {
 	@Override
 	@Transactional
 	public User create(User u) {
-		//Session s = sf.getCurrentSession();
-		System.out.println("reaching create in UserDAO");
+
 		Session os = sf.openSession();
 
 		os.beginTransaction();
@@ -66,7 +64,6 @@ public class UserDAO implements IUserDAO {
 	@Transactional
 	public boolean getLogin(String username, String userpwd) {
 		System.out.println("reaching getLogin in UserDAO");
-		//Session s = sf.getCurrentSession();
 		Session os = sf.openSession(); 
 		os.beginTransaction();
 		System.out.println(os);

@@ -43,8 +43,7 @@ public class WatchlistController {
 	
 	@PutMapping("/createwatchlist")
 	public Watchlist upsert(@RequestBody Watchlist watchlistCreate) throws JsonProcessingException{
-		System.out.println("reaching create watchlist controller " + watchlistCreate);
-		
+		System.out.println("New watchlist created: " + watchlistCreate);		
 		Watchlist newWatchlist = new Watchlist(
 				watchlistCreate.getWatchlistId(),
 				watchlistCreate.getWatchlistName(),
@@ -69,37 +68,6 @@ public class WatchlistController {
 		return userWL;
 	}
 	
-	
-//	@PostMapping(value = "/watchlistbyname")
-//	public List<Movie> getWatchlistByName(@RequestBody String watchlistName) throws JsonProcessingException {
-//		System.out.println("Reached watchlist by name");
-//		System.out.println(watchlistName);
-//		ObjectMapper om = new ObjectMapper();
-//		String strWN = om.writeValueAsString(watchlistName);
-//		List<Movie> wlbn = watchlistService.getWatchlistByName(strWN);
-//		System.out.println(wlbn);
-//		
-//		try {
-//			return wlbn;
-//			
-//		}catch (RuntimeException e) {
-//			return wlbn;
-//		}
-//	}
-	
-	@PostMapping(value = "/watchlistbyname")
-	public List<Watchlist> getWatchlistByName(@RequestBody String watchlistName) throws JsonProcessingException {
-		System.out.println("Reached watchlist by name");
-		System.out.println(watchlistName);
-		ObjectMapper om = new ObjectMapper();
-		String strWN = om.writeValueAsString(watchlistName);
-		List<Watchlist> watchlistsByName = watchlistService.getWatchlistByName(strWN);
-
-		return watchlistsByName;
-		
-	}
-	
-
 	
 	@PostMapping("/moviesinwatchlist")
 	@ResponseBody 

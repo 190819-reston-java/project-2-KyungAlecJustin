@@ -21,7 +21,6 @@ public class MovieDAO implements IMovieDAO {
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<Movie> listAll() {
-		//Session s = sf.getCurrentSession();
 		
 		Session os = sf.openSession();
 		os.beginTransaction();
@@ -38,7 +37,6 @@ public class MovieDAO implements IMovieDAO {
 	@Override
 	@Transactional
 	public Movie addMovie(Movie newMovie) {
-		//Session s = sf.getCurrentSession();
 		Session os = sf.openSession();
 
 		os.beginTransaction();
@@ -58,7 +56,6 @@ public class MovieDAO implements IMovieDAO {
 	@Override
 	@Transactional
 	public Movie addMovieToDatabase(Movie newMovie) {
-		//Session s = sf.getCurrentSession();
 		Session os = sf.openSession();
 
 		os.beginTransaction();
