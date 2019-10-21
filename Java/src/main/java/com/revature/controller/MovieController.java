@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.model.Movie;
+import com.revature.model.Watchlist;
 import com.revature.services.MovieService;
 import com.revature.session.UserSession;
 
@@ -24,6 +25,9 @@ public class MovieController {
 	
 	@Autowired
 	private UserSession sessionUser;
+	
+	@Autowired
+	private Movie movie;
 
 	
 	@GetMapping("/movies")
@@ -39,6 +43,9 @@ public class MovieController {
 		System.out.println("CURRENT SESSION IN MOVIE CONTROLLER: " + this.sessionUser.getCurrentUser());
 		
 		Movie response = movieService.addMovie(m);
+		//movie.setWatchlist(w);
+	
+		
 		System.out.println(response);
 		
 		ResponseEntity.ok().body(null);

@@ -47,6 +47,7 @@ export class WatchlistComponent implements OnInit {
 		"watchlistOwner": null
 	}
 
+
 	userWatchlists: Object[] = [];
 	userWatchlistsDisplay: String[] =[];
 	movies: Object[] = [];

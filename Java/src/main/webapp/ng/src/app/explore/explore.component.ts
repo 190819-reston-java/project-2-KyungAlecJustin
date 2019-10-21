@@ -18,6 +18,28 @@ export class ExploreComponent implements OnInit {
   
   // //JENKINS ENDPOINTS
   // sessionUserUri: String = "http://ec2-3-92-47-77.compute-1.amazonaws.com:8080/cineplay/getSessionUser";
+ 
+  watchlistByNameUri = "http://localhost:8080/cineplay/watchlistbyname";
+  allWatchlistsUri = "http://localhost:8080/cineplay/watchlists";
+
+
+  searchForWatchlist = function(event, watchlistSearch) {
+    console.log("Search for Watchlist");
+    event.preventDefault();
+    console.log(watchlistSearch);
+		if (watchlistSearch != "") {
+			this.http.post(this.watchlistByNameUri, watchlistSearch).subscribe(
+				(result => {
+          console.log("reached method");
+          console.log(result); 
+					this.createdWatchlist = result;
+        }))
+		} else {
+	  	alert("Name of the watchlist cannot be empty.");
+		}
+  } 
+  
+
 
   allWatchlists: Object[] = [];
   matchingWatchlists: Object[] = [];

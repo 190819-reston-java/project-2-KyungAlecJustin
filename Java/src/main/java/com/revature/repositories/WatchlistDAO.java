@@ -1,5 +1,6 @@
 package com.revature.repositories;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -30,7 +31,6 @@ public class WatchlistDAO implements IWatchlistDAO {
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<Watchlist> findAllWatchlist() {
-		//Session s = sf.getCurrentSession();
 		
 		Session os = sf.openSession();
 		os.beginTransaction();
@@ -47,49 +47,78 @@ public class WatchlistDAO implements IWatchlistDAO {
 		
 	}
 
-	@Override
-	@Transactional
-	public List<Movie> findWatchlist(String watchlistName) {
-		System.out.println("reaching finWatchlist in WatchlistDAODAO");
 
-		Session os = sf.openSession(); 
-		os.beginTransaction();
-		System.out.println(os);
-		
-		@SuppressWarnings("unchecked")
-
-		//List<Watchlist> watchlists = os.createCriteria(Watchlist.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-
-		List<Watchlist> watchlists = os.createCriteria(Watchlist.class).list();
-		//@SuppressWarnings("unchecked")
-		//List<Movie> wlbn = os.createCriteria(Watchlist.class).add(Restrictions.eq("watchlistName", watchlistName)).list();
-
-		
-		for(Watchlist w : watchlists) {
-			if (w.getWatchlistName().equals(watchlistName)) {
-				
-				int wid = w.getWatchlistId();
-				
-				@SuppressWarnings("unchecked")
-				List<Movie> movies = (List<Movie>) os.createQuery("FROM movies WHERE watchlist_id = :wid");
-				
-				((Query) movies).setInteger("wid", wid);
-				
-				return movies;
-			}
-		}
-		
-		return null;
-	}
+//	@Override
+//	@Transactional
+//	public List<Movie> findWatchlist(String watchlistName) {
+//		System.out.println("==WatchlistDAO: reaching the method");
+//
+//		Session os = sf.openSession(); 
+//		os.beginTransaction();
+//		System.out.println("==WatchlistDao open seesion: " + os);
+//		
+//		@SuppressWarnings("unchecked")
+//		List<Watchlist> watchlists = os.createCriteria(Watchlist.class).list();
+//		System.out.println("==WatchlistDAO: reaching after list and before forloop");
+//
+//		//List<Watchlist> watchlists = os.createCriteria(Watchlist.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+//		
+//		//@SuppressWarnings("unchecked")
+//		//List<Movie> wlbn = os.createCriteria(Watchlist.class).add(Restrictions.eq("watchlistName", watchlistName)).list();
+//		
+//		System.out.println("==WatchlistDAO: input from frontend: " + watchlistName);
+//		
+////		for (Watchlist w : watchlists) {
+////			System.out.println("*****: " + watchlistName);
+////			System.out.println("====WatchlistDAO: printling list of names of watchlist: " + w.getWatchlistName());
+////			System.out.println("==== TO STRING: " + w.getWatchlistName().toString());
+////			System.out.println("====WatchlistDAO: printing list of id: " + w.getWatchlistId());
+////		}
+//		
+////		for (Watchlist w : watchlists) {
+////			if ((w.getWatchlistName().toString()) == (watchlistName.toString())) {
+////				System.out.println("FUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUCK");
+////			}
+////			System.out.println("*****: " + watchlistName);
+////			System.out.println("====WatchlistDAO: printling list of names of watchlist: " + w.getWatchlistName());
+////			System.out.println("==== TO STRING: " + w.getWatchlistName().toString());
+////			System.out.println("====WatchlistDAO: printing list of id: " + w.getWatchlistId());
+////			System.out.println("no");
+////		}
+//
+//		
+//		for(Watchlist w : watchlists) {
+//			if (w.getWatchlistName().equals(watchlistName)) {
+//				System.out.println("=================can you come here?==================");
+//				
+//				int wid = w.getWatchlistId();
+//				
+////				@SuppressWarnings("unchecked")
+////				List<Movie> movies = (List<Movie>) os.createQuery("FROM Movie WHERE watchlistId = :wid");
+////				
+////				((Query) movies).setInteger("wid", wid);
+//				
+//				@SuppressWarnings("unchecked")
+//				List<Movie> movies = os.createCriteria(Movie.class).list();
+//				
+//				for (Movie m : movies) {
+//					if (m.getWatchlist() == wid) {
+//						return movies;
+//					}
+//				}
+//				
+////				return movies;
+//			}
+//		}
+//		System.out.println("==WatchlistDAO: not completing for loop");
+//		return null;
+//	}
 
 
 	@Override
 	@Transactional
 	public Watchlist create(Watchlist newWatchlist) {
-		System.out.println("Reaching DAO watchlist");
-		System.out.println("USER SESSION IN DAO: " + this.sessionUser.getCurrentUser());
-		//Session s = sf.getCurrentSession();
-		//System.out.println("Session in DAO " + os);
+		System.out.println("User Session in Session Dao: " + this.sessionUser.getCurrentUser().getUsername());
 		Session os = sf.openSession();
 
 		os.beginTransaction();
@@ -113,7 +142,6 @@ public class WatchlistDAO implements IWatchlistDAO {
 	@Override
 	@Transactional
 	public List<Watchlist> getUserWatchlists(Integer ownerId){
-		System.out.println("Reached WL DAO for USWL");
 		Session s = sf.openSession();	
 		System.out.println(s.isOpen());
 		System.out.println(ownerId);
@@ -124,12 +152,18 @@ public class WatchlistDAO implements IWatchlistDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Movie> getMoviesInWatchlist(Integer watchlistId) {
-		System.out.println("Reached WL DAO for Movies in WL");
 		Session s = sf.openSession();	
 		System.out.println(s.isOpen());
 		System.out.println(watchlistId);
 		
 		return (List<Movie>) s.createCriteria(Movie.class).add(Restrictions.eq("watchlist.watchlistId", watchlistId)).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+	}
+
+
+	@Override
+	public List<Watchlist> findWatchlist(String watchlistName) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

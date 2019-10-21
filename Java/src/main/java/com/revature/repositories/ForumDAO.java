@@ -23,7 +23,6 @@ public class ForumDAO implements IForumDAO {
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<Forum> getAllForums() {
-		//Session s = sf.getCurrentSession();
 
 		Session os = sf.openSession();
 		//os.beginTransaction();
@@ -41,9 +40,7 @@ public class ForumDAO implements IForumDAO {
 	@Override
 	@Transactional
 	public Forum createForum(Forum f) {
-		//Session s = sf.getCurrentSession();
 		Session os = sf.openSession();
-		System.out.println(os);
 
 		os.beginTransaction();
 		

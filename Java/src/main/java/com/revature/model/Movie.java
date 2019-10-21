@@ -61,11 +61,7 @@ public class Movie implements Serializable {
 	@JoinColumn(name="watchlist_id")
 	private Watchlist watchlist;
 	
-	
-	//AT Mapping CODE-------------------------------------------------------------------------------
-//	@ManyToMany(mappedBy = "movies", fetch = FetchType.LAZY)
-//	private Set<Watchlist> watchlists = new HashSet<Watchlist>();
-//	
+
 
 	public Movie() {
 		super();
