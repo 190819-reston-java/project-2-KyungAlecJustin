@@ -177,13 +177,6 @@ export class WatchlistComponent implements OnInit {
 					)
 				}
 			}
-		// this.http.put(this.movieUri, this.newFilm).subscribe(
-		// 	(request => {
-
-		// 		this.newFilm = request;
-		// 		console.log(this.newFilm);
-		// 	})
-		// );
 
 		}
 	}
