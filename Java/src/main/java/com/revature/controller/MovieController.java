@@ -36,14 +36,14 @@ public class MovieController {
 	}
 	
 	@PutMapping("/addmovie")
-	public ResponseEntity<Movie> upsert(@RequestBody Movie m, Watchlist w)
+	public ResponseEntity<Movie> upsert(@RequestBody Movie m)
 			{
 		System.out.println("Reaching addmovie");
 		System.out.println(m);
 		System.out.println("CURRENT SESSION IN MOVIE CONTROLLER: " + this.sessionUser.getCurrentUser());
 		
 		Movie response = movieService.addMovie(m);
-		movie.setWatchlist(w);
+		//movie.setWatchlist(w);
 	
 		
 		System.out.println(response);

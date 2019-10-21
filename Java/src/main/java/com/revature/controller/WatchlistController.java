@@ -70,22 +70,20 @@ public class WatchlistController {
 	
 	
 
-
-
-	@RequestMapping(value = "/watchlistbyname", method = RequestMethod.POST)
-	public List<Movie> getWatchlistByName(@RequestBody String watchlistName) throws JsonProcessingException {
-		System.out.println("==WatchlistController: printing input from frontend: " + watchlistName);
-//		ObjectMapper om = new ObjectMapper();
-//		String strWN = om.writeValueAsString(watchlistName);
-		List<Movie> wlbn = watchlistService.getWatchlistByName(watchlistName);
-		System.out.println("==WatchlistController: printing final list: " + wlbn);
-		
-		try {
-			return wlbn;
-		}catch (RuntimeException e) {
-			return wlbn;
-		}
-	}
+//	@RequestMapping(value = "/watchlistbyname", method = RequestMethod.POST)
+//	public List<Movie> getWatchlistByName(@RequestBody String watchlistName) throws JsonProcessingException {
+//		System.out.println("==WatchlistController: printing input from frontend: " + watchlistName);
+////		ObjectMapper om = new ObjectMapper();
+////		String strWN = om.writeValueAsString(watchlistName);
+//		List<Movie> wlbn = watchlistService.getWatchlistByName(watchlistName);
+//		System.out.println("==WatchlistController: printing final list: " + wlbn);
+//		
+//		try {
+//			return wlbn;
+//		}catch (RuntimeException e) {
+//			return wlbn;
+//		}
+//	}
 	
 	@GetMapping("/moviesinwatchlist")
 	@ResponseBody 
