@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +25,17 @@ public class WatchlistService {
 		return watchlists;
 		
 	}
+//	
+//	public List<Movie> getWatchlistByName(String watchlistName) {
+//		List<Movie> movies = watchlistDao.findWatchlist(watchlistName);
+//		return movies;
+//	}
 	
-	public List<Movie> getWatchlistByName(String watchlistName) {
-		List<Movie> movies = watchlistDao.findWatchlist(watchlistName);
-		return movies;
+//	
+	public List<Watchlist> getWatchlistByName(String watchlistName) {
+		List<Watchlist> watchlists = watchlistDao.findWatchlist(watchlistName);
+		return watchlists;
 	}
-	
 
 	public List<Watchlist> getWatchlistByUser(Integer ownerId) {
 		return watchlistDao.getUserWatchlists(ownerId);

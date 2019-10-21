@@ -1,5 +1,6 @@
 package com.revature.repositories;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -47,39 +48,31 @@ public class WatchlistDAO implements IWatchlistDAO {
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
-	public List<Movie> findWatchlist(String watchlistName) {
-		System.out.println("reaching finWatchlist in WatchlistDAODAO");
+	public List<Watchlist> findWatchlist(String watchlistName) {
+		System.out.println("reaching finWatchlist in WatchlistDAO");
 
 		Session os = sf.openSession(); 
 		os.beginTransaction();
-		System.out.println(os);
+		System.out.println(os.isConnected());
 		
-		@SuppressWarnings("unchecked")
-
-		//List<Watchlist> watchlists = os.createCriteria(Watchlist.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-
-		List<Watchlist> watchlists = os.createCriteria(Watchlist.class).list();
+		System.out.println("REACHING BEFORE HIBERNATE CRITERIA");
+		
 		//@SuppressWarnings("unchecked")
-		//List<Movie> wlbn = os.createCriteria(Watchlist.class).add(Restrictions.eq("watchlistName", watchlistName)).list();
+		List<Watchlist> watchlists = os.createCriteria(Watchlist.class).add(Restrictions.eq("watchlistName", watchlistName)).list();
+		//List<Watchlist> watchlists = os.createQuery("FROM Watchlist WHERE watchlistName = :wln").list();
+		//Query watchlists = (Query) os.createQuery("FROM Watchlist WHERE watchlistName = :wln").setString("wln", watchlistName).list();
 
 		
-		for(Watchlist w : watchlists) {
-			if (w.getWatchlistName().equals(watchlistName)) {
-				
-				int wid = w.getWatchlistId();
-				
-				@SuppressWarnings("unchecked")
-				List<Movie> movies = (List<Movie>) os.createQuery("FROM movies WHERE watchlist_id = :wid");
-				
-				((Query) movies).setInteger("wid", wid);
-				
-				return movies;
-			}
-		}
+		System.out.println(watchlists);
 		
-		return null;
+		os.getTransaction().commit();
+		//os.close();
+		System.out.println(os.isOpen());
+		System.out.println("reaching end");
+		return watchlists;
 	}
 
 

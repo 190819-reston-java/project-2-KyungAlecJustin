@@ -47,19 +47,10 @@ public class Watchlist implements Serializable {
 	@JoinColumn(name="user_id")
 	private User watchlistOwner;
 	
-	//AT Mapping CODE-------------------------------------------------------------------------------
 	@JsonIgnore
 	@OneToMany(mappedBy = "watchlist",cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
 	private Set<Movie> movies; 
-//	Lists movies in Watchlist;
-//	
-	//HAVING TROUBLE WITH MANY TO MANY MAPPING
-//	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST} )
-//	@JoinTable(
-//			name = "watchlist_movie", 
-//			joinColumns = {@JoinColumn(name="watchlist_id")},
-//			inverseJoinColumns = {@JoinColumn(name = "movie_id")})
-//	private List<Movie> moviesWatchlist = new ArrayList<Movie>();
+
 
 	public Watchlist() {
 		super();

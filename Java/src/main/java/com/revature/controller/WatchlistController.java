@@ -1,5 +1,6 @@
 package com.revature.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ import com.revature.services.WatchlistService;
 import com.revature.session.UserSession;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class WatchlistController {
 	
 	@Autowired
@@ -39,15 +40,6 @@ public class WatchlistController {
 		
 	}
 	
-//	@PutMapping("/createwatchlist")
-//	public ResponseEntity<Watchlist> upsert(@RequestBody Watchlist w){
-//		System.out.println("reaching watchlist controller " + w);
-//		
-//		
-//		Watchlist response = watchlistService.createWatchlist(w);
-//		System.out.println("WL response: " + response);
-//		return ResponseEntity.ok(response);
-//	}
 	
 	@PutMapping("/createwatchlist")
 	public Watchlist upsert(@RequestBody Watchlist watchlistCreate) throws JsonProcessingException{
@@ -78,27 +70,40 @@ public class WatchlistController {
 	}
 	
 	
-	@RequestMapping(value = "/watchlistbyname", method = RequestMethod.GET)
-	public List<Movie> getWatchlistByName(@RequestBody String watchlistName) throws JsonProcessingException {
+//	@PostMapping(value = "/watchlistbyname")
+//	public List<Movie> getWatchlistByName(@RequestBody String watchlistName) throws JsonProcessingException {
+//		System.out.println("Reached watchlist by name");
+//		System.out.println(watchlistName);
+//		ObjectMapper om = new ObjectMapper();
+//		String strWN = om.writeValueAsString(watchlistName);
+//		List<Movie> wlbn = watchlistService.getWatchlistByName(strWN);
+//		System.out.println(wlbn);
+//		
+//		try {
+//			return wlbn;
+//			
+//		}catch (RuntimeException e) {
+//			return wlbn;
+//		}
+//	}
+	
+	@PostMapping(value = "/watchlistbyname")
+	public List<Watchlist> getWatchlistByName(@RequestBody String watchlistName) throws JsonProcessingException {
+		System.out.println("Reached watchlist by name");
 		System.out.println(watchlistName);
 		ObjectMapper om = new ObjectMapper();
 		String strWN = om.writeValueAsString(watchlistName);
-		List<Movie> wlbn = watchlistService.getWatchlistByName(strWN);
-		System.out.println(wlbn);
+		List<Watchlist> watchlistsByName = watchlistService.getWatchlistByName(strWN);
+
+		return watchlistsByName;
 		
-		try {
-			return wlbn;
-			
-		}catch (RuntimeException e) {
-			return wlbn;
-		}
 	}
 	
-	@GetMapping("/moviesinwatchlist")
+
+	
+	@PostMapping("/moviesinwatchlist")
 	@ResponseBody 
-	public List<Movie> listMoviesInWatchlist(Integer watchlistId) {
-		//Used for testing
-		watchlistId = 5;
+	public List<Movie> listMoviesInWatchlist(@RequestBody Integer watchlistId) {
 		
 		List<Movie> moviesInWatchlist = watchlistService.getMoviesInWatchlist(watchlistId);
 		

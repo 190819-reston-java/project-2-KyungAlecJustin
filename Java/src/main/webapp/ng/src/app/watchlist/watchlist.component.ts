@@ -68,6 +68,7 @@ export class WatchlistComponent implements OnInit {
 		"watchlistOwner": null
 	}
 
+
 	userWatchlists: Object[] = [];
 	userWatchlistsDisplay: String[] = [];
 	movies: Object[] = [];
@@ -176,8 +177,8 @@ export class WatchlistComponent implements OnInit {
 		this.newFilm.plot = this.apiFilm.Plot;
 		this.newFilm.poster = this.apiFilm.Poster;
 
-		//CHANGED THIS CODE (HARDCODED)
-		this.newFilm.watchlist = 1;
+		//this.createdWatchlist 
+
 		console.log(this.newFilm);
 		this.http.put(this.movieUri, this.newFilm).subscribe(
 			(request => {
