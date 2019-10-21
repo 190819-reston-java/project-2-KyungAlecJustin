@@ -1,5 +1,6 @@
 package com.revature.repositories;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -30,7 +31,6 @@ public class WatchlistDAO implements IWatchlistDAO {
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<Watchlist> findAllWatchlist() {
-		//Session s = sf.getCurrentSession();
 		
 		Session os = sf.openSession();
 		os.beginTransaction();
@@ -46,6 +46,7 @@ public class WatchlistDAO implements IWatchlistDAO {
 		return watchlists;
 		
 	}
+
 
 	@Override
 	@Transactional
@@ -117,10 +118,7 @@ public class WatchlistDAO implements IWatchlistDAO {
 	@Override
 	@Transactional
 	public Watchlist create(Watchlist newWatchlist) {
-		System.out.println("Reaching DAO watchlist");
-		System.out.println("USER SESSION IN DAO: " + this.sessionUser.getCurrentUser());
-		//Session s = sf.getCurrentSession();
-		//System.out.println("Session in DAO " + os);
+		System.out.println("User Session in Session Dao: " + this.sessionUser.getCurrentUser().getUsername());
 		Session os = sf.openSession();
 
 		os.beginTransaction();
@@ -144,7 +142,6 @@ public class WatchlistDAO implements IWatchlistDAO {
 	@Override
 	@Transactional
 	public List<Watchlist> getUserWatchlists(Integer ownerId){
-		System.out.println("Reached WL DAO for USWL");
 		Session s = sf.openSession();	
 		System.out.println(s.isOpen());
 		System.out.println(ownerId);
@@ -155,12 +152,18 @@ public class WatchlistDAO implements IWatchlistDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Movie> getMoviesInWatchlist(Integer watchlistId) {
-		System.out.println("Reached WL DAO for Movies in WL");
 		Session s = sf.openSession();	
 		System.out.println(s.isOpen());
 		System.out.println(watchlistId);
 		
 		return (List<Movie>) s.createCriteria(Movie.class).add(Restrictions.eq("watchlist.watchlistId", watchlistId)).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+	}
+
+
+	@Override
+	public List<Watchlist> findWatchlist(String watchlistName) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

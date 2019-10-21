@@ -1,5 +1,6 @@
 package com.revature.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ import com.revature.services.WatchlistService;
 import com.revature.session.UserSession;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class WatchlistController {
 	
 	@Autowired
@@ -39,20 +40,10 @@ public class WatchlistController {
 		
 	}
 	
-//	@PutMapping("/createwatchlist")
-//	public ResponseEntity<Watchlist> upsert(@RequestBody Watchlist w){
-//		System.out.println("reaching watchlist controller " + w);
-//		
-//		
-//		Watchlist response = watchlistService.createWatchlist(w);
-//		System.out.println("WL response: " + response);
-//		return ResponseEntity.ok(response);
-//	}
 	
 	@PutMapping("/createwatchlist")
 	public Watchlist upsert(@RequestBody Watchlist watchlistCreate) throws JsonProcessingException{
-		System.out.println("reaching create watchlist controller " + watchlistCreate);
-		
+		System.out.println("New watchlist created: " + watchlistCreate);		
 		Watchlist newWatchlist = new Watchlist(
 				watchlistCreate.getWatchlistId(),
 				watchlistCreate.getWatchlistName(),
@@ -78,6 +69,9 @@ public class WatchlistController {
 	}
 	
 	
+
+
+
 	@RequestMapping(value = "/watchlistbyname", method = RequestMethod.POST)
 	public List<Movie> getWatchlistByName(@RequestBody String watchlistName) throws JsonProcessingException {
 		System.out.println("==WatchlistController: printing input from frontend: " + watchlistName);
@@ -95,9 +89,7 @@ public class WatchlistController {
 	
 	@GetMapping("/moviesinwatchlist")
 	@ResponseBody 
-	public List<Movie> listMoviesInWatchlist(Integer watchlistId) {
-		//Used for testing
-		watchlistId = 5;
+	public List<Movie> listMoviesInWatchlist(@RequestBody Integer watchlistId) {
 		
 		List<Movie> moviesInWatchlist = watchlistService.getMoviesInWatchlist(watchlistId);
 		

@@ -11,10 +11,12 @@
 
 </form>
 <br><br>
-<div id="watchlists">
-    <div id="watchlist-tabs">
-        <h4>James Bond Flicks</h4>
-        <h4>Films By Women Directors</h4>
-        <h4>Foreign Films from France</h4>
+
+
+<div id="feed">
+    <h1>See What Watchlists People Are Creating</h1>
+    <div id="watchlist-feed">
+        <!-- like an insta-feed, get a poster of a movie in watchlist and display it above title -->
+        <p *ngFor="let watchlist of allWatchlists">{{watchlist}}</p>
     </div>
 </div>
