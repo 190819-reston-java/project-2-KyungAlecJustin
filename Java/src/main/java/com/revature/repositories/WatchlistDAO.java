@@ -92,4 +92,11 @@ public class WatchlistDAO implements IWatchlistDAO {
 		return (List<Movie>) s.createCriteria(Movie.class).add(Restrictions.eq("watchlist.watchlistId", watchlistId)).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 	}
 
+
+	@Override
+	public List<Watchlist> findWatchlist(String watchlistName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
