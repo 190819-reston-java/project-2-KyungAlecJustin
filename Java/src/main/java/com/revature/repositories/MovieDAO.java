@@ -52,21 +52,27 @@ public class MovieDAO implements IMovieDAO {
 		
 		return newMovie;
 	}
-	
-	@Override
-	@Transactional
-	public Movie addMovieToDatabase(Movie newMovie) {
-		Session os = sf.openSession();
 
-		os.beginTransaction();
-		
-		System.out.println(newMovie);
-		os.save(newMovie);
-		os.getTransaction().commit();
-		os.close();
-		
-		return newMovie;
+	@Override
+	public Movie addMovieToDatabase(Movie newMovie) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+	
+//	@Override
+//	@Transactional
+//	public Movie addMovieToDatabase(Movie newMovie) {
+//		Session os = sf.openSession();
+//
+//		os.beginTransaction();
+//		
+//		System.out.println(newMovie);
+//		os.save(newMovie);
+//		os.getTransaction().commit();
+//		os.close();
+//		
+//		return newMovie;
+//	}
 
 
 
